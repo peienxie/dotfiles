@@ -5,4 +5,7 @@
 
 - clean: ['~']
 
+- link:
+    ~/.vimrc: vim/vimrc
+
 
