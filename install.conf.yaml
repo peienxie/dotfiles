@@ -10,5 +10,6 @@
     ~/.zsh: zsh
     ~/.zshrc: zsh/zshrc
     ~/.p10k.zsh: zsh/themes/p10k.zsh
+    ~/.i3: i3
 
 
