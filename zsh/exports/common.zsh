@@ -5,5 +5,7 @@ export PATH=/usr/lib/gcc/gcc-arm-none-eabi-4_9-2015q1/bin:$PATH
 export CPPUTEST_HOME=/opt/cpputest
 
 # Golang
-export GO_PATH=~/go
-export PATH=$PATH:$GO_PATH/bin
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
