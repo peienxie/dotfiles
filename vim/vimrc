@@ -1,7 +1,34 @@
-set tabstop=4
+syntax on
+
+set noerrorbells
+set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
+set smartindent
 set number relativenumber
-set cursorline
-inoremap jj <Esc>
+set nowrap
+set smartcase
 
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+set incsearch
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=gray guibg=blue
+set signcolumn=yes
+set scrolloff=8
+set cursorline
+set termguicolors
+set cmdheight=2
+
+
+inoremap jj <Esc>
+inoremap <C-c> <Esc>
+let mapleader = " "
+
+
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
