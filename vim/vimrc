@@ -28,16 +28,31 @@ set cmdheight=2
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 colorscheme gruvbox
 set background=dark
+
 let mapleader = " "
 let g:airline#extensions#branch#enabled = 1
 
 inoremap jj <Esc>
 inoremap <C-c> <Esc>
 
+" move around windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" vim-fugitive
+nnoremap <leader>gs :G<CR>
+nnoremap <leader>gj :diffget //3<CR>
+nnoremap <leader>gf :diffget //2<CR>
+nnoremap <leader>gc :Gcommit -v<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
+nnoremap <leader>gl :Gclog<CR>
 
 
 vnoremap J :m '>+1<cr>gv=gv
