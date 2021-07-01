@@ -25,6 +25,13 @@ set termguicolors
 set cmdheight=2
 
 
+call plug#begin('~/.vim/plugged')
+Plug 'gruvbox-community/gruvbox'
+call plug#end()
+
+colorscheme gruvbox
+set background=dark
+
 inoremap jj <Esc>
 inoremap <C-c> <Esc>
 let mapleader = " "
