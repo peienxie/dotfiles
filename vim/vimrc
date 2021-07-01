@@ -27,14 +27,17 @@ set cmdheight=2
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 colorscheme gruvbox
 set background=dark
+let mapleader = " "
+let g:airline#extensions#branch#enabled = 1
 
 inoremap jj <Esc>
 inoremap <C-c> <Esc>
-let mapleader = " "
+
 
 
 vnoremap J :m '>+1<cr>gv=gv
