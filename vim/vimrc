@@ -15,13 +15,9 @@ set undodir=~/.vim/undodir
 set undofile
 
 set incsearch
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=gray guibg=blue
 set signcolumn=yes
 set scrolloff=8
-set cursorline
-set termguicolors
+" set cursorline
 set cmdheight=2
 
 
@@ -31,8 +27,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
+set colorcolumn=80
+set termguicolors
+set t_Co=256
 colorscheme gruvbox
 set background=dark
+highlight Normal ctermbg=NONE guibg=NONE
 
 let mapleader = " "
 let g:airline#extensions#branch#enabled = 1
