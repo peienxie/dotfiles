@@ -1,0 +1,27 @@
+set -ga terminal-overrides ",xterm-256color*:Tc"
+
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# reload tmux conf
+unbind r
+bind r source-file ${HOME}/.tmux.conf \; display-message "tmux.conf reloaded"
+
+# statusbar color and display info
+set-option -g status-style 'bg=#333333 fg=#5eacd3'
+set-option -g status-right "\"#h\" #(~/.tmux_path.sh #{pane_current_path}) %Y-%m-%d %H:%M:%S %Z"
+set-option -g pane-border-style 'fg=#333333'
+set-option -g pane-active-border-style "fg=#333333"
+
+# windows index starts at 1
+set-option -g base-index 1
+set-window-option -g pane-base-index 1
+
+# vim style switching pane
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
+
+
