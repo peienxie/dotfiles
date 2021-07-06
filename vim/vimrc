@@ -23,6 +23,7 @@ set cmdheight=2
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -35,9 +36,11 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 set colorcolumn=80
 set termguicolors
 set t_Co=256
-colorscheme gruvbox
 set background=dark
+let g:colors_name = 'dracula'
+colorscheme dracula
 highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
 
 let mapleader = " "
 let g:airline#extensions#branch#enabled = 1
