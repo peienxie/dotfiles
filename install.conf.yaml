@@ -6,12 +6,10 @@
 - clean: ['~']
 
 - link:
-    ~/.vimrc: vim/vimrc
-    ~/.config/nvim/init.vim: vim/vimrc
+    ~/.config/nvim: vim
     ~/.zsh: zsh
     ~/.zshrc: zsh/zshrc
     ~/.p10k.zsh: zsh/themes/p10k.zsh
     ~/.i3: i3
     ~/.tmux.conf: tmux/config
-
 
