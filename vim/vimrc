@@ -53,6 +53,9 @@ highlight NonText ctermbg=NONE guibg=NONE
 
 let mapleader = " "
 let g:airline#extensions#branch#enabled = 1
+let g:airline_section_z = airline#section#create(['windowswap', 'obsession', 'linenr', 'colnr'])
+let g:airline_symbols.colnr = ',Col'
+let g:airline_symbols.linenr = 'Ln'
 
 " escape
 inoremap jj <Esc>
