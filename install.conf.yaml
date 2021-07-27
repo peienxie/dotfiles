@@ -11,5 +11,6 @@
     ~/.zshrc: zsh/zshrc
     ~/.p10k.zsh: zsh/themes/p10k.zsh
     ~/.i3: i3
-    ~/.tmux.conf: tmux/config
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.terminfo: terminfo
 
