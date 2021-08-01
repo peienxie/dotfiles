@@ -5,6 +5,19 @@ inoremap jj <Esc>
 inoremap <C-c> <Esc>
 nnoremap <silent> <C-c> :nohl<CR>
 
+" make Y work the same as D and C
+nnoremap Y y$
+
+" keep cursor center when jumpping search result
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" add more undo break points
+inoremap <Space> <Space><c-g>u
+inoremap <CR> <CR><c-g>u
+inoremap <BS> <BS><c-g>u
+
 " source myvimrc
 nnoremap <leader><CR> :so $MYVIMRC<CR>
 
