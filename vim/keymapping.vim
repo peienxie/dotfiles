@@ -13,11 +13,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-" add more undo break points
-inoremap <Space> <Space><c-g>u
-inoremap <CR> <CR><c-g>u
-inoremap <BS> <BS><c-g>u
-
 " source myvimrc
 nnoremap <leader><CR> :so $MYVIMRC<CR>
 
