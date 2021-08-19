@@ -4,6 +4,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-rooter'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
