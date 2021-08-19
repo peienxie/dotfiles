@@ -55,9 +55,14 @@ bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # for full screen to clipboard
-bindsym --release Print exec --no-startup-id xfce4-screenshooter -fc
+bindsym --release Print exec --no-startup-id \
+xfce4-screenshooter -f --save /dev/stdout | xclip -i -selection clipboard -t image/png
 # for active window to clipboard
-bindsym --release $mod+Print exec --no-startup-id xfce4-screenshooter -wc
+bindsym --release $mod+Print exec --no-startup-id \
+xfce4-screenshooter -w --save /dev/stdout | xclip -i -selection clipboard -t image/png
+# select a region to be captured then pipe it to clipboard
+bindsym --release $mod+Shift+Print exec --no-startup-id \
+xfce4-screenshooter -r --save /dev/stdout | xclip -i -selection clipboard -t image/png
 
 # focus_wrapping yes|no|force|workspace
 focus_wrapping no
