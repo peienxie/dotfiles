@@ -5,6 +5,11 @@ inoremap jj <Esc>
 inoremap <C-c> <Esc>
 nnoremap <silent> <C-c> :nohl<CR>
 
+
+" disable some default keymapping which I don't wanna use
+nnoremap Q <nop>
+nnoremap q: <nop>
+
 " make Y work the same as D and C
 nnoremap Y y$
 

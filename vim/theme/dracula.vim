@@ -9,4 +9,4 @@ set background=dark
 colorscheme dracula
 syntax on
 highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE guifg=Gray
