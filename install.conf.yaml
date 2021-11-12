@@ -6,6 +6,7 @@
 - clean: ['~']
 
 - link:
+    ~/.bin: bin
     ~/.config/nvim: vim
     ~/.zsh: zsh
     ~/.zshrc: zsh/zshrc

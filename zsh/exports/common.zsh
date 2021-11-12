@@ -12,4 +12,6 @@ export GOPATH=$HOME/go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 export PATH=~/.npm-global/bin:$PATH
 
-export LS_COLORS='ow=01;34;40'
+# add personal bin
+export PATH=$HOME/.bin:$PATH
+
