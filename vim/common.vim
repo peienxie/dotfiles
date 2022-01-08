@@ -10,6 +10,7 @@ set expandtab
 set smartindent
 set number relativenumber
 set nowrap
+set ignorecase
 set smartcase
 
 set noswapfile
