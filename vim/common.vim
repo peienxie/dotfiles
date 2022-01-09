@@ -23,4 +23,6 @@ set signcolumn=yes
 set scrolloff=8
 " set cursorline
 set cmdheight=2
-set colorcolumn=80
+set colorcolumn=81
+set list
+set listchars=tab:»\ ,eol:↓,trail:·
