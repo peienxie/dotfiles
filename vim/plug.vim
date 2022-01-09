@@ -6,6 +6,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-rooter'
 Plug 'fatih/vim-go'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -17,6 +19,8 @@ if has("nvim")
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
     Plug 'mhinz/vim-signify'
+
+    Plug 'neovim/nvim-lspconfig'
 endif
 
 call plug#end()
