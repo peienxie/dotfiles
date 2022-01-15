@@ -21,6 +21,13 @@ if has("nvim")
     Plug 'mhinz/vim-signify'
 
     Plug 'neovim/nvim-lspconfig'
+
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
 endif
 
 call plug#end()
