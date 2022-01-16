@@ -5,6 +5,8 @@ inoremap jj <Esc>
 inoremap <C-c> <Esc>
 nnoremap <silent> <C-c> :nohl<CR>
 
+" show the highlight group of symbol under cursor
+nnoremap <F10> :TSHighlightCapturesUnderCursor<CR>
 
 " disable some default keymapping which I don't wanna use
 nnoremap Q <nop>
