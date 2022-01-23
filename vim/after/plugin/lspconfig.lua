@@ -69,11 +69,15 @@ end
 -- vim.o.updatetime = 500
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
--- display signature help while typing
-vim.cmd [[
-    augroup ShowSignatureHelp
-        autocmd!
-        autocmd InsertCharPre * lua require'lsphelper.signature'.show_signature_help()
-    augroup END
-]]
+require("lsp_signature").setup({
+    -- FIXME: when disable virtual text by set `hint_prefix` to false,
+    -- the highlight of current argument in signature floating window will display incorrectly
+    -- hint_enable = false,
+    hint_prefix = "",
+    handler_opts = {
+        border = "none", -- double, rounded, single, shadow, none
+    },
+    always_trigger = true,
+    toggle_key = '<C-k>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+})
 

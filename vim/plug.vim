@@ -22,6 +22,8 @@ if has("nvim")
 
     Plug 'neovim/nvim-lspconfig'
 
+    Plug 'ray-x/lsp_signature.nvim'
+
     Plug 'hrsh7th/nvim-cmp'
     Plug 'onsails/lspkind-nvim'
     Plug 'hrsh7th/cmp-nvim-lsp'
