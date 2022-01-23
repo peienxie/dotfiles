@@ -3,7 +3,7 @@ if !exists('g:loaded_telescope')
 endif
 
 nnoremap <C-p> <Cmd>lua require('telescope.builtin').git_files()<CR>
-nnoremap <leader>ff <Cmd>lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>ff <Cmd>lua require('telescope.builtin').find_files({ no_ignore=true })<CR>
 nnoremap <leader>fg <Cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep for > ' ), use_regex = true })<CR>
 nnoremap <leader>fw <Cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>fb <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ previewer = false, sorting_strategy = "ascending" })<CR>
