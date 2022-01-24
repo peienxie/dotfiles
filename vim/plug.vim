@@ -9,6 +9,8 @@ Plug 'fatih/vim-go'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
+"Plug 'ayu-theme/ayu-vim'
+Plug 'Luxed/ayu-vim'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
