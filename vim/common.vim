@@ -4,10 +4,12 @@ set termencoding=utf-8
 set fileencoding=utf-8
 
 set noerrorbells
-set tabstop=4 softtabstop=4
+set tabstop=4
+set softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set smartindent
+set autoindent
 set number relativenumber
 set nowrap
 set ignorecase

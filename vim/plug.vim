@@ -8,6 +8,7 @@ Plug 'airblade/vim-rooter'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-sleuth'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
