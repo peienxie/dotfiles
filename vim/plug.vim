@@ -36,6 +36,7 @@ if has("nvim")
 
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'akinsho/bufferline.nvim'
 endif
 
 call plug#end()
