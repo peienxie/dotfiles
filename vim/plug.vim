@@ -33,6 +33,9 @@ if has("nvim")
     Plug 'hrsh7th/cmp-buffer'
     Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
+
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
 endif
 
 call plug#end()
