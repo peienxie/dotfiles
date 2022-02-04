@@ -23,7 +23,8 @@ set undofile
 set incsearch
 set signcolumn=yes
 set scrolloff=8
-" set cursorline
+set cursorline
+set cursorlineopt=number
 set cmdheight=2
 set colorcolumn=81
 set list
