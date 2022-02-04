@@ -31,14 +31,14 @@ cmp.setup({
     end,
   },
   formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
+    format = lspkind.cmp_format({
+      mode = 'symbol_kind',
       menu = {
         buffer = '[buf]',
         nvim_lsp = '[LSP]',
         luasnip = '[snip]',
       },
-    },
+    })
   },
   experimental = {
     native_menu = false,
