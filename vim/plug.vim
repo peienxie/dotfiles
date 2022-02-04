@@ -24,7 +24,7 @@ if has("nvim")
     Plug 'mhinz/vim-signify'
 
     Plug 'neovim/nvim-lspconfig'
-
+    Plug 'williamboman/nvim-lsp-installer'
     Plug 'ray-x/lsp_signature.nvim'
 
     Plug 'hrsh7th/nvim-cmp'

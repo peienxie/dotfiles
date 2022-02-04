@@ -1,4 +1,4 @@
-local nvim_lsp = require('lspconfig')
+local lsp_installer = require("nvim-lsp-installer")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -47,15 +47,75 @@ local on_attach = function(client, bufnr)
     end
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'clangd', 'pyright', 'gopls' }
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        capabilities = capabilities,
+local servers = {
+    clangd = {
+        cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+        }
+    },
+    pyright = {},
+    gopls = {},
+    sumneko_lua = {
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    -- Setup your lua path
+                    path = vim.split(package.path, ';')
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'}
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                    },
+                },
+            },
+        },
+    },
+    vimls = {},
+}
+
+local extend_lsp_config = function(name)
+    local default = servers[name] or {}
+    return vim.tbl_deep_extend("force", default, {
         on_attach = on_attach,
-    }
+        capabilities = capabilities,
+    })
 end
+
+-- Loop through the servers listed above.
+for server_name in pairs(servers) do
+    local server_available, server = lsp_installer.get_server(server_name)
+    if server_available then
+        server:on_ready(function()
+            -- When this particular server is ready (i.e. when installation is finished or the server is already installed),
+            -- this function will be invoked. Make sure not to use the "catch-all" lsp_installer.on_server_ready()
+            -- function to set up servers, to avoid doing setting up a server twice.
+            local config = extend_lsp_config(server_name)
+            server:setup(config)
+        end)
+        if not server:is_installed() then
+            -- Queue the server to be installed.
+            server:install()
+        end
+    end
+end
+
+---- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
+---- or if the server is already installed).
+--lsp_installer.on_server_ready(function(server)
+--    local config = extend_lsp_config(server.name)
+--    server:setup(config)
+--end)
 
 -- make diagnostic icon looks better
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -70,9 +130,7 @@ end
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 require("lsp_signature").setup({
-    -- FIXME: when disable virtual text by set `hint_prefix` to false,
-    -- the highlight of current argument in signature floating window will display incorrectly
-    -- hint_enable = false,
+    hint_enable = false,
     hint_prefix = "",
     handler_opts = {
         border = "none", -- double, rounded, single, shadow, none
