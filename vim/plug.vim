@@ -11,6 +11,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
 "Plug 'ayu-theme/ayu-vim'
 Plug 'Luxed/ayu-vim'
+Plug 'jpalardy/vim-slime'
+Plug 'hanschen/vim-ipython-cell'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -43,6 +45,8 @@ if has("nvim")
     Plug 'akinsho/bufferline.nvim'
 
     Plug 'numToStr/Comment.nvim'
+
+    Plug 'akinsho/toggleterm.nvim'
 endif
 
 call plug#end()
