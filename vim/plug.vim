@@ -13,6 +13,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'Luxed/ayu-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'hanschen/vim-ipython-cell'
+Plug 'mhinz/vim-startify'
 
 if has("nvim")
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
