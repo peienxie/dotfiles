@@ -62,6 +62,6 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>q <C-w>q
-nnoremap <leader>ss :split<Return><C-w>w
-nnoremap <leader>sv :vsplit<Return><C-w>w
+nnoremap <leader>ss :split<CR>
+nnoremap <leader>sv :vsplit<CR>
 

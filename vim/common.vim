@@ -3,6 +3,8 @@ set fileencodings=utf-8,big5,cp950,gbk,cp936,iso-2022-jp,sjis,euc-jp,japan,euc-k
 set termencoding=utf-8
 set fileencoding=utf-8
 set mouse=a
+set splitbelow
+set splitright
 
 set noerrorbells
 set tabstop=4
