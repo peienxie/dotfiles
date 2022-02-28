@@ -43,12 +43,12 @@ vnoremap <C-f> "hy<Esc>/<C-r>h<CR>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " move current line/block up and down
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-nnoremap <A-j> <Esc>:m .+1<CR>==
-nnoremap <A-k> <Esc>:m .-2<CR>==
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+inoremap <A-j> <Esc>:m .+1<CR>gi
+inoremap <A-k> <Esc>:m .-2<CR>gi
+nnoremap <A-j> <Esc>:m .+1<CR>
+nnoremap <A-k> <Esc>:m .-2<CR>
+vnoremap <A-j> :m '>+1<CR>gv
+vnoremap <A-k> :m '<-2<CR>gv
 
 " indent but remain in visual mode
 vnoremap > >gv
