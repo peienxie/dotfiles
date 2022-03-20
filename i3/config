@@ -247,7 +247,7 @@ bar {
         binding_mode       #FF5555 #FF5555 #F8F8F2
     }
     position top
-    status_command i3blocks -c ~/.i3/i3blocks.conf
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
 }
 
 exec --no-startup-id i3-msg workspace $ws1
