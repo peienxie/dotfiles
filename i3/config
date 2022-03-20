@@ -64,6 +64,9 @@ xfce4-screenshooter -w --save /dev/stdout | xclip -i -selection clipboard -t ima
 bindsym --release $mod+Shift+Print exec --no-startup-id \
 xfce4-screenshooter -r --save /dev/stdout | xclip -i -selection clipboard -t image/png
 
+# lock screen
+bindsym $mod+Shift+x exec $HOME/.config/i3/scripts/lock.sh
+
 # focus_wrapping yes|no|force|workspace
 focus_wrapping no
 
