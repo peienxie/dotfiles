@@ -95,6 +95,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # move workspace between monitors
+# move workspace to output left|right|down|up|current|primary|<output>
 bindsym $mod+Shift+bracketleft move workspace to output left
 bindsym $mod+Shift+bracketright move workspace to output right
 
@@ -165,9 +166,9 @@ set $ws9 "9"
 set $ws10 "10:Media"
 
 # assign apps to workspaces
-for_window [class="Google-chrome"] move to workspace $ws2
-for_window [class="Code"] move to workspace $ws4
-for_window [class="Spotify"] move to workspace $ws10
+# for_window [class="Google-chrome"] move to workspace $ws2
+# for_window [class="Code"] move to workspace $ws4
+# for_window [class="Spotify"] move to workspace $ws10
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
