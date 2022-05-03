@@ -94,6 +94,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# move workspace between monitors
+bindsym $mod+Shift+bracketleft move workspace to output left
+bindsym $mod+Shift+bracketright move workspace to output right
+
 # Resizing windows in i3 using keyboard only
 # https://unix.stackexchange.com/q/255344/150597
 
