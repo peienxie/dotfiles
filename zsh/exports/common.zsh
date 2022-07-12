@@ -12,6 +12,9 @@ export GOPATH=$HOME/go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 export PATH=~/.npm-global/bin:$PATH
 
+# Rust
+export PATH=~/.cargo/bin:$PATH
+
 # add personal bin
 export PATH=$HOME/.bin:$PATH
 
