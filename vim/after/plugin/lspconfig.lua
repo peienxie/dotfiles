@@ -82,6 +82,9 @@ local servers = {
         },
     },
     vimls = {},
+    dockerls = {},
+    yamlls = {},
+    jsonls = {},
 }
 
 local extend_lsp_config = function(name)
