@@ -48,6 +48,8 @@ if has("nvim")
     Plug 'numToStr/Comment.nvim'
 
     Plug 'akinsho/toggleterm.nvim'
+
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 endif
 
 call plug#end()
