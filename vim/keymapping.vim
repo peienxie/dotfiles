@@ -65,3 +65,8 @@ nnoremap <leader>q <C-w>q
 nnoremap <leader>ss :split<CR>
 nnoremap <leader>sv :vsplit<CR>
 
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [q :cprev<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> [l :lprev<CR>
+
