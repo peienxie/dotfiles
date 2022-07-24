@@ -7,3 +7,8 @@ augroup higlight_todo
     autocmd!
     autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME\|XXX', -1)
 augroup END
+
+augroup startinsert_commit
+  autocmd!
+  autocmd BufEnter COMMIT_EDITMSG startinsert
+augroup END
