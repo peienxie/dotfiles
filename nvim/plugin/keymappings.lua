@@ -75,3 +75,11 @@ nnoremap('[q', ':cprev<CR>')
 nnoremap(']l', ':lnext<CR>')
 nnoremap('[l', ':lprev<CR>')
 
+
+-- add more undo break points
+-- vscode and ideavim currently is not supported <C-g> command
+if vim.fn.has('nvim') then
+  inoremap('<Space>', '<Space><C-g>u')
+  inoremap('<CR>', '<CR><C-g>u')
+  inoremap('<BS>', '<BS><C-g>u')
+end
