@@ -1,5 +1,5 @@
 "source ~/.config/nvim/common.vim
-source ~/.config/nvim/plug.vim
+"source ~/.config/nvim/plug.vim
 "source ~/.config/nvim/keymapping.vim
 "source ~/.config/nvim/autocmd.vim
 
@@ -12,3 +12,5 @@ source ~/.config/nvim/theme/ayu.vim
 if has("nvim")
     exec "source ~/.config/nvim/advanced-keymapping.vim"
 endif
+
+lua require('mylua')

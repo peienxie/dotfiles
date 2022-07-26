@@ -1,6 +1,6 @@
 local nnoremap = require 'mylua.keymap'.nnoremap
 local inoremap = require 'mylua.keymap'.inoremap
-local vnoremap = require 'mylua.keymap'.inoremap
+local vnoremap = require 'mylua.keymap'.vnoremap
 
 -- use ' ' space as leader key
 vim.g.mapleader = ' '
