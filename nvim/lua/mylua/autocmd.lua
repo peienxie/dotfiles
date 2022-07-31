@@ -15,9 +15,3 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	command = "startinsert",
 	group = group,
 })
-
---vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---	pattern = "*.lua",
---	command = "!stylua %",
---	group = group,
---})
