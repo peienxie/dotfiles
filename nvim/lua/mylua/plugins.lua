@@ -31,12 +31,17 @@ return packer.startup(function(use)
 	-- use({ "ayu-theme/ayu-vim" })
 
 	use({ "vim-airline/vim-airline" })
-	use({ "tpope/vim-fugitive" })
 	use({ "airblade/vim-rooter" })
 	use({ "fatih/vim-go" })
 	use({ "tpope/vim-surround" })
 	use({ "jiangmiao/auto-pairs" })
 	use({ "tpope/vim-sleuth" })
+
+	-- Git integration
+	use({ "TimUntersberger/neogit" })
+	use({ "akinsho/git-conflict.nvim" })
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+	use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- ipython terminal
 	use({ "jpalardy/vim-slime" })
@@ -52,8 +57,6 @@ return packer.startup(function(use)
 	use({ "nvim-lua/plenary.nvim" })
 	use({ "nvim-telescope/telescope.nvim" })
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-	use({ "mhinz/vim-signify" })
 
 	-- lsp
 	use({ "neovim/nvim-lspconfig" })
