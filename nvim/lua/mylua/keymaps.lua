@@ -1,5 +1,6 @@
 local nnoremap = require("mylua.utils.keymap").nnoremap
 local inoremap = require("mylua.utils.keymap").inoremap
+local cnoremap = require("mylua.utils.keymap").cnoremap
 local vnoremap = require("mylua.utils.keymap").vnoremap
 
 -- use space as leader key
@@ -43,9 +44,39 @@ vnoremap("<leader>d", '"_d')
 nnoremap("x", '"_x')
 vnoremap("x", '"_xgv')
 
--- search/replace for visually hightlighted text
-vnoremap("<C-f>", '"hy<Esc>/<C-r>h<CR>')
-vnoremap("<C-r>", '"hy:%s/<C-r>h//gc<left><left><left>')
+-- search the word under cursor
+nnoremap("<C-f>", "g#N", { silent = false })
+vnoremap("<C-f>", 'y/<C-r>"<CR>N', { silent = false })
+
+-- replace selected word
+vim.cmd([[ 
+function EscapeAll()
+	let @"=escape(@", '\\/.*$^~[]')
+	let @"=substitute(@", '\n', '\\n', 'g')
+	let @"=substitute(@", '\t', '\\t', 'g')
+endfunction
+]])
+vnoremap("<C-r>", 'y:call EscapeAll()<CR>:%s/<C-r>"//gc<Left><Left><Left>', { silent = false })
+
+-- search and replace on visually hightlighted range
+vnoremap("/", "<Esc>/\\%V", { silent = false })
+vnoremap("?", "<Esc>?\\%V", { silent = false })
+
+-- 'n' go down and 'N' go up when searching
+nnoremap("n", "'Nn'[v:searchforward]", { silent = false, expr = true })
+nnoremap("N", "'nN'[v:searchforward]", { silent = false, expr = true })
+
+-- add and remove \< \> to match whole word
+cnoremap("<A-w>", "<Home>\\<<End>\\>", { silent = false })
+cnoremap("<A-W>", "<Home><Del><Del><End><Backspace><Backspace>", { silent = false })
+nnoremap("<A-w>", "/<Up><Home>\\<<End>\\><CR>N", { silent = false })
+nnoremap("<A-W>", "/<Up><Home><Del><Del><End><Backspace><Backspace><CR>N", { silent = false })
+
+-- add and remove \C to match case sensitive
+cnoremap("<A-c>", "<End>\\C", { silent = false })
+cnoremap("<A-C>", "<End><Backspace><Backspace>", { silent = false })
+nnoremap("<A-c>", "/<Up><End>\\C<CR>N", { silent = false })
+nnoremap("<A-C>", "/<Up><End><Backspace><Backspace><CR>N", { silent = false })
 
 -- move current line/block up and down
 inoremap("<A-j>", "<Esc>:m .+1<CR>gi")
