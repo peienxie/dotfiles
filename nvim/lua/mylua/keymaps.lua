@@ -101,11 +101,21 @@ nnoremap("<leader>q", "<C-w>q")
 nnoremap("<leader>ss", ":split<CR>")
 nnoremap("<leader>sv", ":vsplit<CR>")
 
--- quickfix and location
+-- quickfix and location navigation
 nnoremap("]q", ":cnext<CR>")
 nnoremap("[q", ":cprev<CR>")
+nnoremap("]Q", ":clast<CR>")
+nnoremap("[Q", ":cfirst<CR>")
 nnoremap("]l", ":lnext<CR>")
 nnoremap("[l", ":lprev<CR>")
+nnoremap("]L", ":llast<CR>")
+nnoremap("[L", ":lfirst<CR>")
+
+-- buffer and tab navigation
+nnoremap("]b", ":bnext<CR>")
+nnoremap("[b", ":bprev<CR>")
+nnoremap("]t", ":tabnext<CR>")
+nnoremap("[t", ":tabprev<CR>")
 
 -- add more undo break points
 -- note that vscode and ideavim currently is not supported <C-g> command
