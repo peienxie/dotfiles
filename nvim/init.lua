@@ -1,4 +1,13 @@
-require('mylua.options')
-require('mylua.keymaps')
-require('mylua.autocmd')
-require('mylua.plugins')
+-- Add modules here
+local modules = {
+	"mylua.options",
+	"mylua.keymaps",
+	"mylua.autocmd",
+	"mylua.plugins",
+}
+
+-- Refresh module cache
+for _, v in pairs(modules) do
+	package.loaded[v] = nil
+	require(v)
+end

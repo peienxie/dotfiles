@@ -27,7 +27,7 @@ nnoremap("N", "Nzzzv")
 nnoremap("J", "mzJ`z")
 
 -- source myvimrc
-nnoremap("<leader><CR>", ":so $MYVIMRC<CR>")
+nnoremap("<leader><CR>", ":luafile $MYVIMRC<CR>", { silent = false })
 
 -- yank to system clipboard
 nnoremap("<leader>y", '"+y')
@@ -50,7 +50,7 @@ vnoremap("<C-f>", 'y/<C-r>"<CR>N', { silent = false })
 
 -- replace selected word
 vim.cmd([[ 
-function EscapeAll()
+function! EscapeAll()
 	let @"=escape(@", '\\/.*$^~[]')
 	let @"=substitute(@", '\n', '\\n', 'g')
 	let @"=substitute(@", '\t', '\\t', 'g')
