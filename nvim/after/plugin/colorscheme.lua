@@ -11,3 +11,6 @@
 vim.g.ayucolor = "dark"
 vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
 vim.cmd([[ colorscheme ayu ]])
+
+-- make selected item more visible
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#30353e" })
