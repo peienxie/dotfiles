@@ -1,10 +1,10 @@
 -- keymaps for IPython terminal
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n", "<leader>rt", ":lua IPythonToggle()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rl", ":lua IPythonRun('IPythonCellClear')<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rr", ":lua IPythonRun('IPythonCellExecuteCell')<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rj", ":lua IPythonRun('IPythonCellExecuteCellJump')<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rR", ":lua IPythonRun('IPythonCellRestart')<CR>", opts)
-vim.api.nvim_set_keymap("n", "]C", ":IPythonCellNextCell<CR>", opts)
-vim.api.nvim_set_keymap("n", "[C", ":IPythonCellPrevCell<CR>", opts)
+local nnoremap = require("mylua.utils.keymap").nnoremap
 
+nnoremap("<leader>rt", ":lua IPythonToggle()<CR>")
+nnoremap("<leader>rl", ":lua IPythonRun('IPythonCellClear')<CR>")
+nnoremap("<leader>rr", ":lua IPythonRun('IPythonCellExecuteCell')<CR>")
+nnoremap("<leader>rj", ":lua IPythonRun('IPythonCellExecuteCellJump')<CR>")
+nnoremap("<leader>rR", ":lua IPythonRun('IPythonCellRestart')<CR>")
+nnoremap("]C", ":IPythonCellNextCell<CR>")
+nnoremap("[C", ":IPythonCellPrevCell<CR>")
