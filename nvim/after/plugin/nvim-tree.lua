@@ -108,3 +108,15 @@ local nnoremap = require("mylua.utils.keymap").nnoremap
 
 nnoremap("<leader>ee", ":NvimTreeToggle<CR>")
 nnoremap("<leader>ef", ":NvimTreeFindFile<CR>")
+
+-- bring back the 'gx' functionality of netrw open URL
+-- https://sbulav.github.io/vim/neovim-opening-urls/
+if vim.fn.has("mac") == 1 then
+	nnoremap("gx", "<Cmd>call jobstart(['open', expand('<cfile>')], {'detach': v:true})<CR>")
+elseif vim.fn.has("unix") == 1 then
+	nnoremap("gx", "<Cmd>call jobstart(['xdg-open', expand('<cfile>')], {'detach': v:true})<CR>")
+elseif vim.fn.has("windows") == 1 then
+	nnoremap("gx", "<Cmd>call jobstart(['start', expand('<cfile>')], {'detach': v:true})<CR>")
+else
+	nnoremap("gx", "<Cmd>lua print('Error: gx is not supported on this OS!')<CR>")
+end
