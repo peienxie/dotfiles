@@ -1,0 +1,40 @@
+[core]
+	editor = nvim
+	autocrlf = input
+	filemode = false
+	excludesfile = ~/.gitignore
+	pager = delta
+
+[credential]
+	helper = store
+
+[user]
+	name = Peien Xie
+	email = peienxieit@gmail.com
+
+[rebase]
+	autoStash = true
+
+[format]
+	pretty = fuller
+
+[include]
+	path = ~/.delta_themes.gitconfig
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	side-by-side = true
+	line-numbers = true
+	true-colors = never
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[init]
+	defaultBranch = main
