@@ -36,19 +36,22 @@ local on_attach = function(client, bufnr)
 
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.document_highlight then
-		vim.api.nvim_exec(
-			[[
-            hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=Grey
-            hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=Grey
-            hi LspReferenceWrite cterm=bold ctermbg=DarkMagenta guibg=Grey
-            augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-        ]],
-			false
-		)
+		vim.api.nvim_set_hl(0, "LspReferenceRead", { bold = true, bg = "Grey" })
+		vim.api.nvim_set_hl(0, "LspReferenceText", { bold = true, bg = "Grey" })
+		vim.api.nvim_set_hl(0, "LspReferenceWrite", { bold = true, bg = "Grey" })
+		local group = vim.api.nvim_create_augroup("lsp_document_highlight", {
+			clear = true,
+		})
+		vim.api.nvim_create_autocmd("CursorHold", {
+			buffer = bufnr,
+			group = group,
+			callback = vim.lsp.buf.document_highlight,
+		})
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			buffer = bufnr,
+			group = group,
+			callback = vim.lsp.buf.clear_references,
+		})
 	end
 end
 
@@ -135,7 +138,11 @@ end
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
 -- vim.o.updatetime = 500
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- local group = vim.api.nvim_create_augroup("lsp_diagnostic_hover", { clear = true })
+-- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+-- 	group = group,
+-- 	callback = vim.diagnostic.open_float(nil, { focus = false }),
+-- })
 
 require("lsp_signature").setup({
 	hint_enable = false,

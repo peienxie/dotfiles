@@ -36,16 +36,22 @@ require("toggleterm").setup({
 	},
 })
 
-function _G.set_term_keymaps()
-	local opts = { noremap = true, silent = true }
-	vim.api.nvim_buf_set_keymap(0, "t", "jj", "<C-\\><C-n>", opts)
+local group = vim.api.nvim_create_augroup("set_term_keymaps", {
+	clear = true,
+})
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "term://*",
+	group = group,
+	callback = function()
+		local opts = { noremap = true, silent = true }
+		vim.api.nvim_buf_set_keymap(0, "t", "jj", "<C-\\><C-n>", opts)
 
-	vim.api.nvim_buf_set_keymap(0, "t", "<A-j>", "<C-\\><C-n><C-w>j", opts)
-	vim.api.nvim_buf_set_keymap(0, "t", "<A-h>", "<C-\\><C-n><C-w>h", opts)
-	vim.api.nvim_buf_set_keymap(0, "t", "<A-k>", "<C-\\><C-n><C-w>k", opts)
-	vim.api.nvim_buf_set_keymap(0, "t", "<A-l>", "<C-\\><C-n><C-w>l", opts)
-end
-vim.cmd("autocmd! TermOpen term://* lua set_term_keymaps()")
+		vim.api.nvim_buf_set_keymap(0, "t", "<A-j>", "<C-\\><C-n><C-w>j", opts)
+		vim.api.nvim_buf_set_keymap(0, "t", "<A-h>", "<C-\\><C-n><C-w>h", opts)
+		vim.api.nvim_buf_set_keymap(0, "t", "<A-k>", "<C-\\><C-n><C-w>k", opts)
+		vim.api.nvim_buf_set_keymap(0, "t", "<A-l>", "<C-\\><C-n><C-w>l", opts)
+	end,
+})
 
 local Terminal = require("toggleterm.terminal").Terminal
 
