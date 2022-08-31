@@ -86,6 +86,7 @@ return packer.startup(function(use)
 	use({ "akinsho/toggleterm.nvim" })
 
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" })
+	use({ "ekickx/clipboard-image.nvim" })
 
 	use({
 		"vimwiki/vimwiki",
