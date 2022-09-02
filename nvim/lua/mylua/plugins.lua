@@ -36,6 +36,17 @@ return packer.startup(function(use)
 	use({ "tpope/vim-surround" })
 	use({ "jiangmiao/auto-pairs" })
 	use({ "tpope/vim-sleuth" })
+	use({
+		"mbbill/undotree",
+		config = function()
+			-- don't open diff window on default
+			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_WindowLayout = 2
+			local nnoremap = require("mylua.utils.keymap").nnoremap
+			nnoremap("<leader>eu", ":UndotreeToggle<CR>")
+		end,
+	})
 
 	-- Git integration
 	use({ "TimUntersberger/neogit" })
