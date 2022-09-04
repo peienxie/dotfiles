@@ -31,6 +31,14 @@ local sources = {
 			return executable("black")
 		end,
 	}),
+	formatting.prettier.with({
+		condition = function()
+			return executable("prettier")
+		end,
+		filetypes = vim.tbl_extend("force", formatting.prettier.filetypes, {
+			"vimwiki",
+		}),
+	}),
 	diagnostics.flake8.with({
 		condition = function()
 			return executable("flake8")
