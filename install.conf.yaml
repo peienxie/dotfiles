@@ -3,9 +3,11 @@
       create: true
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
+    ~/Pictures/wallpapers: wallpapers
+
     ~/.gitconfig: git/.gitconfig
     ~/.bin: bin
     ~/.config/nvim: nvim
@@ -15,4 +17,3 @@
     ~/.config/i3: i3
     ~/.tmux.conf: tmux/tmux.conf
     ~/.terminfo: terminfo
-
