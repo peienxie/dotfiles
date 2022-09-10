@@ -17,3 +17,4 @@
     ~/.config/i3: i3
     ~/.tmux.conf: tmux/tmux.conf
     ~/.terminfo: terminfo
+    ~/.config/picom: picom
