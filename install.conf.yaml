@@ -8,12 +8,12 @@
 - link:
     ~/Pictures/wallpapers: wallpapers
 
+    ~/.zshenv: zsh/.zshenv
+    ~/.config/zsh: zsh
+
     ~/.gitconfig: git/.gitconfig
     ~/.bin: bin
     ~/.config/nvim: nvim
-    ~/.zsh: zsh
-    ~/.zshrc: zsh/zshrc
-    ~/.p10k.zsh: zsh/themes/p10k.zsh
     ~/.config/i3: i3
     ~/.tmux.conf: tmux/tmux.conf
     ~/.terminfo: terminfo

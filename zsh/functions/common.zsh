@@ -57,3 +57,6 @@ function git {
     /usr/bin/git "$@"
   fi
 }
+# fuzzy cd
+function cdf() { cd *$1*/ } # stolen from @topfunky
+

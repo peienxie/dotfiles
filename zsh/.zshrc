@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -89,10 +96,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-for file in ~/.zsh/exports/*.zsh
-do
-  source "$file"
-done
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -102,21 +105,19 @@ done
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-for file in ~/.zsh/aliases/*.zsh
+for file in $ZDOTDIR/aliases/*.zsh
 do
   source "$file"
 done
 
-for file in ~/.zsh/functions/*.zsh
+for file in $ZDOTDIR/functions/*.zsh
 do
   source "$file"
 done
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# fuzzy cd
-function cdf() { cd *$1*/ } # stolen from @topfunky
+P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
+[[ ! -f $P10K_CONFIG_FILE ]] || source $P10K_CONFIG_FILE
 
 zstyle ':completion:*' list-colors
 
