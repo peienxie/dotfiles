@@ -15,7 +15,7 @@
     ~/.bin: bin
     ~/.config/nvim: nvim
     ~/.config/i3: i3
-    ~/.tmux.conf: tmux/tmux.conf
+    ~/.config/tmux: tmux
     ~/.terminfo: terminfo
     ~/.config/picom: picom
     ~/.config/npm: npm
