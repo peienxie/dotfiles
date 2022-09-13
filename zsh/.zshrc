@@ -78,6 +78,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-z)
 
+# make sure assign ZSH_COMPDUMP variable before source oh-my-zsh.sh
+mkdir -p $XDG_CACHE_HOME/zsh
+ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -120,4 +124,7 @@ P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 [[ ! -f $P10K_CONFIG_FILE ]] || source $P10K_CONFIG_FILE
 
 zstyle ':completion:*' list-colors
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
+mkdir -p $XDG_DATA_HOME/zsh
+ZSHZ_DATA=$XDG_DATA_HOME/zsh/zsh-z-history
