@@ -7,15 +7,14 @@
 
 - link:
     ~/Pictures/wallpapers: wallpapers
+    ~/.bin: bin
+    ~/.terminfo: terminfo
 
     ~/.zshenv: zsh/.zshenv
     ~/.config/zsh: zsh
-
-    ~/.gitconfig: git/.gitconfig
-    ~/.bin: bin
+    ~/.config/git: git
     ~/.config/nvim: nvim
     ~/.config/i3: i3
     ~/.config/tmux: tmux
-    ~/.terminfo: terminfo
     ~/.config/picom: picom
     ~/.config/npm: npm
