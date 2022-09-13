@@ -18,3 +18,4 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.terminfo: terminfo
     ~/.config/picom: picom
+    ~/.config/npm: npm
