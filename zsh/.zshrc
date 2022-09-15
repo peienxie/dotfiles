@@ -119,6 +119,12 @@ do
   source "$file"
 done
 
+# source fzf keybindings and completion
+if [[ -x "$(command -v fzf)" ]]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 [[ ! -f $P10K_CONFIG_FILE ]] || source $P10K_CONFIG_FILE
