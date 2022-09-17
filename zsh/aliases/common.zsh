@@ -9,3 +9,6 @@ alias ipy=ipython
 # fzf then cd the result has been selected
 alias f='cd $(fd --type directory | fzf)'
 
+# create virtual serial ports connected each other
+alias vserial='socat -d -d pty,raw,echo=0 pty,raw,echo=0'
+
