@@ -60,3 +60,21 @@ function git {
 # fuzzy cd
 function cdf() { cd *$1*/ } # stolen from @topfunky
 
+# zshz with fzf
+function zf() {
+    if ! type 'zshz' 2>/dev/null | grep -q 'function'
+    then
+        echo "zshz is not found."
+        return -1
+    fi
+    if [[ "$#" -eq 1 ]]; then
+        zshz "$@"
+        return
+    fi
+
+    if [[ -x "$(command -v fzf)" ]]; then
+        zshz $(zshz | fzf)
+    else
+        zshz
+    fi
+}
