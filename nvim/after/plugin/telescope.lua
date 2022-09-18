@@ -16,6 +16,9 @@ nnoremap("<leader>fb", ':lua require("telescope.builtin").current_buffer_fuzzy_f
 nnoremap("<leader>fn", ':lua require("telescope.builtin").buffers()<CR>')
 nnoremap("<leader>fh", ':lua require("telescope.builtin").help_tags()<CR>')
 
+nnoremap("<leader>fr", ':lua require("telescope.builtin").resume()<CR>')
+nnoremap("<leader>ft", ":Telescope<CR>")
+
 local telescope = require("telescope")
 
 telescope.setup({
