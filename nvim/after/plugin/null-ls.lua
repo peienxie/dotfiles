@@ -27,6 +27,7 @@ local sources = {
 		end,
 	}),
 	formatting.black.with({
+		extra_args = { "--fast" },
 		condition = function()
 			return executable("black")
 		end,
@@ -40,6 +41,7 @@ local sources = {
 		}),
 	}),
 	diagnostics.flake8.with({
+		extra_args = { "--max-line-length=88", "--ignore=E203" },
 		condition = function()
 			return executable("flake8")
 		end,
