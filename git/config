@@ -2,7 +2,7 @@
 	editor = nvim
 	autocrlf = input
 	filemode = false
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.config/git/gitignore_global
 	pager = delta
 
 [credential]
@@ -18,9 +18,6 @@
 [format]
 	pretty = fuller
 
-[include]
-	path = ~/.delta_themes.gitconfig
-
 [interactive]
 	diffFilter = delta --color-only
 
@@ -28,7 +25,6 @@
 	navigate = true  # use n and N to move between diff sections
 	side-by-side = true
 	line-numbers = true
-	true-colors = never
 
 [merge]
 	conflictstyle = diff3
