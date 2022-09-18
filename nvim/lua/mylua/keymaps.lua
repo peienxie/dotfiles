@@ -58,9 +58,8 @@ endfunction
 ]])
 vnoremap("<C-r>", 'y:call EscapeAll()<CR>:%s/<C-r>"//gc<Left><Left><Left>', { silent = false })
 
--- search and replace on visually hightlighted range
-vnoremap("/", "<Esc>/\\%V", { silent = false })
-vnoremap("?", "<Esc>?\\%V", { silent = false })
+-- search in visually hightlighted range
+vnoremap("g/", "<Esc>/\\%V", { silent = false })
 
 -- 'n' go down and 'N' go up when searching
 nnoremap("n", "'Nn'[v:searchforward]", { silent = false, expr = true })
