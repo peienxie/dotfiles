@@ -1,3 +1,8 @@
+if vim.fn.exists("g:vscode") == 1 then
+	require("vscode")
+	return
+end
+
 -- Add modules here
 local modules = {
 	"mylua.options",

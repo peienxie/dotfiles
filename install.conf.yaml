@@ -20,3 +20,5 @@
     ~/.config/npm: npm
     ~/.config/ripgrep: ripgrep
     ~/.config/python: python
+
+    ~/.config/vscode-neovim: vscode-neovim
