@@ -63,3 +63,12 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,vim
+
+## ccls
+.ccls
+.ccls-cache/
+
+## personal stuff
+_NOTES.*
+_TODOS.*
+
