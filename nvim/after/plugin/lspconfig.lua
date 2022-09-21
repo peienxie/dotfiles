@@ -1,4 +1,4 @@
-local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require("lspconfig")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -55,14 +55,15 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-local servers = {
-	clangd = {
-		cmd = {
-			"clangd",
-			"--background-index",
-			"--clang-tidy",
-		},
-	},
+local lsp_server_configs = {
+	ccls = {},
+	--clangd = {
+	--	cmd = {
+	--		"clangd",
+	--		"--background-index",
+	--		"--clang-tidy",
+	--	},
+	--},
 	pyright = {},
 	gopls = {},
 	sumneko_lua = {
@@ -95,38 +96,42 @@ local servers = {
 	jsonls = {},
 }
 
-local extend_lsp_config = function(name)
-	local default = servers[name] or {}
-	return vim.tbl_deep_extend("force", default, {
+local extend_lsp_config = function(default)
+	return vim.tbl_deep_extend("force", {
 		on_attach = on_attach,
 		capabilities = capabilities,
-	})
+	}, default)
 end
+
+local setup_lsp_server = function(server, config)
+	if not config then
+		return
+	end
+
+	if type(config) ~= "table" then
+		config = {}
+	end
+
+	lspconfig[server].setup(extend_lsp_config(config))
+end
+
+local get_lsp_servers = function()
+	local lsp_servers = {}
+	for server in pairs(lsp_server_configs) do
+		table.insert(lsp_servers, server)
+	end
+	return lsp_servers
+end
+
+require("mason-lspconfig").setup({
+	ensure_installed = get_lsp_servers(),
+	automatic_installation = true,
+})
 
 -- Loop through the servers listed above.
-for server_name in pairs(servers) do
-	local server_available, server = lsp_installer.get_server(server_name)
-	if server_available then
-		server:on_ready(function()
-			-- When this particular server is ready (i.e. when installation is finished or the server is already installed),
-			-- this function will be invoked. Make sure not to use the "catch-all" lsp_installer.on_server_ready()
-			-- function to set up servers, to avoid doing setting up a server twice.
-			local config = extend_lsp_config(server_name)
-			server:setup(config)
-		end)
-		if not server:is_installed() then
-			-- Queue the server to be installed.
-			server:install()
-		end
-	end
+for server, config in pairs(lsp_server_configs) do
+	setup_lsp_server(server, config)
 end
-
----- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
----- or if the server is already installed).
---lsp_installer.on_server_ready(function(server)
---    local config = extend_lsp_config(server.name)
---    server:setup(config)
---end)
 
 -- make diagnostic icon looks better
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
