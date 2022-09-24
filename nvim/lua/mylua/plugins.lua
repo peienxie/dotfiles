@@ -34,7 +34,13 @@ return packer.startup(function(use)
 	use({ "airblade/vim-rooter" })
 	use({ "fatih/vim-go" })
 	use({ "tpope/vim-surround" })
-	use({ "jiangmiao/auto-pairs" })
+	use({
+		"jiangmiao/auto-pairs",
+		config = function()
+			-- only jump to close pair on the same line
+			vim.g.AutoPairsMultilineClose = 0
+		end,
+	})
 	use({ "tpope/vim-sleuth" })
 	use({
 		"mbbill/undotree",
