@@ -1,4 +1,10 @@
-require("clipboard-image").setup({
+local ok, clipboard_image = pcall(require, "clipboard-image")
+if not ok then
+	vim.notify("Failed to load plugin 'clipboard-image'", "error")
+	return
+end
+
+clipboard_image.setup({
 	-- Default configuration for all filetype
 	default = {
 		img_dir = { "%:p:h", "img" },

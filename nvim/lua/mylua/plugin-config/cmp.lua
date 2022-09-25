@@ -1,8 +1,18 @@
-vim.opt.completeopt = { "menu", "menuone", "noinsert" }
-
-local lspkind = require("lspkind")
-local cmp = require("cmp")
-local luasnip = require("luasnip")
+local lspkind_ok, lspkind = pcall(require, "lspkind")
+if not lspkind_ok then
+	vim.notify("Failed to load plugin 'lspkind'", "error")
+	return
+end
+local cmp_ok, cmp = pcall(require, "cmp")
+if not cmp_ok then
+	vim.notify("Failed to load plugin 'nvim-cmp'", "error")
+	return
+end
+local luasnip_ok, luasnip = pcall(require, "luasnip")
+if not luasnip_ok then
+	vim.notify("Failed to load plugin 'luasnip'", "error")
+	return
+end
 
 cmp.setup({
 	mapping = {
@@ -54,3 +64,5 @@ cmp.setup({
 		ghost_text = false,
 	},
 })
+
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }

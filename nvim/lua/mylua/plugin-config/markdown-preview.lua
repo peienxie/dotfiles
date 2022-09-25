@@ -97,7 +97,7 @@ vim.g.mkdp_filetypes = { "markdown" }
 -- By default the theme is define according to the preferences of the system
 vim.g.mkdp_theme = "dark"
 
--- keymapping
+-- keymaps
 local nnoremap = require("mylua.utils.keymap").nnoremap
 
 nnoremap("<leader>md", ":MarkdownPreviewToggle<CR>")

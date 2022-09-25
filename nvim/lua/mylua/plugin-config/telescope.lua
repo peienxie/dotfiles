@@ -1,25 +1,11 @@
+local ok, telescope = pcall(require, "telescope")
+if not ok then
+	vim.notify("Failed to load plugin 'telescope'", "error")
+	return
+end
+
 local actions = require("telescope.actions")
 local actions_layout = require("telescope.actions.layout")
-
-local nnoremap = require("mylua.utils.keymap").nnoremap
-local vnoremap = require("mylua.utils.keymap").vnoremap
-
--- TODO: fallback to find_files if not a git directory
--- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
-nnoremap("<C-p>", ':lua require("telescope.builtin").git_files()<CR>')
-nnoremap("<leader>ff", ':lua require("telescope.builtin").find_files()<CR>')
-nnoremap("<leader>fw", ':lua require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })<CR>')
-vnoremap("<leader>fw", ':lua require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })<CR>')
-nnoremap("<leader>fg", ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep for > ") })<CR>')
-nnoremap("<leader>fl", ':lua require("telescope.builtin").live_grep()<CR>')
-nnoremap("<leader>fb", ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>')
-nnoremap("<leader>fn", ':lua require("telescope.builtin").buffers()<CR>')
-nnoremap("<leader>fh", ':lua require("telescope.builtin").help_tags()<CR>')
-
-nnoremap("<leader>fr", ':lua require("telescope.builtin").resume()<CR>')
-nnoremap("<leader>ft", ":Telescope<CR>")
-
-local telescope = require("telescope")
 
 telescope.setup({
 	defaults = {
@@ -102,3 +88,22 @@ telescope.setup({
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 telescope.load_extension("fzf")
+
+-- keymaps
+local nnoremap = require("mylua.utils.keymap").nnoremap
+local vnoremap = require("mylua.utils.keymap").vnoremap
+
+-- TODO: fallback to find_files if not a git directory
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
+nnoremap("<C-p>", ':lua require("telescope.builtin").git_files()<CR>')
+nnoremap("<leader>ff", ':lua require("telescope.builtin").find_files()<CR>')
+nnoremap("<leader>fw", ':lua require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })<CR>')
+vnoremap("<leader>fw", ':lua require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })<CR>')
+nnoremap("<leader>fg", ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep for > ") })<CR>')
+nnoremap("<leader>fl", ':lua require("telescope.builtin").live_grep()<CR>')
+nnoremap("<leader>fb", ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>')
+nnoremap("<leader>fn", ':lua require("telescope.builtin").buffers()<CR>')
+nnoremap("<leader>fh", ':lua require("telescope.builtin").help_tags()<CR>')
+
+nnoremap("<leader>fr", ':lua require("telescope.builtin").resume()<CR>')
+nnoremap("<leader>ft", ":Telescope<CR>")

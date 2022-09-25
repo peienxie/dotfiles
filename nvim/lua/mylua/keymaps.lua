@@ -11,9 +11,6 @@ inoremap("jj", "<Esc>")
 inoremap("<C-c>", "<Esc>")
 nnoremap("<C-c>", "<Cmd>nohl<CR>")
 
--- show the highlight group of symbol under cursor
-nnoremap("<F10>", ":TSHighlightCapturesUnderCursor<CR>")
-
 -- disable some default keymapping which I don't wanna use
 nnoremap("Q", "<nop>")
 nnoremap("q:", "<nop>")

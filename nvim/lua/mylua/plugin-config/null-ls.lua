@@ -1,8 +1,15 @@
-local null_ls = require("null-ls")
+local ok, null_ls = pcall(require, "null-ls")
+if not ok then
+	vim.notify("Failed to load plugin 'null-ls'", "error")
+	return
+end
+
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local executable = function(expr)
-	return vim.fn.executable(expr) == 1
+	return function()
+		return vim.fn.executable(expr) == 1
+	end
 end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -22,29 +29,21 @@ end
 
 local sources = {
 	formatting.stylua.with({
-		condition = function()
-			return executable("stylua")
-		end,
+		condition = executable("stylua"),
 	}),
 	formatting.black.with({
 		extra_args = { "--fast" },
-		condition = function()
-			return executable("black")
-		end,
+		condition = executable("black"),
 	}),
 	formatting.prettier.with({
-		condition = function()
-			return executable("prettier")
-		end,
+		condition = executable("prettier"),
 		filetypes = vim.tbl_extend("force", formatting.prettier.filetypes, {
 			"vimwiki",
 		}),
 	}),
 	diagnostics.flake8.with({
 		extra_args = { "--max-line-length=88", "--ignore=E203" },
-		condition = function()
-			return executable("flake8")
-		end,
+		condition = executable("flake8"),
 	}),
 }
 

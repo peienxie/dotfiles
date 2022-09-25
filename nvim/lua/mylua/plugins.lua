@@ -16,6 +16,7 @@ end
 -- Use a protected call so we don't error out on first use
 local ok, packer = pcall(require, "packer")
 if not ok then
+	vim.notify("packer ")
 	return
 end
 
@@ -24,104 +25,226 @@ return packer.startup(function(use)
 	-- Packer can manage itself
 	use({ "wbthomason/packer.nvim" })
 
-	-- themes
-	use({ "gruvbox-community/gruvbox" })
-	use({ "dracula/vim", as = "dracula" })
-	use({ "Luxed/ayu-vim" })
+	-- Colorschemes
+	use({ "gruvbox-community/gruvbox", disable = true })
+	use({ "dracula/vim", as = "dracula", disable = true })
 	-- use({ "ayu-theme/ayu-vim" })
+	use({
+		"Luxed/ayu-vim",
+		config = function()
+			require("mylua.plugin-config.ayu")
+		end,
+	})
 
-	use({ "vim-airline/vim-airline" })
-	use({ "airblade/vim-rooter" })
-	use({ "fatih/vim-go" })
+	-- Statusline
+	use({
+		"vim-airline/vim-airline",
+		config = function()
+			require("mylua.plugin-config.airline")
+		end,
+	})
+
+	-- Buffers and Tabs
+	use({
+		"akinsho/bufferline.nvim",
+		config = function()
+			require("mylua.plugin-config.bufferline")
+		end,
+	})
+
+	-- File Explorer
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = {
+			{ "kyazdani42/nvim-web-devicons" },
+		},
+		config = function()
+			require("mylua.plugin-config.nvim-tree")
+		end,
+	})
+
+	-- Session management
+	use({
+		"mhinz/vim-startify",
+		config = function()
+			require("mylua.plugin-config.startify")
+		end,
+	})
+
+	-- Terminal
+	use({
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("mylua.plugin-config.toggleterm")
+		end,
+	})
+	-- ipython terminal
+	use({ "jpalardy/vim-slime" })
+	use({ "hanschen/vim-ipython-cell", ft = "python" })
+
+	-- Git integration
+	use({
+		"TimUntersberger/neogit",
+		requires = { "sindrets/diffview.nvim" },
+		config = function()
+			require("mylua.plugin-config.neogit")
+		end,
+	})
+	use({
+		"akinsho/git-conflict.nvim",
+		config = function()
+			require("mylua.plugin-config.git-conflict")
+		end,
+	})
+	use({
+		"sindrets/diffview.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("mylua.plugin-config.diffview")
+		end,
+	})
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("mylua.plugin-config.gitsigns")
+		end,
+	})
+
+	-- Treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		requires = {
+			{ "nvim-treesitter/playground" },
+			{ "nvim-treesitter/nvim-treesitter-context" },
+		},
+		config = function()
+			require("mylua.plugin-config.treesitter")
+		end,
+	})
+	use({
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("mylua.plugin-config.treesitter-context")
+		end,
+	})
+
+	-- Telescope
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "kyazdani42/nvim-web-devicons" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+		},
+		config = function()
+			require("mylua.plugin-config.telescope")
+		end,
+	})
+
+	-- LSP
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			{ "ray-x/lsp_signature.nvim" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
+		},
+		config = function()
+			require("mylua.plugin-config.lspconfig")
+		end,
+	})
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("mylua.plugin-config.null-ls")
+		end,
+	})
+	-- LSP server installer
+	use({
+		"williamboman/mason.nvim",
+		config = function()
+			require("mylua.plugin-config.mason")
+		end,
+	})
+
+	-- Autocompletion
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			-- icons for completeion items
+			{ "onsails/lspkind-nvim" },
+			-- sources of nvim-cmp
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
+			{ "saadparwaiz1/cmp_luasnip" },
+		},
+		config = function()
+			require("mylua.plugin-config.cmp")
+		end,
+	})
+	-- snip engine and cmp source
+	use({
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("mylua.plugin-config.luasnip")
+		end,
+	})
+
+	-- Neovim lua development
+	use({ "folke/lua-dev.nvim" })
+
+	-- Programming language related
+	use({ "fatih/vim-go", ft = "go" })
+
+	-- Editing
+	use({ "tpope/vim-sleuth" })
 	use({ "tpope/vim-surround" })
 	use({
 		"jiangmiao/auto-pairs",
 		config = function()
-			-- only jump to close pair on the same line
-			vim.g.AutoPairsMultilineClose = 0
+			require("mylua.plugin-config.auto-pairs")
 		end,
 	})
-	use({ "tpope/vim-sleuth" })
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("mylua.plugin-config.comment")
+		end,
+	})
+
+	-- Other utility
+	use({ "airblade/vim-rooter", disable = true })
 	use({
 		"mbbill/undotree",
 		config = function()
-			-- don't open diff window on default
-			vim.g.undotree_DiffAutoOpen = 0
-			vim.g.undotree_SetFocusWhenToggle = 1
-			vim.g.undotree_WindowLayout = 2
-			local nnoremap = require("mylua.utils.keymap").nnoremap
-			nnoremap("<leader>eu", ":UndotreeToggle<CR>")
+			require("mylua.plugin-config.undotree")
 		end,
 	})
-
-	-- Git integration
-	use({ "TimUntersberger/neogit" })
-	use({ "akinsho/git-conflict.nvim" })
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-	use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" })
-
-	-- ipython terminal
-	use({ "jpalardy/vim-slime" })
-	use({ "hanschen/vim-ipython-cell" })
-	use({ "mhinz/vim-startify" })
-
-	-- treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use({ "nvim-treesitter/playground" })
-	use({ "nvim-treesitter/nvim-treesitter-context" })
-
-	-- telescope
-	use({ "nvim-lua/popup.nvim" })
-	use({ "nvim-lua/plenary.nvim" })
-	use({ "nvim-telescope/telescope.nvim" })
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-	-- lsp
-	use({ "neovim/nvim-lspconfig" })
-	use({ "ray-x/lsp_signature.nvim" })
-	use({ "williamboman/mason.nvim" })
-	use({ "williamboman/mason-lspconfig.nvim" })
-	use({ "jose-elias-alvarez/null-ls.nvim" })
-
-	-- autocompletion
-	use({ "hrsh7th/nvim-cmp" })
-	use({ "onsails/lspkind-nvim" })
-	-- sources of nvim-cmp
-	use({ "hrsh7th/cmp-nvim-lsp" })
-	use({ "hrsh7th/cmp-nvim-lua" })
-	use({ "hrsh7th/cmp-buffer" })
-	use({ "hrsh7th/cmp-path" })
-	use({ "hrsh7th/cmp-cmdline" })
-	use({ "hrsh7th/cmp-nvim-lsp-document-symbol" })
-	-- snip engine and cmp source
-	use({ "L3MON4D3/LuaSnip" })
-	use({ "saadparwaiz1/cmp_luasnip" })
-
-	use({ "folke/lua-dev.nvim" })
-
-	use({ "kyazdani42/nvim-tree.lua" })
-	use({ "kyazdani42/nvim-web-devicons" })
-
-	use({ "akinsho/bufferline.nvim" })
-
-	use({ "numToStr/Comment.nvim" })
-
-	use({ "akinsho/toggleterm.nvim" })
-
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" })
-	use({ "ekickx/clipboard-image.nvim" })
-
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && yarn install",
+		config = function()
+			require("mylua.plugin-config.markdown-preview")
+		end,
+	})
+	use({
+		"ekickx/clipboard-image.nvim",
+		config = function()
+			require("mylua.plugin-config.clipboard-image")
+		end,
+	})
 	use({
 		"vimwiki/vimwiki",
 		config = function()
-			vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
-			-- automatically generate a level 1 header when creating a new wiki page.
-			vim.g.vimwiki_auto_header = 1
-			-- only set the filetype of markdown files inside a wiki directory
-			vim.g.vimwiki_global_ext = 0
-			-- the prettier markdown formatter will format the checkbox of completed task to lowercase x
-			-- if use default value ' .oOX' here, syntax highlight and <C-Space> keymap won't work with the formatter
-			vim.g.vimwiki_listsyms = " x"
+			require("mylua.plugin-config.vimwiki")
 		end,
 	})
 end)

@@ -1,4 +1,8 @@
-local luasnip = require("luasnip")
+local ok, luasnip = pcall(require, "luasnip")
+if not ok then
+	vim.notify("Failed to load plugin 'luasnip'", "error")
+	return
+end
 
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
 	if luasnip.jumpable(1) then

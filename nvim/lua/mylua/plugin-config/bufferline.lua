@@ -1,6 +1,8 @@
-vim.opt.termguicolors = true
+local ok, bufferline = pcall(require, "bufferline")
+if not ok then
+	vim.notify("Failed to load plugin 'bufferline'", "error")
+end
 
-local bufferline = require("bufferline")
 bufferline.setup({
 	options = {
 		numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -78,3 +80,5 @@ bufferline.setup({
 		-- end
 	},
 })
+
+vim.opt.termguicolors = true

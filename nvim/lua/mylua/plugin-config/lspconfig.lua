@@ -1,8 +1,8 @@
-local lspconfig = require("lspconfig")
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_ok then
+	vim.notify("Failed to load plugin 'lspconfig'", "error")
+	return
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -52,6 +52,16 @@ local on_attach = function(client, bufnr)
 			callback = vim.lsp.buf.clear_references,
 		})
 	end
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_nvim_lsp_ok then
+	vim.notify("Failed to load plugin 'cmp_nvim_lsp'")
+else
+	capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
 end
 
 local lsp_server_configs = {
@@ -122,10 +132,17 @@ local get_lsp_servers = function()
 	return lsp_servers
 end
 
-require("mason-lspconfig").setup({
-	ensure_installed = get_lsp_servers(),
-	automatic_installation = true,
-})
+-- It's important that you set up the plugins in the following order:
+-- mason.nvim --> mason-lspconfig.nvim --> lspconfig
+local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_ok then
+	vim.notify("Failed to load plugin 'mason-lspconfig'", "error")
+else
+	mason_lspconfig.setup({
+		ensure_installed = get_lsp_servers(),
+		automatic_installation = true,
+	})
+end
 
 -- Loop through the servers listed above.
 for server, config in pairs(lsp_server_configs) do
@@ -148,12 +165,17 @@ end
 -- 	callback = vim.diagnostic.open_float(nil, { focus = false }),
 -- })
 
-require("lsp_signature").setup({
-	hint_enable = false,
-	hint_prefix = "",
-	handler_opts = {
-		border = "none", -- double, rounded, single, shadow, none
-	},
-	always_trigger = true,
-	toggle_key = "<C-k>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
-})
+local lsp_signature_ok, lsp_signature = pcall(require, "lsp_signature")
+if not lsp_signature_ok then
+	vim.notify("Failed to load plugin 'lsp_signature'", "error")
+else
+	lsp_signature.setup({
+		hint_enable = false,
+		hint_prefix = "",
+		handler_opts = {
+			border = "none", -- double, rounded, single, shadow, none
+		},
+		always_trigger = true,
+		toggle_key = "<C-k>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+	})
+end

@@ -1,4 +1,10 @@
-require("Comment").setup({
+local ok, comment = pcall(require, "Comment")
+if not ok then
+	vim.notify("Failed to load plugin 'Comment'", "error")
+	return
+end
+
+comment.setup({
 	---Add a space b/w comment and the line
 	padding = true,
 

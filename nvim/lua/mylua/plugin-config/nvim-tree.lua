@@ -1,4 +1,9 @@
-local nvim_tree = require("nvim-tree")
+local ok, nvim_tree = pcall(require, "nvim-tree")
+if not ok then
+	vim.notify("Failed to load plugin 'nvim-tree'", "error")
+	return
+end
+
 local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
@@ -45,7 +50,6 @@ nvim_tree.setup({
 	},
 	view = {
 		width = 30,
-		height = 30,
 		hide_root_folder = false,
 		side = "left",
 		mappings = {
@@ -103,7 +107,7 @@ nvim_tree.setup({
 	},
 })
 
--- keymapping
+-- keymaps
 local nnoremap = require("mylua.utils.keymap").nnoremap
 
 nnoremap("<leader>ee", ":NvimTreeToggle<CR>")

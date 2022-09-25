@@ -1,4 +1,10 @@
-require("toggleterm").setup({
+local ok, toggleterm = pcall(require, "toggleterm")
+if not ok then
+	vim.notify("Failed to load plugin 'toggleterm'", "error")
+	return
+end
+
+toggleterm.setup({
 	-- size can be a number or function which is passed the current terminal
 	size = function(term)
 		if term.direction == "horizontal" then
