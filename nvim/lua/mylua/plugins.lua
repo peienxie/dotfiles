@@ -38,9 +38,9 @@ return packer.startup(function(use)
 
 	-- Statusline
 	use({
-		"vim-airline/vim-airline",
+		"hoob3rt/lualine.nvim",
 		config = function()
-			require("mylua.plugin-config.airline")
+			require("mylua.plugin-config.lualine")
 		end,
 	})
 
