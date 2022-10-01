@@ -19,3 +19,4 @@
     ~/.config/picom: picom
     ~/.config/npm: npm
     ~/.config/ripgrep: ripgrep
+    ~/.config/python: python

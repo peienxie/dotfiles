@@ -20,6 +20,12 @@ skip_global_compinit=1
 export GOROOT=/usr/local/go
 export GOPATH=$XDG_DATA_HOME/go
 
+# python, ipython, and jupyter
+# https://viliampucik.wordpress.com/2021/01/11/xdg-base-directory-compliant-python_history/
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonstartup.py
+export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
+
 # node repl history
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
 # npm config file ocation
