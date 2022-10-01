@@ -42,6 +42,10 @@ export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
 export TERMINFO=$XDG_DATA_HOME/terminfo
 export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
 
+# fzf default find command including hidden but not .git folder
+# https://github.com/junegunn/fzf/issues/337
+export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
+
 # includes user's private bin
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
