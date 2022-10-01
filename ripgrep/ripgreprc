@@ -1,0 +1,6 @@
+# show hidden files but not .git/
+--hidden
+--glob=!.git
+
+--smart-case
+

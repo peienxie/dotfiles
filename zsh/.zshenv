@@ -25,6 +25,9 @@ export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
 # npm config file ocation
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
+# ripgrep config file
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
+
 # includes user's private bin
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
