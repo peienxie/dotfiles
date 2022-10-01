@@ -20,6 +20,10 @@ skip_global_compinit=1
 export GOROOT=/usr/local/go
 export GOPATH=$XDG_DATA_HOME/go
 
+# rust
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+
 # python, ipython, and jupyter
 # https://viliampucik.wordpress.com/2021/01/11/xdg-base-directory-compliant-python_history/
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonstartup.py
@@ -46,7 +50,7 @@ fi
 PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
 # rust
-PATH="$HOME/.cargo/bin:$PATH"
+PATH="$CARGO_HOME/bin:$PATH"
 
 # deduplicate path entry
 export -U PATH
