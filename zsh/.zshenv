@@ -38,6 +38,10 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # ripgrep config file
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
 
+# terminal profiles
+export TERMINFO=$XDG_DATA_HOME/terminfo
+export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
+
 # includes user's private bin
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
