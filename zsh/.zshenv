@@ -16,6 +16,9 @@ export HISTFILE="$XDG_STATE_HOME"/zsh/history
 # skip compinit call in /etc/zsh/zshrc, the compinit will be called in oh-my-zsh.sh
 skip_global_compinit=1
 
+# oh-my-zsh home
+export ZSH=$XDG_CONFIG_HOME/oh-my-zsh
+
 # golang
 export GOROOT=/usr/local/go
 export GOPATH=$XDG_DATA_HOME/go

@@ -5,11 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,6 +65,19 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+
+ZSH_CUSTOM=$ZSH/custom
+
+# auto install oh-my-zsh custom plugins and themes
+! [[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]] && {
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions >/dev/null 2>&1
+}
+! [[ -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
+  git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
+}
+! [[ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]] && {
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k >/dev/null 2>&1
+}
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
