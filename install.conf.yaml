@@ -22,3 +22,4 @@
     ~/.config/python: python
 
     ~/.config/vscode-neovim: vscode-neovim
+    ~/.config/ideavim: ideavim
