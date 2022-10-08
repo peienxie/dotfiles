@@ -9,11 +9,11 @@ opt.splitbelow = true
 opt.splitright = true
 
 opt.errorbells = false
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
 opt.expandtab = false
-
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = -1
+opt.smarttab = true
 opt.smartindent = true
 opt.autoindent = true
 opt.number = true
