@@ -156,5 +156,5 @@ lualine.setup({
 	tabline = {},
 	winbar = {},
 	inactive_winbar = {},
-	extensions = { "quickfix", "nvim-tree" },
+	extensions = { "nvim-dap-ui", "quickfix", "nvim-tree" },
 })

@@ -197,6 +197,23 @@ return packer.startup(function(use)
 			require("mylua.plugin-config.luasnip")
 		end,
 	})
+	-- DAP
+	use({
+		"mfussenegger/nvim-dap",
+		config = function()
+			require("mylua.plugin-config.dap")
+		end,
+	})
+	use({
+		"rcarriga/nvim-dap-ui",
+		require = { "mfussenegger/nvim-dap" },
+	})
+	use({
+		"leoluz/nvim-dap-go",
+		config = function()
+			require("dap-go").setup()
+		end,
+	})
 
 	-- Neovim lua development
 	use({ "folke/lua-dev.nvim" })
