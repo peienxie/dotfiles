@@ -216,6 +216,7 @@ return packer.startup(function(use)
 
 	-- Programming language related
 	use({ "fatih/vim-go", ft = "go" })
+	use({ "mfussenegger/nvim-jdtls" })
 
 	-- Editing
 	use({ "tpope/vim-sleuth" })
