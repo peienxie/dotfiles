@@ -94,10 +94,12 @@ local nnoremap = require("mylua.utils.keymap").nnoremap
 local vnoremap = require("mylua.utils.keymap").vnoremap
 
 nnoremap("<C-p>", function()
-	local opts = {} -- define here if you want to define something
-	local is_git_dir = pcall(require("telescope.builtin").git_files, opts)
-	if not is_git_dir then
-		require("telescope.builtin").find_files(opts)
+	-- https://github.com/nvim-telescope/telescope.nvim/issues/2183
+	local in_git_repo = vim.fn.systemlist("git rev-parse --is-inside-work-tree")[1] == "true"
+	if in_git_repo then
+		require("telescope.builtin").git_files()
+	else
+		require("telescope.builtin").find_files()
 	end
 end)
 nnoremap("<leader>ff", function()
