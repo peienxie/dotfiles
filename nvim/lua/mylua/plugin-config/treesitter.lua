@@ -7,21 +7,17 @@ end
 treesitter.setup({
 	highlight = {
 		enable = true,
-		disable = {},
 	},
 	indent = {
 		enable = false,
-		disable = {},
 	},
-	ensure_installed = {
-		"go",
-		"json",
-		"yaml",
-	},
+	ensure_installed = "all",
 })
 
 -- keymaps
 local nnoremap = require("mylua.utils.keymap").nnoremap
 
+-- toggle treesitter playground
+nnoremap("<leader><F9>", ":TSPlaygroundToggle<CR>")
 -- show the highlight group of symbol under cursor
-nnoremap("<F10>", ":TSHighlightCapturesUnderCursor<CR>")
+nnoremap("<leader><F10>", ":TSHighlightCapturesUnderCursor<CR>")
