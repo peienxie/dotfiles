@@ -197,6 +197,7 @@ return packer.startup(function(use)
 			require("mylua.plugin-config.luasnip")
 		end,
 	})
+
 	-- DAP
 	use({
 		"mfussenegger/nvim-dap",
@@ -210,8 +211,16 @@ return packer.startup(function(use)
 	})
 	use({
 		"leoluz/nvim-dap-go",
+		require = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("dap-go").setup()
+		end,
+	})
+	use({
+		"mfussenegger/nvim-dap-python",
+		require = { "mfussenegger/nvim-dap" },
+		config = function()
+			require("dap-python").setup("python")
 		end,
 	})
 

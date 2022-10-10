@@ -149,4 +149,20 @@ nnoremap("<F8>", dap.step_into)
 nnoremap("<F9>", dap.step_out)
 nnoremap("<F10>", dap.step_over)
 
-nnoremap("<leader>tr", "<cmd>lua require('dap-go').debug_test()<CR>")
+local group = vim.api.nvim_create_augroup("DapRunKeymap", { clear = true })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = "go",
+	callback = function()
+		nnoremap("<leader>tr", "<cmd>lua require('dap-go').debug_test()<CR>", { buffer = 0 })
+	end,
+	group = group,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = "python",
+	callback = function()
+		nnoremap("<leader>tr", "<cmd>lua require('dap-python').test_method()<CR>", { buffer = 0 })
+	end,
+	group = group,
+})
