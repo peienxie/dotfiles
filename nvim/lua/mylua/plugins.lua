@@ -202,7 +202,7 @@ return packer.startup(function(use)
 	use({
 		"mfussenegger/nvim-dap",
 		config = function()
-			require("mylua.plugin-config.dap")
+			require("mylua.dap").setup()
 		end,
 	})
 	use({
@@ -212,16 +212,10 @@ return packer.startup(function(use)
 	use({
 		"leoluz/nvim-dap-go",
 		require = { "mfussenegger/nvim-dap" },
-		config = function()
-			require("dap-go").setup()
-		end,
 	})
 	use({
 		"mfussenegger/nvim-dap-python",
 		require = { "mfussenegger/nvim-dap" },
-		config = function()
-			require("dap-python").setup("python")
-		end,
 	})
 
 	-- Neovim lua development
