@@ -153,7 +153,7 @@ return packer.startup(function(use)
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			require("mylua.plugin-config.lspconfig")
+			require("mylua.lsp").setup()
 		end,
 	})
 	use({
@@ -161,13 +161,6 @@ return packer.startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("mylua.plugin-config.null-ls")
-		end,
-	})
-	-- LSP server installer
-	use({
-		"williamboman/mason.nvim",
-		config = function()
-			require("mylua.plugin-config.mason")
 		end,
 	})
 
