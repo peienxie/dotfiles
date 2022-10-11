@@ -49,6 +49,12 @@ export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
 # https://github.com/junegunn/fzf/issues/337
 export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
 
+# golang
+PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+
+# rust
+PATH="$CARGO_HOME/bin:$PATH"
+
 # includes user's private bin
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
@@ -56,12 +62,6 @@ fi
 if [ -d "$HOME/.bin" ] ; then
     PATH="$HOME/.bin:$PATH"
 fi
-
-# golang
-PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
-
-# rust
-PATH="$CARGO_HOME/bin:$PATH"
 
 # deduplicate path entry
 export -U PATH

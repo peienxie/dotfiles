@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+GIT_WINDOWS="lazygit.exe"
+GIT_LINUX="$(which lazygit)"
+
+case "$(pwd -P)" in
+  /mnt/?/*)
+    exec "$GIT_WINDOWS" "$@" ;;
+  *)
+    exec "$GIT_LINUX" "$@" ;;
+esac

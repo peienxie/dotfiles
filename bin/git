@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+# https://gist.github.com/jasonboukheir/3fdab92ece236744528447a4f7f5de00
+
+GIT_WINDOWS="git.exe"
+GIT_LINUX="/usr/bin/git"
+
+case "$(pwd -P)" in
+  /mnt/?/*)
+    exec "$GIT_WINDOWS" "$@" | sed 's/\([A-E]\):/\/mnt\/\L\1/g' ;;
+  *)
+    exec "$GIT_LINUX" "$@" ;;
+esac
