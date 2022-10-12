@@ -38,6 +38,11 @@ export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
 # npm config file ocation
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
+# java
+export JAVA_HOME=/usr/lib/jvm/default-java
+export GRADLE_HOME=/opt/gradle/latest
+export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
+
 # ripgrep config file
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
 
@@ -62,6 +67,10 @@ PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
 # rust
 PATH="$CARGO_HOME/bin:$PATH"
+
+# java
+PATH="$JAVA_HOME/bin:$PATH"
+PATH="$GRADLE_HOME/bin:$PATH"
 
 # deduplicate path entry
 export -U PATH
