@@ -1,4 +1,4 @@
 # change prefix to $HOME/.local, so that npm will symlink installed binaries into $HOME/.local/bin
-prefix=$HOME/.local/
+prefix=${HOME}/.local/
 cache=${XDG_CACHE_HOME}/npm
 init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
