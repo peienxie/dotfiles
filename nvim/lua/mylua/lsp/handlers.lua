@@ -2,7 +2,7 @@ local M = {}
 
 local document_highlight = function(client, bufnr)
 	-- Set autocommands conditional on server_capabilities
-	if client.server_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_set_hl(0, "LspReferenceRead", { bold = true, bg = "Grey" })
 		vim.api.nvim_set_hl(0, "LspReferenceText", { bold = true, bg = "Grey" })
 		vim.api.nvim_set_hl(0, "LspReferenceWrite", { bold = true, bg = "Grey" })

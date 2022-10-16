@@ -22,9 +22,9 @@ M.on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 
 	-- Set some keybinds conditional on server capabilities
-	if client.server_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		buf_set_keymap("n", "<leader>gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-	elseif client.server_capabilities.document_range_formatting then
+	elseif client.server_capabilities.documentRangeFormattingProvider then
 		buf_set_keymap("v", "<leader>gf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	end
 end
