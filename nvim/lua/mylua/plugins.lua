@@ -222,6 +222,12 @@ return packer.startup(function(use)
 	-- Programming language related
 	use({ "fatih/vim-go", ft = "go" })
 	use({ "mfussenegger/nvim-jdtls" })
+	use({
+		"hsanson/vim-android",
+		config = function()
+			vim.g.android_sdk_path = os.getenv("HOME") .. "/Android/Sdk"
+		end,
+	})
 
 	-- Editing
 	use({ "tpope/vim-sleuth" })
