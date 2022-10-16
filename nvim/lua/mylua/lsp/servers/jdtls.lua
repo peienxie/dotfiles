@@ -1,11 +1,19 @@
 local M = {}
 
-local jdtls_home = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+-- all servers are installed by mason
+local jdtls_home = require("mason-registry.jdtls"):get_install_path()
+local java_debug_home = require("mason-registry.java-debug-adapter"):get_install_path()
+local java_test_home = require("mason-registry.java-test"):get_install_path()
+
 local root_markers = { ".git", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
 local workspace_dir = os.getenv("HOME") .. "/.cache/jdtls/workspace/" .. project_name
 local platform = "linux" -- or "mac" "win"
+
+local bundles = {}
+vim.list_extend(bundles, { vim.fn.glob(java_debug_home .. "/extension/server/com.microsoft.java.debug.plugin-*.jar") })
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar"), "\n"))
 
 M.config = {
 	-- The command that starts the language server
@@ -47,12 +55,9 @@ M.config = {
 	-- Language server `initializationOptions`
 	-- You need to extend the `bundles` with paths to jar files
 	-- if you want to use additional eclipse.jdt.ls plugins.
-	--
 	-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-	--
-	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
 	init_options = {
-		bundles = {},
+		bundles = bundles,
 	},
 
 	capabilities = require("mylua.lsp.handlers").capabilities,
@@ -60,11 +65,16 @@ M.config = {
 	on_attach = function(client, bufnr)
 		-- call my common LSP on_attach function
 		require("mylua.lsp.handlers").on_attach(client, bufnr)
+		local jdtls = require("jdtls")
 
 		require("jdtls.setup").add_commands()
-		require("jdtls").update_project_config()
-		require("jdtls").setup_dap({ hotcodereplace = "auto" })
+		jdtls.update_project_config()
+		jdtls.setup_dap({ hotcodereplace = "auto" })
 		require("jdtls.dap").setup_dap_main_class_configs()
+
+		local nnoremap = require("mylua.utils.keymap").nnoremap
+		nnoremap("<leader>tr", jdtls.test_nearest_method)
+		nnoremap("<leader>tf", jdtls.test_class)
 	end,
 }
 
