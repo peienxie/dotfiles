@@ -32,18 +32,20 @@ local sources = {
 		condition = executable("stylua"),
 	}),
 	formatting.black.with({
-		extra_args = { "--fast" },
 		condition = executable("black"),
+		extra_args = { "--fast" },
 	}),
 	formatting.prettier.with({
 		condition = executable("prettier"),
-		filetypes = vim.tbl_extend("force", formatting.prettier.filetypes, {
-			"vimwiki",
-		}),
+		extra_filetypes = { "vimwiki" },
+	}),
+	formatting.google_java_format.with({
+		condition = executable("google-java-format"),
+		extra_args = { "--aosp" },
 	}),
 	diagnostics.flake8.with({
-		extra_args = { "--max-line-length=88", "--ignore=E203" },
 		condition = executable("flake8"),
+		extra_args = { "--max-line-length=88", "--ignore=E203" },
 	}),
 }
 
