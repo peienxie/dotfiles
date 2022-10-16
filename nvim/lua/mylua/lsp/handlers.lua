@@ -1,5 +1,17 @@
 local M = {}
 
+-- You will likely want to reduce updatetime which affects CursorHold
+-- note: this setting is global and should be set only once
+vim.opt.updatetime = 500
+
+-- local diagnostic_float = function()
+-- 	local group = vim.api.nvim_create_augroup("lsp_diagnostic_hover", { clear = true })
+-- 	vim.api.nvim_create_autocmd("CursorHold", {
+-- 		group = group,
+-- 		callback = vim.diagnostic.open_float(nil, { focus = false }),
+-- 	})
+-- end
+
 local document_highlight = function(client, bufnr)
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then

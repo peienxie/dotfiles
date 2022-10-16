@@ -27,15 +27,6 @@ M.setup = function()
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	-- You will likely want to reduce updatetime which affects CursorHold
-	-- note: this setting is global and should be set only once
-	-- vim.o.updatetime = 500
-	-- local group = vim.api.nvim_create_augroup("lsp_diagnostic_hover", { clear = true })
-	-- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-	-- 	group = group,
-	-- 	callback = vim.diagnostic.open_float(nil, { focus = false }),
-	-- })
-
 	-- It's important that you set up the plugins in the following order:
 	-- mason.nvim --> mason-lspconfig.nvim --> lspconfig
 	require("mylua.lsp.mason").setup()
