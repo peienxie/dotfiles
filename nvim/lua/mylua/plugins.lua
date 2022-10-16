@@ -212,7 +212,12 @@ return packer.startup(function(use)
 	})
 
 	-- Neovim lua development
-	use({ "folke/lua-dev.nvim" })
+	use({
+		"folke/neodev.nvim",
+		config = function()
+			require("mylua.plugin-config.neodev")
+		end,
+	})
 
 	-- Programming language related
 	use({ "fatih/vim-go", ft = "go" })
