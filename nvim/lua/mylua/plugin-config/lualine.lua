@@ -67,20 +67,11 @@ local components = {
 		update_in_insert = false,
 		always_visible = false,
 	},
-	filetype = {
+	filetype_icon_only = {
 		"filetype",
 		icon_only = true,
 		separator = "",
-		padding = { right = 0, left = 1 },
-	},
-	fileformat = {
-		"fileformat",
-		icons_enabled = true,
-		symbols = {
-			unix = "LF",
-			dos = "CRLF",
-			mac = "CR",
-		},
+		padding = { left = 1, right = 0 },
 	},
 	filename = {
 		custom_filename,
@@ -92,6 +83,23 @@ local components = {
 	},
 	encoding = {
 		"encoding",
+		padding = 1,
+	},
+	fileformat = {
+		"fileformat",
+		icons_enabled = true,
+		symbols = {
+			unix = "LF",
+			dos = "CRLF",
+			mac = "CR",
+		},
+		padding = 1,
+	},
+	filetype_icon_text = {
+		"filetype",
+		icons_enabled = false,
+		separator = "",
+		padding = 1,
 	},
 	location = {
 		"location",
@@ -123,7 +131,7 @@ lualine.setup({
 		},
 		lualine_c = {
 			{ "%=" },
-			components.filetype,
+			components.filetype_icon_only,
 			components.filename,
 		},
 		lualine_x = {
@@ -132,6 +140,7 @@ lualine.setup({
 		lualine_y = {
 			components.encoding,
 			components.fileformat,
+			components.filetype_icon_text,
 		},
 		lualine_z = {
 			components.location,
@@ -141,17 +150,16 @@ lualine.setup({
 		lualine_a = {},
 		lualine_b = {},
 		lualine_c = {
-			components.filetype,
+			components.filetype_icon_only,
 			components.filename,
 		},
 		lualine_x = {},
 		lualine_y = {
 			components.encoding,
 			components.fileformat,
+			components.filetype_icon_text,
 		},
-		lualine_z = {
-			components.location,
-		},
+		lualine_z = {},
 	},
 	tabline = {},
 	winbar = {},
