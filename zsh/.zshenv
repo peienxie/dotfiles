@@ -39,7 +39,12 @@ export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # java
-export JAVA_HOME=/usr/lib/jvm/default-java
+export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
+export JAVA8_HOME=$SDKMAN_DIR/candidates/java/8
+export JAVA11_HOME=$SDKMAN_DIR/candidates/java/11
+export JAVA17_HOME=$SDKMAN_DIR/candidates/java/17
+export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
+# TODO: should I use sdkman to manage gradle as well?
 export GRADLE_HOME=/opt/gradle/latest
 export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
 

@@ -142,3 +142,5 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
 mkdir -p $XDG_DATA_HOME/zsh
 ZSHZ_DATA=$XDG_DATA_HOME/zsh/zsh-z-history
+
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
