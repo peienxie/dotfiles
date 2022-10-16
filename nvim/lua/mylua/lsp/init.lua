@@ -45,7 +45,7 @@ M.setup = function()
 	for server, config in pairs(lsp_server_configs) do
 		config = vim.tbl_deep_extend("force", {
 			on_attach = handlers.on_attach,
-			capabilities = handlers.capabilities,
+			capabilities = handlers.get_capabilities(),
 		}, config)
 
 		lspconfig[server].setup(config)

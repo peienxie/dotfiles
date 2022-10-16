@@ -29,13 +29,15 @@ M.on_attach = function(client, bufnr)
 	document_highlight(client, bufnr)
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
-	vim.notify("Failed to load plugin 'cmp_nvim_lsp'")
-else
-	M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
-	M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.get_capabilities = function(override)
+	override = override or {}
+	local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+	if not ok then
+		vim.notify("Failed to load plugin 'cmp_nvim_lsp'")
+		return vim.lsp.protocol.make_client_capabilities()
+	else
+		return cmp_nvim_lsp.default_capabilities(override)
+	end
 end
 
 return M

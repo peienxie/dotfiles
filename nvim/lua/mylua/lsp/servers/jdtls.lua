@@ -60,7 +60,7 @@ M.config = {
 		bundles = bundles,
 	},
 
-	capabilities = require("mylua.lsp.handlers").capabilities,
+	capabilities = require("mylua.lsp.handlers").get_capabilities({ snippetSupport = false }),
 
 	on_attach = function(client, bufnr)
 		-- call my common LSP on_attach function
