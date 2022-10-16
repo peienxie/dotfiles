@@ -10,13 +10,9 @@ function M.setup()
 	-- setup nvim-dap-go
 	dap_go.setup()
 
-	-- register keymap for go filetype only
-	local register = require("mylua.dap.keymaps").register_filetype_keymap
+	-- keymaps
 	local nnoremap = require("mylua.utils.keymap").nnoremap
-
-	register("go", function()
-		nnoremap("<leader>tr", "<cmd>lua require('dap-go').debug_test()<CR>", { buffer = 0 })
-	end)
+	nnoremap("<leader>tr", dap_go.debug_test, { buffer = 0 })
 end
 
 return M

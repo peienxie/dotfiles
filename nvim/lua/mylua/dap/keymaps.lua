@@ -1,14 +1,5 @@
 local M = {}
 
-M.register_filetype_keymap = function(pattern, callback)
-	local group = vim.api.nvim_create_augroup("DapRunKeymap", { clear = true })
-	vim.api.nvim_create_autocmd({ "FileType" }, {
-		pattern = pattern,
-		callback = callback,
-		group = group,
-	})
-end
-
 M.setup = function()
 	local dap_ok, dap = pcall(require, "dap")
 	if not dap_ok then

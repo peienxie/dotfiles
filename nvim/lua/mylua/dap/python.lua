@@ -10,12 +10,10 @@ function M.setup()
 	-- setup nvim-dap-python
 	dap_python.setup("python")
 
-	local register = require("mylua.dap.keymaps").register_filetype_keymap
+	-- keymaps
 	local nnoremap = require("mylua.utils.keymap").nnoremap
-
-	register("python", function()
-		nnoremap("<leader>tr", "<cmd>lua require('dap-python').test_method()<CR>", { buffer = 0 })
-	end)
+	nnoremap("<leader>tr", dap_python.test_method, { buffer = 0 })
+	nnoremap("<leader>tf", dap_python.test_class, { buffer = 0 })
 end
 
 return M

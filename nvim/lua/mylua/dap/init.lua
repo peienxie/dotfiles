@@ -126,17 +126,26 @@ local setup_dap = function()
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open({ reset = true })
 	end
-	dap.listeners.before.event_terminated["dapui_config"] = function()
-		dapui.close()
-	end
-	dap.listeners.before.event_exited["dapui_config"] = function()
-		dapui.close()
-	end
+	-- dap.listeners.before.event_terminated["dapui_config"] = function()
+	-- 	dapui.close()
+	-- end
+	-- dap.listeners.before.event_exited["dapui_config"] = function()
+	-- 	dapui.close()
+	-- end
 end
 
 local setup_debuggers = function()
-	require("mylua.dap.go").setup()
-	require("mylua.dap.python").setup()
+	local group = vim.api.nvim_create_augroup("DapRunKeymap", { clear = true })
+	vim.api.nvim_create_autocmd({ "FileType" }, {
+		pattern = "go",
+		callback = require("mylua.dap.go").setup,
+		group = group,
+	})
+	vim.api.nvim_create_autocmd({ "FileType" }, {
+		pattern = "python",
+		callback = require("mylua.dap.python").setup,
+		group = group,
+	})
 end
 
 local setup_keymaps = function()
