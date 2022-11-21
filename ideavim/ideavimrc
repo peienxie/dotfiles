@@ -123,9 +123,18 @@ nnoremap <leader>fF :<C-u>action FindInPath<CR>
 nnoremap <Leader>ee :<C-u>action ActivateProjectToolWindow<CR>
 nnoremap <leader>ef :<C-u>action SelectInProjectView<CR>
 
+" occurrence selection
+vnoremap <C-n>      :<C-u>action SelectNextOccurrence<CR>
+vnoremap <C-p>      :<C-u>action UnselectPreviousOccurrence<CR>
+vnoremap <A-n>      :<C-u>action SelectAllOccurrences<CR>
 " Refactor
+nnoremap ,r,        :<C-u>action RefactoringMenu<CR>
+nnoremap ,ri        :<C-u>action IntroduceActionsGroup<CR>
 nnoremap ,rm        :<C-u>action ExtractMethod<CR>
-nnoremap ,rn        :<C-u>action RenameElement<CR>
+nnoremap ,rv        :<C-u>action IntroduceVariable<CR>
+nnoremap ,rp        :<C-u>action IntroduceParameter<CR>
+nnoremap ,rn        :<C-u>action Inline<CR>
+nnoremap ,ro        :<C-u>action Move<CR>
 nnoremap ,rs        :<C-u>action ChangeSignature<CR>
 nnoremap ,rt        :<C-u>action ChangeTypeSignature<CR>
 
