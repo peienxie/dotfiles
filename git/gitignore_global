@@ -74,3 +74,12 @@ _TODOS.*
 
 ## windows exectable
 *.exe
+
+## java and jdtls
+*.class
+*.classpath
+*.project
+.settings/
+
+
+.idea/
