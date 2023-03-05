@@ -14,7 +14,7 @@ return {
 	--},
 	pyright = {},
 	gopls = {},
-	sumneko_lua = {
+	lua_ls = {
 		settings = {
 			Lua = {
 				runtime = {
