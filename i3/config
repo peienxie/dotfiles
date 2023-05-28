@@ -67,6 +67,10 @@ xfce4-screenshooter -r --save /dev/stdout | xclip -i -selection clipboard -t ima
 # lock screen
 bindsym $mod+Shift+x exec $HOME/.config/i3/scripts/lock.sh
 
+# scratchpad
+bindsym $mod+Shift+z move scratchpad
+bindsym $mod+z       scratchpad show
+
 # focus_wrapping yes|no|force|workspace
 focus_wrapping no
 
