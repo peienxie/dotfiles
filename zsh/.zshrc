@@ -1,146 +1,134 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# determine current os type
+IS_MACOS="" && [[ "$OSTYPE" == "darwin"* ]] && IS_MACOS="true"
+IS_LINUX="" && [[ "$OSTYPE" == "linux-gnu" ]] && IS_LINUX="true"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# zsh_history
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+# oh-my-zsh home
+export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# golang
+[[ -x "/opt/homebrew/bin/brew" ]] && \
+  export GOROOT="$(/opt/homebrew/bin/brew --prefix go)/libexec" || \
+  export GOROOT="/usr/lib/go"
+export GOPATH="$XDG_DATA_HOME/go"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# rust
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# python, ipython, and jupyter
+# https://viliampucik.wordpress.com/2021/01/11/xdg-base-directory-compliant-python_history/
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# nvm
+export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+# node repl history
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/node_repl_history"
+# npm config file ocation
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# java
+export SDKMAN_DIR="$XDG_DATA_HOME/sdkman"
+# gradle
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# ripgrep config file
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# terminal profiles
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# fzf default find command including hidden but not .git folder
+# https://github.com/junegunn/fzf/issues/337
+export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-ZSH_CUSTOM=$ZSH/custom
-
-# auto install oh-my-zsh custom plugins and themes
-! [[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]] && {
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions >/dev/null 2>&1
-}
-! [[ -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
-  git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
-}
-! [[ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]] && {
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k >/dev/null 2>&1
-}
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-z)
-
-# make sure assign ZSH_COMPDUMP variable before source oh-my-zsh.sh
-mkdir -p $XDG_CACHE_HOME/zsh
-ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
 for file in $ZDOTDIR/aliases/*.zsh
 do
   source "$file"
 done
 
+# Custom functions
 for file in $ZDOTDIR/functions/*.zsh
 do
   source "$file"
 done
 
-# source fzf keybindings and completion
-if [[ -x "$(command -v fzf)" ]]; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-    source /usr/share/doc/fzf/examples/completion.zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 [[ ! -f $P10K_CONFIG_FILE ]] || source $P10K_CONFIG_FILE
 
+# Automaticlly install oh-my-zsh custom plugins and themes
+[[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]] && {
+  echo -n "Clone the zsh-autosuggestions plugin..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions >/dev/null 2>&1
+  echo "Done"
+}
+[[ ! -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
+  echo -n "Clone the zsh-z plugin..."
+  git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
+  echo "Done"
+}
+[[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]] && {
+  echo -n "Clone the powerlevel10k theme..."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k >/dev/null 2>&1
+  echo "Done"
+}
+
+# Which plugins would you like to load?
+plugins=(git zsh-autosuggestions zsh-z)
+
+# Variables and corresponding directories for oh-my-zsh
+[[ ! -d "$XDG_DATA_HOME/zsh" ]] && mkdir -p "$XDG_DATA_HOME/zsh"
+ZSHZ_DATA="$XDG_DATA_HOME/zsh/zsh-z-history"
+[[ ! -d "$XDG_CACHE_HOME/zsh" ]] && mkdir -p "$XDG_CACHE_HOME/zsh"
+ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
 zstyle ':completion:*' list-colors
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
-mkdir -p $XDG_DATA_HOME/zsh
-ZSHZ_DATA=$XDG_DATA_HOME/zsh/zsh-z-history
+# Initialize oh-my-zsh
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh" || echo "Can't find oh-my-zsh config file: $ZSH/oh-my-zsh.sh"
 
+# Detect the type of operating system and load the appropriate fzf configuration files
+if [[ $IS_LINUX == "true" ]]; then
+  # source fzf keybindings and completion
+  [[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+  [[ -f "/usr/share/doc/fzf/examples/completion.zsh" ]] && source "/usr/share/doc/fzf/examples/completion.zsh"
+elif [[ $IS_MACOS == "true" ]]; then
+  [[ -f "$XDG_CONFIG_HOME/fzf/fzf.zsh" ]] && source "$XDG_CONFIG_HOME/fzf/fzf.zsh"
+fi
+
+# Setup homebrew environment
+[[ -x "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Initialize sdkman
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# Initialize nvm
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
+# My personal bin
+[[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
+
+# golang
+PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+
+# rust
+PATH="$CARGO_HOME/bin:$PATH"
+
+# deduplicate path entry
+export -U PATH

@@ -1,4 +1,7 @@
-# default applications
+# Language
+export LANG="en_US.UTF-8"
+
+# Default applications
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
@@ -10,72 +13,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # zsh home
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-# zsh_history
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-# skip compinit call in /etc/zsh/zshrc, the compinit will be called in oh-my-zsh.sh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Skip `compinit` command call in /etc/zsh/zshrc, it will be called in oh-my-zsh.sh later
 skip_global_compinit=1
-
-# oh-my-zsh home
-export ZSH=$XDG_CONFIG_HOME/oh-my-zsh
-
-# golang
-export GOROOT=/usr/local/go
-export GOPATH=$XDG_DATA_HOME/go
-
-# rust
-export CARGO_HOME=$XDG_DATA_HOME/cargo
-export RUSTUP_HOME=$XDG_DATA_HOME/rustup
-
-# python, ipython, and jupyter
-# https://viliampucik.wordpress.com/2021/01/11/xdg-base-directory-compliant-python_history/
-export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonstartup.py
-export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
-export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
-
-# node repl history
-export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
-# npm config file ocation
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-
-# java
-export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
-export JAVA8_HOME=$SDKMAN_DIR/candidates/java/8
-export JAVA11_HOME=$SDKMAN_DIR/candidates/java/11
-export JAVA17_HOME=$SDKMAN_DIR/candidates/java/17
-export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
-# TODO: should I use sdkman to manage gradle as well?
-export GRADLE_HOME=/opt/gradle/latest
-export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
-
-# ripgrep config file
-export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
-
-# terminal profiles
-export TERMINFO=$XDG_DATA_HOME/terminfo
-export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
-
-# fzf default find command including hidden but not .git folder
-# https://github.com/junegunn/fzf/issues/337
-export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
-
-# includes user's private bin
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/.bin" ] ; then
-    PATH="$HOME/.bin:$PATH"
-fi
-
-# golang
-PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
-
-# rust
-PATH="$CARGO_HOME/bin:$PATH"
-
-# java
-PATH="$JAVA_HOME/bin:$PATH"
-PATH="$GRADLE_HOME/bin:$PATH"
-
-# deduplicate path entry
-export -U PATH
