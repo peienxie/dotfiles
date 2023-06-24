@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+test-terminal-colors
+test-terminal-text
+test-terminal-text-more

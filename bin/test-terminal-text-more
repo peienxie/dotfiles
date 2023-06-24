@@ -1,0 +1,39 @@
+#!/bin/bash
+# Reference: https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
+
+echo -e "\033[1mbold\033[22m"
+echo -e "\033[2mdim\033[22m"
+echo -e "\033[3mitalic\033[23m"
+echo -e "\033[4munderline\033[24m"
+echo -e "\033[4:1mthis is also underline (new in 0.52)\033[4:0m"
+echo -e "\033[21mdouble underline (new in 0.52)\033[24m"
+echo -e "\033[4:2mthis is also double underline (new in 0.52)\033[4:0m"
+echo -e "\033[4:3mcurly underline (new in 0.52)\033[4:0m"
+echo -e "\033[5mblink (new in 0.52)\033[25m"
+echo -e "\033[7mreverse\033[27m"
+echo -e "\033[8minvisible\033[28m <- invisible (but copy-pasteable)"
+echo -e "\033[9mstrikethrough\033[29m"
+echo -e "\033[53moverline (new in 0.52)\033[55m"
+
+echo -e "\033[31mred\033[39m"
+echo -e "\033[91mbright red\033[39m"
+echo -e "\033[38:5:42m256-color, de jure standard (ITU-T T.416)\033[39m"
+echo -e "\033[38;5;42m256-color, de facto standard (commonly used)\033[39m"
+echo -e "\033[38:2::240:143:104mtruecolor, de jure standard (ITU-T T.416) (new in 0.52)\033[39m"
+echo -e "\033[38:2:240:143:104mtruecolor, rarely used incorrect format (might be removed at some point)\033[39m"
+echo -e "\033[38;2;240;143;104mtruecolor, de facto standard (commonly used)\033[39m"
+
+echo -e "\033[46mcyan background\033[49m"
+echo -e "\033[106mbright cyan background\033[49m"
+echo -e "\033[48:5:42m256-color background, de jure standard (ITU-T T.416)\033[49m"
+echo -e "\033[48;5;42m256-color background, de facto standard (commonly used)\033[49m"
+echo -e "\033[48:2::240:143:104mtruecolor background, de jure standard (ITU-T T.416) (new in 0.52)\033[49m"
+echo -e "\033[48:2:240:143:104mtruecolor background, rarely used incorrect format (might be removed at some point)\033[49m"
+echo -e "\033[48;2;240;143;104mtruecolor background, de facto standard (commonly used)\033[49m"
+
+echo -e "\033[21m\033[58:5:42m256-color underline (new in 0.52)\033[59m\033[24m"
+echo -e "\033[21m\033[58;5;42m256-color underline (new in 0.52)\033[59m\033[24m"
+echo -e "\033[4:3m\033[58:2::240:143:104mtruecolor underline (new in 0.52) (*)\033[59m\033[4:0m"
+echo -e "\033[4:3m\033[58:2:240:143:104mtruecolor underline (new in 0.52) (might be removed at some point) (*)\033[59m\033[4:0m"
+echo -e "\033[4:3m\033[58;2;240;143;104mtruecolor underline (new in 0.52) (*)\033[59m\033[4:0m"
+

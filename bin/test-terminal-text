@@ -1,0 +1,11 @@
+#!/bin/bash
+# Reference: https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
+
+echo -e "Normal"
+echo -e "\033[1mBold\033[22m"
+echo -e "\033[3mItalic\033[23m"
+echo -e "\033[3;1mBold Italic\033[0m"
+echo -e "\033[4mUnderline\033[24m"
+echo -e "\033[9mStrikethrough\033[0m"
+echo -e "== === !== >= <= =>"
+echo -e "契          勒 鈴 "
