@@ -12,6 +12,10 @@
 	name = Peien Xie
 	email = peienxieit@gmail.com
 
+# Override the user config by sourcing config.work if inside any git repo of work
+[includeIf "gitdir:~/work/"]
+    path = config.work
+
 [rebase]
 	autoStash = true
 
