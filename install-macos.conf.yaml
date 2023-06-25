@@ -1,0 +1,25 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ["~"]
+
+- link:
+    ~/Pictures/wallpapers: wallpapers
+    ~/.bin: bin
+    ~/.local/share/terminfo: terminfo/output
+
+    ~/.zshenv: zsh/.zshenv
+    ~/.config/zsh: zsh
+    ~/.config/git: git
+    ~/.config/nvim: nvim
+    ~/.config/tmux: tmux
+    ~/.config/npm: npm
+    ~/.config/ripgrep: ripgrep
+    ~/.config/python: python
+
+    ~/.config/fzf: macos/fzf
+    ~/.config/yabai: macos/yabai
+    ~/.config/skhd: macos/skhd
+

@@ -1,0 +1,18 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ["~"]
+
+- link:
+    ~/Pictures/wallpapers: wallpapers
+    ~/.bin: bin
+    ~/.local/share/terminfo: terminfo/output
+
+    ~/.config/git: git
+    ~/AppData/Local/nvim: nvim
+
+    ~/.config/npm: npm
+    ~/.config/ripgrep: ripgrep
+    ~/.config/python: python

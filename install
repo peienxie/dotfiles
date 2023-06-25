@@ -1,8 +1,18 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
 
-CONFIG="install.conf.yaml"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	CONFIG="install.conf.yaml"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	CONFIG="install-macos.conf.yaml"
+elif [[ "$OSTYPE" == "msys"* ]]; then
+	CONFIG="install-windows.conf.yaml"
+else
+	echo Unknown OS type: \'$OSTYPE\'
+	exit -1
+fi
+
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
@@ -12,4 +22,4 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+python3 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

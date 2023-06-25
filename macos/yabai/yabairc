@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Layout defines whether windows are tiled ("managed", "bsp")
+yabai -m config layout bsp
+
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+# Set all padding and gaps to 5pt (default: 0)
+yabai -m config top_padding    5
+yabai -m config bottom_padding 5
+yabai -m config left_padding   5
+yabai -m config right_padding  5
+yabai -m config window_gap     5
+
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse autofocus
+# modifier for clicking and dragging with mouse
+yabai -m config mouse_modifier alt
+# set modifier + left-click drag to move window
+yabai -m config mouse_action1 move
+# set modifier + right-click drag to resize window
+yabai -m config mouse_action2 resize
+
+# floating windows are always on top (default: off)
+yabai -m config window_topmost on
+
+# modify window shadows (default: on, options: on, off, float)
+# example: show shadows only for floating windows
+yabai -m config window_shadow float
+
+# window opacity (default: off)
+# example: render all unfocused windows with 90% opacity
+#yabai -m config window_opacity on
+#yabai -m config active_window_opacity 1.0
+#yabai -m config normal_window_opacity 0.9
+
+yabai -m rule --add app="^(System Preferences|System Settings|System Information|Calculator|Software Update|Dictionary|VLC|System Settings|App Store|YabaiIndicator|Itsycal|zoom.us)$" manage=off
+yabai -m rule --add app="^LINE$" title!="^LINE$" manage=off
+yabai -m rule --add app="^Fantastical$" title!="^Fantastical$" manage=off
+yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref|Finder Settings)" manage=off
+yabai -m rule --add app="^Preview$" title="Open" manage=off
+yabai -m rule --add app="^Calendar$" title="(General|^$)" manage=off
+yabai -m rule --add app="^Notes$" title="Settings" manage=off
+

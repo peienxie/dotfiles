@@ -1,0 +1,82 @@
+# Window navigations
+alt + ctrl - h : yabai -m window --focus west
+alt + ctrl - j : [ $(yabai -m query --spaces --space | jq -r .type) = "bsp" ] && yabai -m window --focus south || \
+          [ $(yabai -m query --spaces --space | jq -r .type) = "stack" ] && yabai -m window --focus stack.next || yabai -m window --focus stack.first
+alt + ctrl - k : [ $(yabai -m query --spaces --space | jq -r .type) = "bsp" ] && yabai -m window --focus north || \
+          [ $(yabai -m query --spaces --space | jq -r .type) = "stack" ] && yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+alt + ctrl - l : yabai -m window --focus east
+
+# Reference: https://github.com/koekeishiya/yabai/issues/113
+# cycle all visible windows on current space sorted by coordinates and id
+alt + ctrl - n : yabai -m window --focus "$(yabai -m query --windows --space | jq -re 'sort_by(.frame.x, .framex.y, .id) | map(select(.subrole != "AXUnknown")) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id')"
+alt + ctrl - p : yabai -m window --focus "$(yabai -m query --windows --space | jq -re 'sort_by(.frame.x, .framex.y, .id) | map(select(.subrole != "AXUnknown")) | nth(index(map(select(.["has-focus"] == true))) - 1).id')"
+
+# Window movement
+alt + shift - h : yabai -m window --warp west
+alt + shift - j : yabai -m window --warp south
+alt + shift - k : yabai -m window --warp north
+alt + shift - l : yabai -m window --warp east
+
+# Resize
+alt + shift + ctrl - h : yabai -m window --resize right:-20:0 || yabai -m window --resize left:20:0
+alt + shift + ctrl - j : yabai -m window --resize bottom:0:20 || yabai -m window --resize top:0:-20
+alt + shift + ctrl - k : yabai -m window --resize bottom:0:-20 || yabai -m window --resize top:0:20
+alt + shift + ctrl - l : yabai -m window --resize right:20:0 || yabai -m window --resize left:-20:0
+
+# Space navigations (needs SIP disabled)
+# Reference Issue: https://github.com/koekeishiya/yabai/issues/205
+# Doesn't work on a fullscreen space or a space without any windows
+alt + ctrl - 1 : yabai -m query --spaces --space 1  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 2 : yabai -m query --spaces --space 2  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 3 : yabai -m query --spaces --space 3  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 4 : yabai -m query --spaces --space 4  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 5 : yabai -m query --spaces --space 5  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 6 : yabai -m query --spaces --space 6  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 7 : yabai -m query --spaces --space 7  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 8 : yabai -m query --spaces --space 8  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 9 : yabai -m query --spaces --space 9  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 0 : yabai -m query --spaces --space 10 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+
+# Move current window to specific space
+alt + shift - 1 : yabai -m window --space 1
+alt + shift - 2 : yabai -m window --space 2
+alt + shift - 3 : yabai -m window --space 3
+alt + shift - 4 : yabai -m window --space 4
+alt + shift - 5 : yabai -m window --space 5
+alt + shift - 6 : yabai -m window --space 6
+alt + shift - 7 : yabai -m window --space 7
+alt + shift - 8 : yabai -m window --space 8
+alt + shift - 9 : yabai -m window --space 9
+alt + shift - 0 : yabai -m window --space 10
+
+# Focus monitors '[' and ']'
+#alt + ctrl - 0x21 : yabai -m display --focus west
+#alt + ctrl - 0x1E : yabai -m display --focus east
+
+# Switching layout modes
+alt + ctrl - w : yabai -m space --layout stack
+alt + ctrl - e : yabai -m space --layout bsp
+# Toggle current window zoom to fullscreen
+alt + ctrl - f : ${HOME}/.config/yabai/scripts/toggle-zoom.sh
+# Toggle floating window
+alt + shift - space : yabai -m window --toggle float
+
+# Rotate the windows clockwise
+#alt + ctrl - r : yabai -m space --rotate 270
+
+# Balance the sizes of all windows
+alt + shift - b : yabai -m space --balance
+
+# Restart yabai and skhd
+#alt + shift - r : brew services restart yabai; brew services restart skhd
+alt + shift - r : yabai --stop-service; yabai --start-service; skhd --stop-service; skhd --start-service
+
+# Close current window
+alt + shift - q : yabai -m window --close
+
+# Close current window
+# i: interactive mode, c: send captured image to clipboard
+alt + shift - s : screencapture -ic
+
+# Application shortcuts
+alt - return : ${HOME}/.config/yabai/scripts/new-iterm2-window.sh
