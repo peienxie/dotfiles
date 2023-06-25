@@ -11,7 +11,9 @@
     ~/.local/share/terminfo: terminfo/output
 
     ~/.config/git: git
+
     ~/AppData/Local/nvim: nvim
+    ~/AppData/Roaming/alacritty/alacritty.yml: alacritty/alacritty-windows.yml
 
     ~/.config/npm: npm
     ~/.config/ripgrep: ripgrep

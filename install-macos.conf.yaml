@@ -15,6 +15,9 @@
     ~/.config/git: git
     ~/.config/nvim: nvim
     ~/.config/tmux: tmux
+
+    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+
     ~/.config/npm: npm
     ~/.config/ripgrep: ripgrep
     ~/.config/python: python

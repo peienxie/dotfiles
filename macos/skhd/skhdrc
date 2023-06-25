@@ -79,4 +79,7 @@ alt + shift - q : yabai -m window --close
 alt + shift - s : screencapture -ic
 
 # Application shortcuts
-alt - return : ${HOME}/.config/yabai/scripts/new-iterm2-window.sh
+# alt - return : ${HOME}/.config/yabai/scripts/new-iterm2-window.sh
+
+alt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+alt + shift - return : /Applications/Alacritty.app/Contents/MacOS/alacritty --command tmux

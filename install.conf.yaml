@@ -14,9 +14,13 @@
     ~/.config/zsh: zsh
     ~/.config/git: git
     ~/.config/nvim: nvim
-    ~/.config/i3: i3
     ~/.config/tmux: tmux
-    ~/.config/picom: picom
+
+    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+
     ~/.config/npm: npm
     ~/.config/ripgrep: ripgrep
     ~/.config/python: python
+
+    ~/.config/i3: i3
+    ~/.config/picom: picom
