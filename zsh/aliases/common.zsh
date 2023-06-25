@@ -5,6 +5,7 @@ alias path="echo -e \"\${PATH//:/\\n}\""
 alias py=python3
 alias python=python3
 alias ipy=ipython
+alias pip=pip3
 
 # fzf then cd the result has been selected
 alias f='cd $(fd --type directory | fzf)'
