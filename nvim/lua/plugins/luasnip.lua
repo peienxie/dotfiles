@@ -13,7 +13,6 @@ return {
         desc = "Next Snippet",
       },
       {
-        -- FIXME: <c-k> is conflict with one of lsp keymaps
         "<C-k>",
         function()
           if require("luasnip").jumpable(-1) then
