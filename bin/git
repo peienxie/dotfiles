@@ -1,13 +1,20 @@
-#!/bin/env bash
+#!/bin/bash
 
 # https://gist.github.com/jasonboukheir/3fdab92ece236744528447a4f7f5de00
 
 GIT_WINDOWS="git.exe"
 GIT_LINUX="/usr/bin/git"
+GIT_MACOS="$(brew --prefix git)/bin/git"
 
 case "$(pwd -P)" in
-  /mnt/?/*)
-    exec "$GIT_WINDOWS" "$@" | sed 's/\([A-E]\):/\/mnt\/\L\1/g' ;;
-  *)
-    exec "$GIT_LINUX" "$@" ;;
+/mnt/?/*)
+	exec "$GIT_WINDOWS" "$@" | sed 's/\([A-E]\):/\/mnt\/\L\1/g'
+	;;
+*)
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		exec "$GIT_MACOS" "$@"
+	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		exec "$GIT_LINUX" "$@"
+	fi
+	;;
 esac

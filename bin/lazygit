@@ -1,11 +1,18 @@
-#!/bin/env bash
+#!/bin/bash
 
-GIT_WINDOWS="lazygit.exe"
-GIT_LINUX="$(which lazygit)"
+LAZYGIT_WINDOWS="lazygit.exe"
+LAZYGIT_LINUX="/usr/bin/lazygit"
+LAZYGIT_MACOS="$(brew --prefix lazygit)/bin/lazygit"
 
 case "$(pwd -P)" in
-  /mnt/?/*)
-    exec "$GIT_WINDOWS" "$@" ;;
-  *)
-    exec "$GIT_LINUX" "$@" ;;
+/mnt/?/*)
+	exec "$LAZYGIT_WINDOWS" "$@"
+	;;
+*)
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		exec "$LAZYGIT_MACOS" "$@"
+	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		exec "$LAZYGIT_LINUX" "$@"
+	fi
+	;;
 esac
