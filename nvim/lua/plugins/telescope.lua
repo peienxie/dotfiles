@@ -1,30 +1,26 @@
 return {
-  "nvim-telescope/telescope.nvim",
-  config = function(_, opts)
-    local telescope = require("telescope")
-    telescope.setup(opts)
-    telescope.load_extension("fzf")
-  end,
-  opts = {
-    defaults = {
-      prompt_prefix = "   ",
-      selection_caret = "  ",
-      results_title = false,
-      sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        prompt_position = "top",
-        horizontal = {
-          width = function(_, max_columns, _)
-            return math.min(max_columns, 160)
-          end,
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        results_title = false,
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          prompt_position = "top",
+          horizontal = {
+            width = function(_, max_columns, _)
+              return math.min(max_columns, 160)
+            end,
 
-          height = function(_, _, max_lines)
-            return math.min(max_lines, 40)
-          end,
+            height = function(_, _, max_lines)
+              return math.min(max_lines, 40)
+            end,
+          },
         },
-      },
-      preview = { hide_on_startup = true },
+        preview = { hide_on_startup = true },
       -- stylua: ignore
       mappings = {
         i = {
@@ -40,10 +36,10 @@ return {
           ["G"] = function(...) return require("telescope.actions").move_to_bottom(...) end,
         },
       },
-    },
-    pickers = {
-      buffers = {
-        sort_mru = true,
+      },
+      pickers = {
+        buffers = {
+          sort_mru = true,
         -- stylua: ignore
         mappings = {
           i = {
@@ -56,10 +52,16 @@ return {
             ["dd"] = function(...) return require("telescope.actions").delete_buffer(...) end,
           },
         },
+        },
       },
     },
-  },
-  dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      telescope.load_extension("fzf")
+    end,
+    dependencies = {
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
   },
 }
