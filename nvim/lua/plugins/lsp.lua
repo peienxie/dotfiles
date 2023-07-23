@@ -79,7 +79,10 @@ return {
           -- use 4 spaces
           -- extra_args = { "--aosp" },
         }),
-        nls.builtins.formatting.prettier.with({
+        -- nls.builtins.formatting.prettier.with({
+        --   extra_filetypes = { "vimwiki" },
+        -- }),
+        nls.builtins.formatting.prettierd.with({
           extra_filetypes = { "vimwiki" },
         }),
         nls.builtins.formatting.shfmt,

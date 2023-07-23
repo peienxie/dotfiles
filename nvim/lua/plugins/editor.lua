@@ -38,6 +38,9 @@ return {
           ["<CR>"] = "open_with_window_picker",
           ["l"] = "open_with_window_picker",
           ["P"] = { "toggle_preview", config = { use_float = true } },
+          -- remap fuzzy_search from `/` to `F`
+          ["/"] = {},
+          ["F"] = "fuzzy_finder",
         },
       },
     },
