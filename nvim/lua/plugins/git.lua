@@ -11,9 +11,9 @@ return {
       integrations = { diffview = true },
       disable_insert_on_commit = false,
       sections = {
-        stashes = { folded = false },
-        unpulled = { folded = false },
-        recent = { folded = false },
+        stashes = { folded = false, hidden = false },
+        unpulled_upstream = { folded = false, hidden = false },
+        recent = { folded = false, hidden = false },
       },
     },
   },
