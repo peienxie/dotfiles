@@ -27,6 +27,12 @@ end
 map("i", "jj", "<Esc>")
 map("i", "<C-c>", "<Esc>")
 
+-- Delete without copying to clipboard
+map("n", "<Leader>d", "\"_d")
+map("v", "<Leader>d", "\"_d")
+map("n", "x", "\"_x")
+map("v", "x", "\"_x")
+
 -- Remap window movement keymaps
 unmap("n", "<C-h>")
 unmap("n", "<C-j>")
