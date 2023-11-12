@@ -48,6 +48,13 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 # https://github.com/junegunn/fzf/issues/337
 export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
 
+# run testcontainer-java with colima
+if [[ $IS_MACOS == "true" ]] && \
+  [[ -x "/opt/homebrew/bin/brew" ]] && [[ ! -z "$(/opt/homebrew/bin/brew list colima -v 2>/dev/null)" ]]; then
+  export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+  export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+fi
+
 # Aliases
 for file in $ZDOTDIR/aliases/*.zsh
 do
