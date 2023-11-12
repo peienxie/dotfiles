@@ -26,3 +26,6 @@
     ~/.config/yabai: macos/yabai
     ~/.config/skhd: macos/skhd
 
+    ~/.config/vscode-neovim: vscode-neovim
+    ~/.config/vscodevim: vscodevim
+    ~/.config/ideavim: ideavim

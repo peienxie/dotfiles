@@ -1,0 +1,200 @@
+" most of keymaps is based on https://github.com/yutkat/dotfiles/blob/main/.config/ideavim/ideavimrc
+set surround
+set commentary
+set clipboard=unnamedplus
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set timeout
+set timeoutlen=1000
+
+" use space as leader key
+let mapleader = ' '
+
+" escape
+inoremap jj <Esc>
+
+" make Y work the same as D and C
+nnoremap Y y$
+
+" source vimrc file
+nnoremap <leader><CR> :so ~/.config/ideavim/ideavimrc<CR>
+
+" delete without copying to clipboard
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+nnoremap x "_x
+vnoremap x "_xgv
+
+" 'n' to search forward and 'N' to search backward
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+
+" search the word under cursor
+nnoremap gw *N
+vnoremap gw "yy/<C-R>y<CR>N
+
+" move current line/block up and down
+inoremap <A-j> <Esc>:m .+1<CR>gi
+inoremap <A-k> <Esc>:m .-2<CR>gi
+nnoremap <A-j> <Esc>:m .+1<CR>
+nnoremap <A-k> <Esc>:m .-2<CR>
+vnoremap <A-j> :m '>+1<CR>gv
+vnoremap <A-k> :m '<-2<CR>gv
+
+" indent but remain in visual mode
+vnoremap > >gv
+vnoremap < <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" window movement
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+nnoremap <leader>wd <C-w>c
+nnoremap <leader>ws :split<CR>
+nnoremap <leader>wv :vsplit<CR>
+
+" close current buffer
+nnoremap <leader>bd :bd<CR>
+
+" use these action to jump with idea's location history
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+" navigations
+nnoremap [m :<C-u>action MethodUp<CR>
+nnoremap ]m :<C-u>action MethodDown<CR>
+" tabs
+nnoremap [b :<C-u>action PreviousTab<CR>
+nnoremap ]b :<C-u>action NextTab<CR>
+
+" LSP related
+nnoremap gD :<C-u>action GotoTypeDeclaration<CR>
+nnoremap gd :<C-u>action GotoDeclaration<CR>
+nnoremap gI :<C-u>action GotoImplementation<CR>
+nnoremap gy :<C-u>action QuickTypeDefinition<CR>
+nnoremap gr :<C-u>action ShowUsages<CR>
+nnoremap gs :<C-u>action QuickJavaDoc<CR>
+nnoremap gh :<C-u>action QuickJavaDoc<CR>
+nnoremap ga :<C-u>action ShowIntentionActions<CR>
+nnoremap gR :<C-u>action RenameElement<CR>
+nnoremap gl :<C-u>action ShowErrorDescription<CR>
+nnoremap gt :<C-u>action GotoTest<CR>
+
+nnoremap <leader>cr :<C-u>action RenameElement<CR>
+nnoremap <leader>cd :<C-u>action ShowErrorDescription<CR>
+nnoremap <leader>ca :<C-u>action ShowIntentionActions<CR>
+" diagnostic
+nnoremap [d :<C-u>action GotoPreviousError<CR>
+nnoremap ]d :<C-u>action GotoNextError<CR>
+" format
+nnoremap <leader>gf :<C-u>action ReformatCode<CR>
+nnoremap <leader>cf :<C-u>action ReformatCode<CR>
+
+nnoremap gu :<C-u>action GotoSuperMethod<CR>
+nnoremap ge :<C-u>action ExpressionTypeInfo<CR>
+inoremap <C-k> <Esc>:<C-u>action ParameterInfo<CR>a
+
+" terminal
+nnoremap <C-\> :<C-u>action ActivateTerminalToolWindow<CR>
+
+" Git
+nnoremap <leader>gs :<C-u>action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>gD :<C-u>action Vcs.ShowTabbedFileHistory<CR>
+nnoremap <leader>gl :<C-u>action Vcs.Show.Log<CR>
+" open diffview
+nnoremap <leader>gd :<C-u>action Compare.SameVersion<CR>
+" stage/unstage/preview hunks
+nnoremap <leader>ga :<C-u>action ChangesView.AddUnversioned<CR>
+nnoremap <leader>gr :<C-u>action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>gp :<C-u>action VcsShowCurrentChangeMarker<CR>
+
+" navigate hunks
+nnoremap [c :<C-u>action VcsShowPrevChangeMarker<CR>
+nnoremap ]c :<C-u>action VcsShowNextChangeMarker<CR>
+
+" Goto file
+nnoremap <leader>ft :<C-u>action SearchEverywhere<CR>
+nnoremap <leader>fc :<C-u>action GotoClass<CR>
+nnoremap <leader>ff :<C-u>action GotoFile<CR>
+nnoremap <leader>fs :<C-u>action GotoSymbol<CR>
+nnoremap <leader>fa :<C-u>action GotoAction<CR>
+nnoremap <leader>fo :<C-u>action FileStructurePopup<CR>
+
+nnoremap <leader>sg :<C-u>action FindInPath<CR>
+
+" open new file
+nnoremap <leader>fn :<C-u>action NewFile<CR>
+
+" file explorer
+nnoremap <leader>fe :<C-u>action SelectInProjectView<CR>
+
+" occurrence selection
+vnoremap <C-n>      :<C-u>action SelectNextOccurrence<CR>
+vnoremap <C-p>      :<C-u>action UnselectPreviousOccurrence<CR>
+vnoremap <A-n>      :<C-u>action SelectAllOccurrences<CR>
+
+" Refactoring
+nnoremap ,r,        :<C-u>action RefactoringMenu<CR>
+nnoremap ,ri        :<C-u>action IntroduceActionsGroup<CR>
+nnoremap ,rm        :<C-u>action ExtractMethod<CR>
+nnoremap ,rv        :<C-u>action IntroduceVariable<CR>
+nnoremap ,rp        :<C-u>action IntroduceParameter<CR>
+nnoremap ,rn        :<C-u>action Inline<CR>
+nnoremap ,ro        :<C-u>action Move<CR>
+nnoremap ,rs        :<C-u>action ChangeSignature<CR>
+nnoremap ,rt        :<C-u>action ChangeTypeSignature<CR>
+
+" Generate
+nnoremap ,g,        :<C-u>action Generate<CR>
+nnoremap ,gn        :<C-u>action NewClass<CR>
+nnoremap ,go        :<C-u>action OverrideMethods<CR>
+nnoremap ,gc        :<C-u>action GenerateConstructor<CR>
+nnoremap ,gg        :<C-u>action GenerateGetter<CR>
+nnoremap ,gs        :<C-u>action GenerateSetter<CR>
+nnoremap ,ga        :<C-u>action GenerateGetterAndSetter<CR>
+nnoremap ,ge        :<C-u>action GenerateEquals<CR>
+nnoremap ,gt        :<C-u>action GenerateTestMethod<CR>
+nnoremap ,gi        :<C-u>action ImplementMethods<CR>
+
+" Build
+" nnoremap <leader>B  :<C-u>action Build<CR>
+" nnoremap <F8>       :<C-u>action Build<CR>
+" nnoremap <S-F8>     :<C-u>action CMake.ReloadCMakeProject<CR>
+" nnoremap <C-F8>     :<C-u>action StopBackgroundProcesses<CR>
+" nnoremap <C-S-F8>   :<C-u>action Clean<CR>
+
+" Run
+nnoremap <leader>rr :<C-u>action Run<CR>
+nnoremap <leader>r; :<C-u>action ChooseRunConfiguration<CR>
+nnoremap <leader>rf :<C-u>action RunClass<CR>
+nnoremap <leader>rR :<C-u>action Rerun<CR>
+nnoremap <leader>rF :<C-u>action RerunFailedTests<CR>
+
+" Debug
+nnoremap <leader>tt :<C-u>action Debug<CR>
+nnoremap <leader>t; :<C-u>action ChooseDebugConfiguration<CR>
+nnoremap <leader>tb :<C-u>action ToggleLineBreakpoint<CR>
+nnoremap <leader>tf :<C-u>action DebugClass<CR>
+nnoremap <leader>te :<C-u>action EvaluateExpression<CR>
+nnoremap <leader>tR :<C-u>action Rerun<CR>
+nnoremap <leader>tF :<C-u>action RerunFailedTests<CR>
+
+" Debug Actions
+" nnoremap <F6>       :<C-u>action StepBack<CR>
+nnoremap <F7>       :<C-u>action StepOver<CR>
+nnoremap <F8>       :<C-u>action StepInto<CR>
+nnoremap <F9>       :<C-u>action StepOut<CR>
+nnoremap <F10>      :<C-u>action Resume<CR>
+
+" Refresh
+nnoremap <F5>       :<C-u>action Synchronize<CR>
+nnoremap <S-F5>     :<C-u>action ReformatCode<CR>
+nnoremap <C-F5>     :<C-u>action Refresh<CR>
