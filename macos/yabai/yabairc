@@ -7,11 +7,11 @@ yabai -m config layout bsp
 yabai -m config window_placement second_child
 
 # Set all padding and gaps to 5pt (default: 0)
-yabai -m config top_padding    5
+yabai -m config top_padding 5
 yabai -m config bottom_padding 5
-yabai -m config left_padding   5
-yabai -m config right_padding  5
-yabai -m config window_gap     5
+yabai -m config left_padding 5
+yabai -m config right_padding 5
+yabai -m config window_gap 5
 
 # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
 yabai -m config focus_follows_mouse autofocus
@@ -43,3 +43,9 @@ yabai -m rule --add app="^Preview$" title="Open" manage=off
 yabai -m rule --add app="^Calendar$" title="(General|^$)" manage=off
 yabai -m rule --add app="^Notes$" title="Settings" manage=off
 
+# Make JetBrains products popup windows float https://github.com/koekeishiya/yabai/issues/1687#issuecomment-1492866141
+JB_Apps='^(CLion|GoLand|IntelliJ IDEA|PyCharm|WebStorm)$'
+yabai -m rule --add app="${JB_Apps}" manage=off
+# If `Open last project when launch` is checked, add this rule. And make sure `always show project path` is also checked.
+# yabai -m rule --add app="${JB_Apps}" title=".*\[.*\].*" manage=on
+yabai -m rule --add app="${JB_Apps}" title="^$" manage=on
