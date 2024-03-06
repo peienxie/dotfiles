@@ -9,6 +9,7 @@ opt.fileencodings = "utf-8,big5,cp950,gbk,cp936,iso-2022-jp,sjis,euc-jp,japan,eu
 opt.scrolloff = 4
 opt.sidescrolloff = 8
 
+opt.winbar = " "
 opt.cursorline = true
 opt.cursorlineopt = "number"
 
