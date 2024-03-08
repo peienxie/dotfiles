@@ -81,6 +81,13 @@ _TODOS.*
 *.project
 .settings/
 
-
+## intellij IDEA
 .idea/
 *.iml
+
+## log/tmp folders
+log/
+logs/
+tmp/
+temp/
+

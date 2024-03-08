@@ -1,6 +1,6 @@
 [core]
 	editor = nvim
-	autocrlf = input
+	autocrlf = false
 	filemode = false
 	excludesfile = ~/.config/git/gitignore_global
 	pager = delta
@@ -14,7 +14,7 @@
 
 # Override the user config by sourcing config.work if inside any git repo of work
 [includeIf "gitdir:~/work/"]
-    path = config.work
+	path = config.work
 
 [rebase]
 	autoStash = true
@@ -38,9 +38,11 @@
 
 [init]
 	defaultBranch = main
+
 [credential "https://github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
