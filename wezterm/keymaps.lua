@@ -4,14 +4,33 @@ local act = wezterm.action
 local M = {}
 
 M.setup = function(config)
+  config.disable_default_key_bindings = true
+
   -- keymaps
   config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
   config.keys = {
     -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
     { key = "a", mods = "LEADER|CTRL", action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }) },
+    { key = "p", mods = "LEADER|SHIFT", action = act.ActivateCommandPalette },
+    { key = "r", mods = "LEADER|SHIFT", action = act.ReloadConfiguration },
+    { key = "l", mods = "LEADER|SHIFT", action = act.ShowDebugOverlay },
+    { key = "u", mods = "LEADER|SHIFT", action = act.CharSelect },
+
+    -- clipboard
     { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
-    { key = "phys:Space", mods = "LEADER", action = act.ActivateCommandPalette },
-    -- { key = "r", mods = "LEADER|SHIFT", action = act.ReloadConfiguration },
+    { key = "]", mods = "LEADER", action = act.QuickSelect },
+    { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+    { key = "c", mods = "SUPER", action = act.CopyTo("Clipboard") },
+    { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
+    { key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") },
+    { key = "f", mods = "CTRL|SHIFT", action = act.Search("CurrentSelectionOrEmptyString") },
+    { key = "f", mods = "SUPER", action = act.Search("CurrentSelectionOrEmptyString") },
+
+    -- fontsize
+    { key = "+", mods = "CTRL|SHIFT", action = wezterm.action.IncreaseFontSize },
+    { key = "=", mods = "SUPER", action = wezterm.action.IncreaseFontSize },
+    { key = "_", mods = "CTRL|SHIFT", action = wezterm.action.DecreaseFontSize },
+    { key = "-", mods = "SUPER", action = wezterm.action.DecreaseFontSize },
 
     -- Pane keybindings
     { key = "%", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -22,7 +41,8 @@ M.setup = function(config)
     { key = "l", mods = "LEADER|CTRL", action = act.ActivatePaneDirection("Right") },
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
     { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
-    { key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
+    { key = "}", mods = "LEADER|SHIFT", action = act.RotatePanes("Clockwise") },
+    { key = "{", mods = "LEADER|SHIFT", action = act.RotatePanes("CounterClockwise") },
     -- We can make separate keybindings for resizing panes
     -- But Wezterm offers custom "mode" in the name of "KeyTable"
     {
