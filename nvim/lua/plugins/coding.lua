@@ -15,20 +15,17 @@ return {
     event = "VeryLazy",
   },
 
-  -- Use auto-pairs instead.
+  -- Use nvim-autopairs instead.
   {
     "echasnovski/mini.pairs",
     enabled = false,
   },
   {
-    "jiangmiao/auto-pairs",
-    event = "VeryLazy",
-    init = function()
-      vim.g.AutoPairsMultilineClose = 0
-      vim.g.AutoPairsShortcutToggle = ""
-      vim.g.AutoPairsShortcutJump = ""
-      vim.g.AutoPairsShortcutBackInsert = ""
-    end,
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      -- fast_wrap = {},
+    },
   },
 
   -- Use Comment instead.
