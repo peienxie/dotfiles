@@ -15,9 +15,6 @@ return {
       keys[#keys + 1] = { "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>" }
       keys[#keys + 1] = { "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>" }
     end,
-  },
-  {
-    "neovim/nvim-lspconfig",
     opts = {
       servers = {
         lua_ls = {
@@ -36,66 +33,72 @@ return {
             },
           },
         },
-        ansiblels = {},
         bashls = {},
-        clangd = {
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-          },
-        },
-        dockerls = {},
-        gopls = {},
-        jsonls = {},
-        pyright = {},
-        yamlls = {},
+        html = {},
+        cssls = {},
       },
     },
   },
   {
-    "nvimtools/none-ls.nvim",
+    "stevearc/conform.nvim",
     keys = {
-      { "<Leader>cn", "<Cmd>NullLsInfo<CR>", desc = "NullLs" },
+      { "<leader>cn", "<Cmd>ConformInfo<CR>", desc = "ConformInfo" },
     },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      local sources = {
-        -- Linters
-        nls.builtins.diagnostics.flake8.with({
-          extra_args = { "--max-line-length=88", "--ignore=E203" },
-        }),
-        nls.builtins.diagnostics.golangci_lint,
-        nls.builtins.diagnostics.markdownlint.with({
-          extra_filetypes = { "vimwiki" },
-        }),
-        nls.builtins.diagnostics.shellcheck,
-
-        -- Formatters
-        nls.builtins.formatting.black.with({
-          extra_args = { "--fast" },
-        }),
-        nls.builtins.formatting.google_java_format.with({
-          -- use 4 spaces
-          -- extra_args = { "--aosp" },
-        }),
-        -- nls.builtins.formatting.prettier.with({
-        --   extra_filetypes = { "vimwiki" },
-        -- }),
-        nls.builtins.formatting.prettierd.with({
-          extra_filetypes = { "vimwiki" },
-        }),
-        nls.builtins.formatting.shfmt,
-        nls.builtins.formatting.stylua,
-      }
-      opts.sources = sources
-      return opts
-    end,
+    event = "BufWritePre",
+    cmd = "ConformInfo",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        go = { "goimports", "gofumpt" },
+        bash = { "shfmt" },
+        sh = { "shfmt" },
+        typescript = { { "prettierd", "prettier" } },
+        typescriptreact = { { "prettierd", "prettier" } },
+        javascript = { { "prettierd", "prettier" } },
+        javascriptreact = { { "prettierd", "prettier" } },
+        css = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
+        markdown = { { "prettierd", "prettier" }, "markdownlint" },
+      },
+    },
   },
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {},
-    },
+    "mfussenegger/nvim-lint",
+    event = "BufReadPre",
+    -- init = function()
+    --   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    --     callback = function()
+    --       require("lint").try_lint()
+    --     end,
+    --   })
+    -- end,
+    config = function(_, opts)
+      local function setup_linters(linters)
+        for ft, linter in pairs(linters) do
+          if opts.linters_by_ft[ft] == nil then
+            opts.linters_by_ft[ft] = linter
+          else
+            vim.notify(
+              string.format(
+                "%s: override linter %s with %s",
+                ft,
+                vim.inspect(opts.linters_by_ft[ft]),
+                vim.inspect(linter)
+              ),
+              vim.log.levels.WARN
+            )
+            opts.linters_by_ft[ft] = linter
+          end
+        end
+      end
+
+      setup_linters({
+        go = { "golangcilint" },
+        --go = { "revive" },
+        bash = { "shellcheck" },
+        sh = { "shellcheck" },
+        html = { "htmlhint" },
+      })
+    end,
   },
 }

@@ -11,10 +11,20 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "lazyvim.plugins.extras.dap.core" },
+
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    -- { import = "lazyvim.plugins.extras.lang.clangd" },
+    -- { import = "lazyvim.plugins.extras.lang.java" },
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+
+    { import = "lazyvim.plugins.extras.lang.docker" }, -- dockerls & docker_compose_language_service LSPs, hadolint linter
+    { import = "lazyvim.plugins.extras.lang.markdown" }, -- marksman LSP, markdownlint linter, markdown-preview.nvim, and Headlines.nvim
+    { import = "lazyvim.plugins.extras.lang.ansible" }, -- ansiblels LSP, ansible-lint linter and nvim-ansible
+    { import = "lazyvim.plugins.extras.lang.json" }, -- jsonls LSP and schemastore packages
+    { import = "lazyvim.plugins.extras.lang.yaml" }, -- yamlls LSP and schemastore packages
+
     -- import/override with your plugins
     { import = "plugins" },
   },
