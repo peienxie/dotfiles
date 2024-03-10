@@ -1,3 +1,37 @@
+local function is_lsp_actived()
+  local clients = vim.lsp.get_active_clients({ bufnr = vim.fn.bufnr() })
+  return clients and #clients > 0
+end
+
+local function get_lsp_progress()
+  local messages = vim.lsp.util.get_progress_messages()
+  if #messages == 0 then
+    return
+  end
+  -- local status = {}
+  -- for _, msg in pairs(messages) do
+  --   table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
+  -- end
+  local spinners = { "⠋", "⠙", "⠸", "⠴", "⠦", "⠇" }
+  local ms = vim.loop.hrtime() / 1000000
+  local frame = math.floor(ms / 120) % #spinners
+  -- return table.concat(status, " | ") .. " " .. spinners[frame + 1]
+  return spinners[frame + 1]
+end
+
+local function get_lsp_name()
+  local clients = vim.lsp.get_active_clients({ bufnr = vim.fn.bufnr() })
+  if clients and #clients > 0 then
+    local names = {}
+    for _, lsp in ipairs(clients) do
+      table.insert(names, lsp.name)
+    end
+    return table.concat(names, ", ")
+  else
+    return ""
+  end
+end
+
 return {
   -- Buffer and tabs integration
   {
@@ -111,43 +145,63 @@ return {
               path = 1,
               symbols = { modified = "  ", readonly = "", unnamed = "" },
             },
-            -- stylua: ignore
-            -- {
-            --   function() return require("nvim-navic").get_location() end,
-            --   cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-            -- },
+            {
+              function()
+                return require("nvim-navic").get_location()
+              end,
+              cond = function()
+                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              end,
+            },
           },
           lualine_x = {
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.command.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = Util.ui.fg("Statement"),
-          },
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = Util.ui.fg("Constant"),
-          },
-          -- stylua: ignore
-          {
-            function() return "  " .. require("dap").status() end,
-            cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-            color = Util.ui.fg("Debug"),
-          },
+            {
+              function()
+                return require("noice").api.status.command.get()
+              end,
+              cond = function()
+                return package.loaded["noice"] and require("noice").api.status.command.has()
+              end,
+              color = Util.ui.fg("Statement"),
+            },
+            {
+              function()
+                return require("noice").api.status.mode.get()
+              end,
+              cond = function()
+                return package.loaded["noice"] and require("noice").api.status.mode.has()
+              end,
+              color = Util.ui.fg("Constant"),
+            },
+            {
+              function()
+                return "  " .. require("dap").status()
+              end,
+              cond = function()
+                return package.loaded["dap"] and require("dap").status() ~= ""
+              end,
+              color = Util.ui.fg("Debug"),
+            },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
               color = Util.ui.fg("Special"),
             },
+            -- {
+            --   "diff",
+            --   symbols = {
+            --     added = icons.git.added,
+            --     modified = icons.git.modified,
+            --     removed = icons.git.removed,
+            --   },
+            -- },
             {
-              "diff",
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
+              function()
+                return get_lsp_name()
+              end,
+              cond = function()
+                return is_lsp_actived()
+              end,
             },
           },
           lualine_y = {
@@ -161,15 +215,6 @@ return {
           },
           lualine_z = {
             { "location", padding = 1 },
-          },
-        },
-        winbar = {
-          lualine_c = {
-          -- stylua: ignore
-          {
-            function() return require("nvim-navic").get_location() end,
-            cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-          },
           },
         },
         extensions = { "neo-tree", "lazy", "nvim-dap-ui", "quickfix" },
