@@ -17,6 +17,12 @@ local function remove_trailing_slash(s)
   return string.gsub(s, "[/]$", "")
 end
 
+local function decode_URI(uri)
+  return string.gsub(uri, "%%(%x%x)", function(hex)
+    return string.char(tonumber(hex, 16))
+  end)
+end
+
 local function get_current_working_dir(tab)
   local cwd_uri = tab.active_pane.current_working_dir
 
@@ -25,7 +31,8 @@ local function get_current_working_dir(tab)
     cwd = cwd_uri.file_path
   elseif cwd_uri then
     -- replace "file://{host}/" with /
-    cwd = string.gsub(tostring(cwd_uri), "(^file://.*?)[/]", "/")
+    cwd_uri = decode_URI(tostring(cwd_uri))
+    cwd = string.gsub(cwd_uri, "(^file://.*?)[/]", "/")
   else
     cwd = "?"
   end
