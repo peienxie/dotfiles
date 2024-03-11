@@ -1,7 +1,8 @@
 return {
   {
     "vimwiki/vimwiki",
-    ft = { "markdown" },
+    enabled = false,
+    ft = { "markdown", "vimwiki" },
     init = function()
       vim.g.vimwiki_list = {
         { path = "~/vimwiki/", syntax = "markdown", ext = ".md" },
@@ -16,16 +17,20 @@ return {
     end,
   },
   {
+    "lukas-reineke/headlines.nvim",
+    enabled = false,
+  },
+  {
     "iamcco/markdown-preview.nvim",
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    -- use function to override the default keymaps from LazyVim extras markdown plugin
+    keys = function()
+      return {
+        { "<Leader>cP", "<Cmd>MarkdownPreviewToggle<CR>", desc = "Markdown Preview Toggle" },
+      }
     end,
-    ft = { "markdown" },
-    cmd = { "MarkdownPreviewToggle" },
-    keys = {
-      { "<Leader>md", "<Cmd>MarkdownPreviewToggle<CR>", desc = "Markdown Preview Toggle" },
-    },
-    init = function()
+    config = function()
+      vim.cmd([[do FileType]])
+
       -- set to 1, the nvim will auto close current preview window when change
       -- from markdown buffer to another buffer
       -- default: 1
@@ -45,10 +50,9 @@ return {
   },
   {
     "ekickx/clipboard-image.nvim",
-    ft = { "markdown" },
     cmd = { "PasteImg" },
     keys = {
-      { "<Leader>mp", "<Cmd>PasteImg<CR>", desc = "Paste Image" },
+      { "<Leader>cp", "<Cmd>PasteImg<CR>", desc = "Paste Image" },
     },
     opts = {
       -- Default configuration for all filetype
