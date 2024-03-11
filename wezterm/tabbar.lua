@@ -2,6 +2,10 @@ local wezterm = require("wezterm")
 
 local M = {}
 
+local function getHome()
+  return os.getenv("HOME") or string.gsub(os.getenv("USERPROFILE") or "", "\\", "/")
+end
+
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "C:\\foo\\bar" returns "bar"
@@ -28,7 +32,8 @@ local function get_current_working_dir(tab)
 
   -- the dir has a trailing slash on Windows
   cwd = remove_trailing_slash(cwd)
-  cwd = string.gsub(cwd, os.getenv("HOME") or "", "~")
+  wezterm.log_info(os.getenv("USERPROFILE"))
+  cwd = string.gsub(cwd, getHome(), "~")
   return basename(cwd)
 end
 
