@@ -20,6 +20,9 @@ inoremap jj <Esc>
 " make Y work the same as D and C
 nnoremap Y y$
 
+" stop the highlighting
+nnoremap <Esc> :nohl<CR><Esc>
+
 " source vimrc file
 nnoremap <leader><CR> :so ~/.config/ideavim/ideavimrc<CR>
 
@@ -129,6 +132,7 @@ nnoremap <leader>fs :<C-u>action GotoSymbol<CR>
 nnoremap <leader>fa :<C-u>action GotoAction<CR>
 nnoremap <leader>fo :<C-u>action FileStructurePopup<CR>
 
+" live grep in current project
 nnoremap <leader>sg :<C-u>action FindInPath<CR>
 
 " open new file
@@ -138,14 +142,18 @@ nnoremap <leader>fn :<C-u>action NewFile<CR>
 nnoremap <leader>fe :<C-u>action SelectInProjectView<CR>
 
 " occurrence selection
+nnoremap <C-n>      :<C-u>action SelectNextOccurrence<CR>
 vnoremap <C-n>      :<C-u>action SelectNextOccurrence<CR>
-vnoremap <C-p>      :<C-u>action UnselectPreviousOccurrence<CR>
+nnoremap <C-p>      :<C-u>action UnselectPreviousOccurrence<CR>gv
+vnoremap <C-p>      :<C-u>action UnselectPreviousOccurrence<CR>gv
+nnoremap <A-n>      :<C-u>action SelectAllOccurrences<CR>
 vnoremap <A-n>      :<C-u>action SelectAllOccurrences<CR>
 
 " Refactoring
 nnoremap ,r,        :<C-u>action RefactoringMenu<CR>
 nnoremap ,ri        :<C-u>action IntroduceActionsGroup<CR>
 nnoremap ,rm        :<C-u>action ExtractMethod<CR>
+vnoremap ,rm        :<C-u>action ExtractMethod<CR>
 nnoremap ,rv        :<C-u>action IntroduceVariable<CR>
 nnoremap ,rp        :<C-u>action IntroduceParameter<CR>
 nnoremap ,rn        :<C-u>action Inline<CR>
@@ -164,13 +172,6 @@ nnoremap ,ga        :<C-u>action GenerateGetterAndSetter<CR>
 nnoremap ,ge        :<C-u>action GenerateEquals<CR>
 nnoremap ,gt        :<C-u>action GenerateTestMethod<CR>
 nnoremap ,gi        :<C-u>action ImplementMethods<CR>
-
-" Build
-" nnoremap <leader>B  :<C-u>action Build<CR>
-" nnoremap <F8>       :<C-u>action Build<CR>
-" nnoremap <S-F8>     :<C-u>action CMake.ReloadCMakeProject<CR>
-" nnoremap <C-F8>     :<C-u>action StopBackgroundProcesses<CR>
-" nnoremap <C-S-F8>   :<C-u>action Clean<CR>
 
 " Run
 nnoremap <leader>rr :<C-u>action Run<CR>
@@ -195,7 +196,8 @@ nnoremap <F8>       :<C-u>action StepInto<CR>
 nnoremap <F9>       :<C-u>action StepOut<CR>
 nnoremap <F10>      :<C-u>action Resume<CR>
 
+" Build
+nnoremap <leader>B  :<C-u>action CompileDirty<CR>
+
 " Refresh
-nnoremap <F5>       :<C-u>action Synchronize<CR>
-nnoremap <S-F5>     :<C-u>action ReformatCode<CR>
-nnoremap <C-F5>     :<C-u>action Refresh<CR>
+nnoremap <leader>R  :<C-u>action ExternalSystem.ProjectRefreshAction<CR>
