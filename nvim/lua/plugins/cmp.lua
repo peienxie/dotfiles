@@ -2,6 +2,9 @@ return {
   -- Completion
   {
     "hrsh7th/nvim-cmp",
+    dependencies = {
+      { "hrsh7th/cmp-cmdline" },
+    },
     opts = function(_, opts)
       local cmp = require("cmp")
       -- update keymaps
@@ -19,6 +22,26 @@ return {
       -- opts.completion = { completeopt = "menu,menuone,noinsert,noselect" }
       -- opts.preselect = cmp.PreselectMode.None
       return opts
+    end,
+    config = function(_, opts)
+      local cmp = require("cmp")
+      cmp.setup.cmdline({ "/", "?" }, {
+        completion = { completeopt = "menu,menuone,noselect,noinsert" },
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "buffer" },
+        }),
+      })
+      cmp.setup.cmdline(":", {
+        completion = { completeopt = "menu,menuone,noselect,noinsert" },
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+          { name = "cmdline" },
+          { name = "buffer" },
+        }),
+      })
+      cmp.setup(opts)
     end,
   },
 
