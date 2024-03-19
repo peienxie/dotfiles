@@ -25,16 +25,37 @@ return {
     end,
     config = function(_, opts)
       local cmp = require("cmp")
+      local function get_millisecond()
+        local second, microsecond = vim.loop.gettimeofday()
+        return 1000 * second + microsecond / 1000
+      end
+      local last_selection_time = 0
+      local function select_or_fallback(select_action)
+        return cmp.mapping(function(fallback)
+          if cmp.visible() and get_millisecond() - last_selection_time > 1000 then
+            select_action()
+          else
+            cmp.close()
+            fallback()
+            last_selection_time = get_millisecond()
+          end
+        end, { "i", "c" })
+      end
+      local cmdline_mapping = cmp.mapping.preset.cmdline({
+        ["<C-n>"] = select_or_fallback(cmp.select_next_item),
+        ["<C-p>"] = select_or_fallback(cmp.select_prev_item),
+      })
+
       cmp.setup.cmdline({ "/", "?" }, {
         completion = { completeopt = "menu,menuone,noselect,noinsert" },
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmdline_mapping,
         sources = cmp.config.sources({
           { name = "buffer" },
         }),
       })
       cmp.setup.cmdline(":", {
         completion = { completeopt = "menu,menuone,noselect,noinsert" },
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmdline_mapping,
         sources = cmp.config.sources({
           { name = "path" },
           { name = "cmdline" },
