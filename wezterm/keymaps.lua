@@ -47,7 +47,7 @@ M.setup = function(config)
     -- But Wezterm offers custom "mode" in the name of "KeyTable"
     {
       key = "r",
-      mods = "LEADER",
+      mods = "LEADER|CTRL",
       action = act.ActivateKeyTable({
         name = "RESIZE",
         until_unknown = true,
@@ -62,6 +62,8 @@ M.setup = function(config)
     { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
     { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
     { key = "l", mods = "LEADER", action = act.ActivateLastTab },
+    { key = ">", mods = "LEADER|SHIFT", action = act.MoveTabRelative(1) },
+    { key = "<", mods = "LEADER|SHIFT", action = act.MoveTabRelative(-1) },
     { key = "1", mods = "LEADER", action = act.ActivateTab(0) },
     { key = "2", mods = "LEADER", action = act.ActivateTab(1) },
     { key = "3", mods = "LEADER", action = act.ActivateTab(2) },
@@ -73,7 +75,7 @@ M.setup = function(config)
     { key = "9", mods = "LEADER", action = act.ActivateTab(8) },
     { key = "0", mods = "LEADER", action = act.ActivateTab(9) },
     {
-      key = "T",
+      key = "t",
       mods = "LEADER",
       action = act.ActivateKeyTable({
         name = "TAB",
@@ -116,10 +118,14 @@ M.setup = function(config)
 
   config.key_tables = {
     ["RESIZE"] = {
-      { key = "h", mods = "SHIFT", action = act.AdjustPaneSize({ "Left", 1 }) },
-      { key = "j", mods = "SHIFT", action = act.AdjustPaneSize({ "Down", 1 }) },
-      { key = "k", mods = "SHIFT", action = act.AdjustPaneSize({ "Up", 1 }) },
-      { key = "l", mods = "SHIFT", action = act.AdjustPaneSize({ "Right", 1 }) },
+      { key = "h", mods = "CTRL", action = act.AdjustPaneSize({ "Left", 1 }) },
+      { key = "j", mods = "CTRL", action = act.AdjustPaneSize({ "Down", 1 }) },
+      { key = "k", mods = "CTRL", action = act.AdjustPaneSize({ "Up", 1 }) },
+      { key = "l", mods = "CTRL", action = act.AdjustPaneSize({ "Right", 1 }) },
+      { key = "h", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
+      { key = "j", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
+      { key = "k", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
+      { key = "l", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
       { key = "q", action = "PopKeyTable" },
       { key = "Escape", action = "PopKeyTable" },
       { key = "Enter", action = "PopKeyTable" },
