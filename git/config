@@ -2,8 +2,9 @@
 	editor = nvim
 	autocrlf = false
 	filemode = false
-	excludesfile = ~/.config/git/gitignore_global
 	pager = delta
+	excludesfile = ~/.config/git/gitignore_global
+	attributesfile = ~/.config/git/gitattributes_global
 
 [credential]
 	helper = store
