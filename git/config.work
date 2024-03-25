@@ -1,3 +1,9 @@
 [user]
 	name = Peien Xie
 	email = peien.xie@tatung.com
+
+[http "https://192.168.3.87"]
+	sslVerify = false
+
+[credential "https://192.168.3.87"]
+	provider = gitlab
