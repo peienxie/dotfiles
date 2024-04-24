@@ -45,12 +45,25 @@ return {
         ["<C-n>"] = select_or_fallback(cmp.select_next_item),
         ["<C-p>"] = select_or_fallback(cmp.select_prev_item),
       })
+      local buffer_source = {
+        name = "buffer",
+        option = {
+          get_bufnrs = function()
+            local buf = vim.api.nvim_get_current_buf()
+            local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+            if byte_size > 1 * 1024 * 1024 then -- 1 Megabyte max
+              return {}
+            end
+            return { buf }
+          end,
+        },
+      }
 
       cmp.setup.cmdline({ "/", "?" }, {
         completion = { completeopt = "menu,menuone,noselect,noinsert" },
         mapping = cmdline_mapping,
         sources = cmp.config.sources({
-          { name = "buffer" },
+          buffer_source,
         }),
       })
       cmp.setup.cmdline(":", {
@@ -59,7 +72,7 @@ return {
         sources = cmp.config.sources({
           { name = "path" },
           { name = "cmdline" },
-          { name = "buffer" },
+          buffer_source,
         }),
       })
       cmp.setup(opts)
