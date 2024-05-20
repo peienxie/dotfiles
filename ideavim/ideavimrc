@@ -1,6 +1,8 @@
 " most of keymaps is based on https://github.com/yutkat/dotfiles/blob/main/.config/ideavim/ideavimrc
 set surround
 set commentary
+set ideajoin
+
 set clipboard=unnamedplus
 set number
 set relativenumber
