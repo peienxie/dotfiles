@@ -52,7 +52,7 @@ export FZF_DEFAULT_COMMAND='rg --hidden --files --glob "!.git"'
 if [[ $IS_MACOS == "true" ]] && \
   [[ -x "/opt/homebrew/bin/brew" ]] && [[ ! -z "$(/opt/homebrew/bin/brew list colima -v 2>/dev/null)" ]]; then
   export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-  export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+  export DOCKER_HOST="unix://$XDG_CONFIG_HOME/colima/default/docker.sock"
 fi
 
 # Aliases
@@ -96,7 +96,7 @@ P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 }
 
 # Which plugins would you like to load?
-plugins=(git zsh-autosuggestions zsh-z)
+plugins=(git kubectl minikube docker zsh-autosuggestions zsh-z)
 
 # Variables and corresponding directories for oh-my-zsh
 [[ ! -d "$XDG_DATA_HOME/zsh" ]] && mkdir -p "$XDG_DATA_HOME/zsh"
