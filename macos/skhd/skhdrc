@@ -26,16 +26,20 @@ alt + shift + ctrl - l : yabai -m window --resize right:20:0 || yabai -m window 
 # Space navigations (needs SIP disabled)
 # Reference Issue: https://github.com/koekeishiya/yabai/issues/205
 # Doesn't work on a fullscreen space or a space without any windows
-alt + ctrl - 1 : yabai -m query --spaces --space 1  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 2 : yabai -m query --spaces --space 2  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 3 : yabai -m query --spaces --space 3  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 4 : yabai -m query --spaces --space 4  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 5 : yabai -m query --spaces --space 5  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 6 : yabai -m query --spaces --space 6  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 7 : yabai -m query --spaces --space 7  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 8 : yabai -m query --spaces --space 8  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 9 : yabai -m query --spaces --space 9  | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
-alt + ctrl - 0 : yabai -m query --spaces --space 10 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+alt + ctrl - 1 : ${HOME}/.config/skhd/scripts/focus-space.sh 1
+alt + ctrl - 2 : ${HOME}/.config/skhd/scripts/focus-space.sh 2
+alt + ctrl - 3 : ${HOME}/.config/skhd/scripts/focus-space.sh 3
+alt + ctrl - 4 : ${HOME}/.config/skhd/scripts/focus-space.sh 4
+alt + ctrl - 5 : ${HOME}/.config/skhd/scripts/focus-space.sh 5
+alt + ctrl - 6 : ${HOME}/.config/skhd/scripts/focus-space.sh 6
+alt + ctrl - 7 : ${HOME}/.config/skhd/scripts/focus-space.sh 7
+alt + ctrl - 8 : ${HOME}/.config/skhd/scripts/focus-space.sh 8
+alt + ctrl - 9 : ${HOME}/.config/skhd/scripts/focus-space.sh 9
+alt + ctrl - 0 : ${HOME}/.config/skhd/scripts/focus-space.sh 0
+
+# Focus next/prev space using 0x21 = '[' and 0x1E = ']'
+alt + ctrl - 0x21 : ${HOME}/.config/skhd/scripts/focus-space.sh prev
+alt + ctrl - 0x1E : ${HOME}/.config/skhd/scripts/focus-space.sh next
 
 # Move current window to specific space
 alt + shift - 1 : yabai -m window --space 1
@@ -48,10 +52,6 @@ alt + shift - 7 : yabai -m window --space 7
 alt + shift - 8 : yabai -m window --space 8
 alt + shift - 9 : yabai -m window --space 9
 alt + shift - 0 : yabai -m window --space 10
-
-# Focus monitors '[' and ']'
-#alt + ctrl - 0x21 : yabai -m display --focus west
-#alt + ctrl - 0x1E : yabai -m display --focus east
 
 # Switching layout modes
 alt + ctrl - w : yabai -m space --layout stack
