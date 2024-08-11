@@ -96,7 +96,7 @@ P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 }
 
 # Which plugins would you like to load?
-plugins=(git zsh-autosuggestions zsh-z)
+plugins=(git kubectl minikube zsh-autosuggestions zsh-z)
 
 # Variables and corresponding directories for oh-my-zsh
 [[ ! -d "$XDG_DATA_HOME/zsh" ]] && mkdir -p "$XDG_DATA_HOME/zsh"
