@@ -2,8 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local Util = require("lazyvim.util")
-
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -28,12 +26,12 @@ map("i", "jj", "<Esc>")
 map("i", "<C-c>", "<Esc>")
 
 -- Delete without copying to clipboard
-map("n", "<Leader>d", "\"_d")
-map("v", "<Leader>d", "\"_d")
-map("n", "x", "\"_x")
-map("v", "x", "\"_x")
+map("n", "<Leader>d", '"_d')
+map("v", "<Leader>d", '"_d')
+map("n", "x", '"_x')
+map("v", "x", '"_x')
 
--- Remap window movement keymaps
+-- Window movement keymaps
 unmap("n", "<C-h>")
 unmap("n", "<C-j>")
 unmap("n", "<C-k>")
@@ -51,7 +49,9 @@ map("i", "<A-k>", "<Esc>:m .-2<CR>gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<CR>gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<CR>gv", { desc = "Move up" })
 
--- Delete buffer movement keymaps. Use `]b` and `[b` instead.
+-- Delete buffer movement keymaps.
+unmap("n", "[b")
+unmap("n", "]b")
 unmap("n", "<S-h>")
 unmap("n", "<S-l>")
 unmap("n", "<Leader>`")
@@ -93,24 +93,15 @@ map("n", "<Leader>L", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 
 -- Toggle Terminal
 local lazyterm = function()
-  Util.float_term(nil, { cwd = Util.get_root() })
+  Snacks.terminal(nil, { cwd = LazyVim.root() })
 end
 unmap("n", "<C-/>")
 unmap("n", "<C-_>")
 map("n", "<C-\\>", lazyterm, { desc = "Terminal (root dir)" })
 
 -- Terminal Mappings
-unmap("t", "<esc><esc>")
-unmap("t", "<C-h>")
-unmap("t", "<C-j>")
-unmap("t", "<C-k>")
-unmap("t", "<C-l>")
 unmap("t", "<C-/>")
 unmap("t", "<c-_>")
-map("t", "<A-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-map("t", "<A-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-map("t", "<A-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-map("t", "<A-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
 map("t", "<C-\\>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- Remap duplicated window splits keymaps and add `s` and `v` to split window
@@ -121,10 +112,10 @@ map("n", "<Leader>wv", "<C-w>v", { desc = "Split window right" })
 
 -- Tabs
 unmap("n", "<leader><tab>l")
+unmap("n", "<leader><tab>o")
 unmap("n", "<leader><tab>f")
 unmap("n", "<leader><tab><tab>")
-unmap("n", "<leader><tab>]")
-unmap("n", "<leader><tab>d")
 unmap("n", "<leader><tab>[")
+unmap("n", "<leader><tab>]")
 map("n", "[<Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "]<Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })

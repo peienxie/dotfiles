@@ -1,3 +1,5 @@
+vim.g.lazyvim_picker = "telescope"
+
 return {
   {
     "nvim-telescope/telescope.nvim",

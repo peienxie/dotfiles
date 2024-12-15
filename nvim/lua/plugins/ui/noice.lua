@@ -1,9 +1,5 @@
 return {
   {
-    "rcarriga/nvim-notify",
-    enabled = false,
-  },
-  {
     "folke/noice.nvim",
     opts = {
       routes = {
@@ -11,6 +7,20 @@ return {
           filter = { event = "msg_show", kind = "search_count" },
           view = "mini",
         },
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
+          },
+          view = "mini",
+        },
+        -- search patterns
+        { filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+        { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
       },
       presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
@@ -22,22 +32,7 @@ return {
       cmdline = {
         view = "cmdline",
       },
-      popupmenu = {
-        backend = "cmp",
-      },
       messages = { view_search = false },
-    },
-  },
-  {
-    "SmiteshP/nvim-navic",
-    opts = {
-      lsp = {
-        auto_attach = true,
-      },
-      separator = " ",
-      highlight = true,
-      depth_limit = 5,
-      icons = require("lazyvim.config").icons.kinds,
     },
   },
 }
