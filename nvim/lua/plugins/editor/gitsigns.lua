@@ -1,24 +1,4 @@
 return {
-  -- Git integrations
-  {
-    "NeogitOrg/neogit",
-    cmd = "Neogit",
-    keys = {
-      { "<Leader>gn", "<Cmd>Neogit<CR>", desc = "Open Neogit" },
-    },
-    opts = {
-      disable_commit_confirmation = true,
-      integrations = { diffview = true },
-      disable_insert_on_commit = false,
-      sections = {
-        stashes = { folded = false, hidden = false },
-        unpulled_upstream = { folded = false, hidden = false },
-        recent = { folded = false, hidden = false },
-      },
-    },
-  },
-
-  -- Show git status on signcolumn
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -31,6 +11,15 @@ return {
         changedelete = { text = "┃" },
         untracked = { text = "┃" },
       },
+      signs_staged = {
+        add = { text = "┃" },
+        change = { text = "┃" },
+        delete = { text = "┃" },
+        topdelete = { text = "┃" },
+        changedelete = { text = "┃" },
+        untracked = { text = "┃" },
+      },
+      signs_staged_enable = true,
       current_line_blame = true,
       current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> • <summary>",
       preview_config = {
@@ -93,50 +82,5 @@ return {
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Hunk Object" })
       end,
     },
-  },
-
-  -- A better diffing view
-  {
-    "sindrets/diffview.nvim",
-    enabled = true,
-    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-    keys = {
-      { "<leader>gD", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open diffview for current file" },
-      { "<leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Open diffview" },
-    },
-    opts = {
-      keymaps = {
-        view = {
-          ["q"] = "<Cmd>tabclose<CR>",
-        },
-        file_panel = {
-          ["q"] = "<Cmd>tabclose<CR>",
-          ["?"] = "<Cmd>h diffview-maps-file-panel<CR>",
-        },
-        file_history_panel = {
-          ["q"] = "<Cmd>tabclose<CR>",
-          ["?"] = "<Cmd>h diffview-maps-file-history-panel<CR>",
-        },
-      },
-    },
-  },
-
-  -- Highlight conflicts and add keymaps for resolving conflicts
-  {
-    "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
-    opts = {
-      disable_diagnostics = true,
-    },
-    config = function(_, opts)
-      require("git-conflict").setup(opts)
-
-      -- vim.api.nvim_set_hl(0, "GitConflictCurrent", { bg = "#163333" })
-      -- vim.api.nvim_set_hl(0, "GitConflictAncestor", { bg = "#181B20" })
-      -- vim.api.nvim_set_hl(0, "GitConflictIncoming", { bg = "#162C43" })
-      -- vim.api.nvim_set_hl(0, "GitConflictCurrentLabel", { bg = "#256b61" })
-      -- vim.api.nvim_set_hl(0, "GitConflictAncestorLabel", { bg = "#2D2E32" })
-      -- vim.api.nvim_set_hl(0, "GitConflictIncomingLabel", { bg = "#255A8A" })
-    end,
   },
 }
