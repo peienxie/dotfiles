@@ -22,7 +22,9 @@ M.setup = function(config)
 
   -- font
   config.font = wezterm.font_with_fallback({
-    { family = "MesloLGS NF", scale = 1.2, weight = "Medium" },
+    { family = "JetBrains Mono", weight = "Medium" },
+    { family = "Symbols Nerd Font Mono", scale = 0.75 },
+    --{ family = "MesloLGS NF", scale = 1.2, weight = "Medium" },
   })
   config.font_size = 16
 
