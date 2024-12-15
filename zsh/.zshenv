@@ -17,3 +17,5 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Skip `compinit` command call in /etc/zsh/zshrc, it will be called in oh-my-zsh.sh later
 skip_global_compinit=1
+
+export SHELL_SESSIONS_DISABLE=1
