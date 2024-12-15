@@ -39,7 +39,6 @@ local function get_current_working_dir(tab)
 
   -- the dir has a trailing slash on Windows
   cwd = remove_trailing_slash(cwd)
-  wezterm.log_info(os.getenv("USERPROFILE"))
   cwd = string.gsub(cwd, getHome(), "~")
   return basename(cwd)
 end
