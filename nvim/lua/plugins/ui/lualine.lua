@@ -150,8 +150,21 @@ return {
             { "location", padding = 1 },
           },
         },
+        tabline = {
+          lualine_z = {
+            { "tabs" },
+          },
+        },
         extensions = { "neo-tree", "lazy", "nvim-dap-ui", "quickfix" },
       }
+    end,
+
+    config = function(_, opts)
+      require("lualine").setup(opts)
+
+      -- override the `showtabline` option to 0 (only display tabline if more than 1 tab)
+      -- Reference: https://github.com/nvim-lualine/lualine.nvim/issues/395#issuecomment-1312371694
+      vim.cmd("set showtabline=0")
     end,
   },
 }

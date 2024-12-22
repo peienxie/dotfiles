@@ -2,7 +2,12 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { style = "moon" },
+    opts = {
+      style = "moon",
+      on_colors = function(colors)
+        colors.border = colors.blue
+      end,
+    },
   },
   {
     "gruvbox-community/gruvbox",
