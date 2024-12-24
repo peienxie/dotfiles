@@ -1,50 +1,61 @@
-local function is_lsp_actived()
-  local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
-  return clients and #clients > 0
-end
-
-local function get_lsp_progress()
-  local messages = vim.lsp.util.get_progress_messages()
-  if #messages == 0 then
-    return
-  end
-  -- local status = {}
-  -- for _, msg in pairs(messages) do
-  --   table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
-  -- end
-  local spinners = { "⠋", "⠙", "⠸", "⠴", "⠦", "⠇" }
-  local ms = vim.loop.hrtime() / 1000000
-  local frame = math.floor(ms / 120) % #spinners
-  -- return table.concat(status, " | ") .. " " .. spinners[frame + 1]
-  return spinners[frame + 1]
-end
-
-local function get_lsp_name()
-  local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
-  if clients and #clients > 0 then
-    local names = {}
-    for _, lsp in ipairs(clients) do
-      table.insert(names, lsp.name)
-    end
-    return table.concat(names, ", ")
-  else
-    return ""
-  end
-end
-
 return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function()
-      local icons = require("lazyvim.config").icons
+      local icons = LazyVim.config.icons
+
+      local diff = {
+        "diff",
+        symbols = {
+          added = icons.git.added,
+          modified = icons.git.modified,
+          removed = icons.git.removed,
+        },
+        source = function()
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
+        end,
+      }
+
+      local lsp_servers = {
+        function()
+          local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
+          return clients and #clients > 0
+        end,
+        cond = function()
+          local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
+          if clients and #clients > 0 then
+            local names = {}
+            for _, lsp in ipairs(clients) do
+              table.insert(names, lsp.name)
+            end
+            return table.concat(names, ",")
+          else
+            return ""
+          end
+        end,
+      }
+
+      local navic_location = {
+        function()
+          return require("nvim-navic").get_location()
+        end,
+        cond = function()
+          return package.loaded["nvim-navic"] and require("nvim-navic").is_available() and vim.o.columns > 160
+        end,
+      }
 
       return {
         options = {
           component_separators = "",
           section_separators = "",
-          disabled_filetypes = {
-            "undotree",
-          },
+          disabled_filetypes = { "undotree" },
         },
         sections = {
           lualine_a = { "mode" },
@@ -59,83 +70,38 @@ return {
                 hint = icons.diagnostics.Hint,
               },
             },
-            {
-              "filetype",
-              icon_only = true,
-              separator = "",
-              padding = { left = 1, right = 0 },
-            },
-            {
-              "filename",
-              path = 1,
-              symbols = { modified = "  ", readonly = "", unnamed = "" },
-            },
-            {
-              function()
-                return require("nvim-navic").get_location()
-              end,
-              cond = function()
-                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-              end,
-            },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { LazyVim.lualine.pretty_path() },
+            navic_location,
           },
+
           lualine_x = {
+            Snacks.profiler.status(),
+            -- stylua: ignore
             {
-              function()
-                return require("noice").api.status.command.get()
-              end,
-              cond = function()
-                return package.loaded["noice"] and require("noice").api.status.command.has()
-              end,
-              color = {
-                fg = Snacks.util.color("Statement"),
-              },
+              function() return require("noice").api.status.command.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              color = function() return { fg = Snacks.util.color("Statement") } end,
             },
+            -- stylua: ignore
             {
-              function()
-                return require("noice").api.status.mode.get()
-              end,
-              cond = function()
-                return package.loaded["noice"] and require("noice").api.status.mode.has()
-              end,
-              color = {
-                fg = Snacks.util.color("Constant"),
-              },
+              function() return require("noice").api.status.mode.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = function() return { fg = Snacks.util.color("Constant") } end,
             },
+            -- stylua: ignore
             {
-              function()
-                return "  " .. require("dap").status()
-              end,
-              cond = function()
-                return package.loaded["dap"] and require("dap").status() ~= ""
-              end,
-              color = {
-                fg = Snacks.util.color("Debug"),
-              },
+              function() return "  " .. require("dap").status() end,
+              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = function() return { fg = Snacks.util.color("Debug") } end,
             },
+            -- stylua: ignore
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = {
-                fg = Snacks.util.color("Special"),
-              },
+              color = function() return { fg = Snacks.util.color("Special") } end,
             },
-            -- {
-            --   "diff",
-            --   symbols = {
-            --     added = icons.git.added,
-            --     modified = icons.git.modified,
-            --     removed = icons.git.removed,
-            --   },
-            -- },
-            {
-              function()
-                return get_lsp_name()
-              end,
-              cond = function()
-                return is_lsp_actived()
-              end,
-            },
+            lsp_servers,
           },
           lualine_y = {
             { "encoding" },
@@ -147,18 +113,23 @@ return {
             { "filetype", icons_enabled = false },
           },
           lualine_z = {
+            {
+              "searchcount",
+              maxcount = 99999,
+              fmt = function(str)
+                return str == "[0/0]" and nil or str
+              end,
+              padding = { left = 1 },
+            },
             { "location", padding = 1 },
           },
         },
         tabline = {
-          lualine_z = {
-            { "tabs" },
-          },
+          lualine_z = { { "tabs" } },
         },
         extensions = { "neo-tree", "lazy", "nvim-dap-ui", "quickfix" },
       }
     end,
-
     config = function(_, opts)
       require("lualine").setup(opts)
 

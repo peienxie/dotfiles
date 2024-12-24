@@ -3,17 +3,22 @@ return {
     "folke/noice.nvim",
     opts = {
       routes = {
-        {
-          filter = { event = "msg_show", kind = "search_count" },
-          view = "mini",
-        },
+        { filter = { event = "msg_show", kind = "search_count" }, skip = true },
         {
           filter = {
             event = "msg_show",
             any = {
+              -- saving files
               { find = "%d+L, %d+B" },
-              { find = "; after #%d+" },
+              -- undo/redo
               { find = "; before #%d+" },
+              { find = "; after #%d+" },
+              { find = "^Already at oldest change" },
+              { find = "^Already at newest change" },
+              -- yank/paste/cut in visual mode
+              { find = "%d lines yanked" },
+              { find = "%d more lines" },
+              { find = "%d fewer lines" },
             },
           },
           view = "mini",
