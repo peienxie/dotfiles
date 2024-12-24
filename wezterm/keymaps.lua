@@ -58,6 +58,7 @@ M.setup = function(config)
 
     -- Tab keybindings
     { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+    { key = "C", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "DOMAINS" }) },
     -- navigating tabs
     { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
     { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
@@ -102,7 +103,7 @@ M.setup = function(config)
     { key = "s", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
     {
       key = "$",
-      mods = "LEADER",
+      mods = "LEADER|SHIFT",
       action = act.PromptInputLine({
         description = "New workspace name",
         action = wezterm.action_callback(function(window, pane, line)

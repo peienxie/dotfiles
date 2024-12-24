@@ -34,7 +34,7 @@ local function get_current_working_dir(tab)
     cwd_uri = decode_URI(tostring(cwd_uri))
     cwd = string.gsub(cwd_uri, "(^file://.*?)[/]", "/")
   else
-    cwd = "?"
+    cwd = ""
   end
 
   -- the dir has a trailing slash on Windows
@@ -52,18 +52,15 @@ M.setup = function(config)
   config.hide_tab_bar_if_only_one_tab = false
 
   wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local icon
-    if tab.active_pane.is_zoomed then
-      icon = "🔎"
-    else
-      icon = ""
-    end
+    local pane = tab.active_pane
+    local icon = pane.is_zoomed and "🔎" or ""
+    local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or get_current_working_dir(tab)
+    title = (title ~= nil and title ~= "") and title or pane.title
 
-    local title
-    if tab.tab_title and #tab.tab_title > 0 then
-      title = tab.tab_title
-    else
-      title = get_current_working_dir(tab)
+    local domain_name = ""
+    if pane.domain_name and pane.domain_name ~= "local" then
+      domain_name = "[" .. pane.domain_name:gsub("^SSH:", ""):gsub("^MUXSSH:", "") .. "]:"
+      title = domain_name .. title
     end
 
     return {
