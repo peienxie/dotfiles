@@ -26,10 +26,6 @@ return {
       local lsp_servers = {
         function()
           local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
-          return clients and #clients > 0
-        end,
-        cond = function()
-          local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
           if clients and #clients > 0 then
             local names = {}
             for _, lsp in ipairs(clients) do
@@ -39,6 +35,10 @@ return {
           else
             return ""
           end
+        end,
+        cond = function()
+          local clients = vim.lsp.get_clients({ bufnr = vim.fn.bufnr() })
+          return clients and #clients > 0
         end,
       }
 
