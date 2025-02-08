@@ -12,10 +12,10 @@ M.setup = function(config)
   if wezterm.target_triple:find("windows") then
     config.default_prog = { "cmd.exe", "/k", "%CMDER_ROOT%/vendor/init.bat" }
     config.window_decorations = "RESIZE|TITLE"
-  -- wezterm.on("gui-startup", function()
-  -- 	local tab, pane, window = wezterm.mux.spawn_window({})
-  -- 	window:gui_window():maximize()
-  -- end)
+    wezterm.on("gui-startup", function()
+      local _, _, window = wezterm.mux.spawn_window({})
+      window:gui_window():maximize()
+    end)
   else
     config.window_decorations = "RESIZE"
   end
