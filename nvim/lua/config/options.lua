@@ -20,6 +20,10 @@ vim.g.lazyvim_cmp = "blink.cmp"
 
 local opt = vim.opt
 
+if vim.uv.os_uname().sysname:find("Windows") then
+  opt.shell = "cmd.exe /k %CMDER_ROOT%/vendor/init.bat"
+end
+
 opt.fileencodings = "utf-8,big5,cp950,gbk,cp936,iso-2022-jp,sjis,euc-jp,japan,euc-kr,ucs-bom,utf-bom,latin1,iso8859-1"
 
 opt.cursorline = true
