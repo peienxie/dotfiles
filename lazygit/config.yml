@@ -1,2 +1,8 @@
+# If true, show a confirmation popup before quitting Lazygit
+confirmOnQuit: true
+
 gui:
-  language: 'en'
+  language: "en"
+  # The number of lines you scroll by when scrolling the main window (default: 2)
+  scrollHeight: 24
+  scrollOffMargin: 4

@@ -12,21 +12,24 @@
 
     ~/.zshenv: zsh/.zshenv
     ~/.config/zsh: zsh
+    ~/.config/tmux: tmux
     ~/.config/git: git
     ~/.config/nvim: nvim
-    ~/.config/tmux: tmux
+    ~/.config/ripgrep: ripgrep
+    ~/.config/lazygit: lazygit
 
+    # terminals
     ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
-
     ~/.config/wezterm: wezterm
 
     ~/.config/npm: npm
-    ~/.config/ripgrep: ripgrep
     ~/.config/python: python
 
+    # WM
     ~/.config/i3: i3
     ~/.config/picom: picom
 
+    # IDE
     ~/.config/vscode-neovim: vscode-neovim
     ~/.config/vscodevim: vscodevim
     ~/.config/ideavim: ideavim

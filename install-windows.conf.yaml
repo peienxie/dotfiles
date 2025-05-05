@@ -11,16 +11,18 @@
     ~/.local/share/terminfo: terminfo/output
 
     ~/.config/git: git
-
     ~/AppData/Local/nvim: nvim
-    ~/AppData/Roaming/alacritty/alacritty.yml: alacritty/alacritty-windows.yml
+    ~/.config/ripgrep: ripgrep
+    ~/AppData/Local/lazygit: lazygit
 
+    # terminals
+    ~/AppData/Roaming/alacritty/alacritty.yml: alacritty/alacritty-windows.yml
     ~/.config/wezterm: wezterm
 
     ~/.config/npm: npm
-    ~/.config/ripgrep: ripgrep
     ~/.config/python: python
 
+    # IDE
     ~/.config/vscode-neovim: vscode-neovim
     ~/.config/vscodevim: vscodevim
     ~/.config/ideavim: ideavim
