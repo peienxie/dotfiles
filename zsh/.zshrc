@@ -84,11 +84,11 @@ P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions >/dev/null 2>&1
   echo "Done"
 }
-[[ ! -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
-  echo -n "Clone the zsh-z plugin..."
-  git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
-  echo "Done"
-}
+# [[ ! -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
+#   echo -n "Clone the zsh-z plugin..."
+#   git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
+#   echo "Done"
+# }
 [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]] && {
   echo -n "Clone the powerlevel10k theme..."
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k >/dev/null 2>&1
@@ -96,11 +96,11 @@ P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 }
 
 # Which plugins would you like to load?
-plugins=(git kubectl minikube docker zsh-autosuggestions zsh-z)
+plugins=(git kubectl minikube docker zsh-autosuggestions)
 
 # Variables and corresponding directories for oh-my-zsh
 [[ ! -d "$XDG_DATA_HOME/zsh" ]] && mkdir -p "$XDG_DATA_HOME/zsh"
-ZSHZ_DATA="$XDG_DATA_HOME/zsh/zsh-z-history"
+# ZSHZ_DATA="$XDG_DATA_HOME/zsh/zsh-z-history"
 [[ ! -d "$XDG_CACHE_HOME/zsh" ]] && mkdir -p "$XDG_CACHE_HOME/zsh"
 ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
@@ -110,6 +110,9 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 # Initialize oh-my-zsh
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh" || echo "Can't find oh-my-zsh config file: $ZSH/oh-my-zsh.sh"
 
+# initialize zoxide
+eval "$(zoxide init zsh)"
+# 
 # Detect the type of operating system and load the appropriate fzf configuration files
 if [[ $IS_LINUX == "true" ]]; then
   # source fzf keybindings and completion
