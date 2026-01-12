@@ -18,11 +18,7 @@ return {
         },
       },
       input = {
-        -- reference: https://github.com/folke/snacks.nvim/discussions/376
         win = {
-          keys = {
-            i_del_word = { "<C-w>", "delete_word", mode = "i" },
-          },
           actions = {
             delete_word = function()
               return "<cmd>normal! diw<cr><right>"
