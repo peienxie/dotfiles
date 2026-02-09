@@ -11,7 +11,7 @@ return {
           winhighlight = "Normal:NormalFloat",
         },
         list = {
-          selection = "manual",
+          selection = { preselect = false },
         },
         documentation = {
           window = { border = "rounded" },

@@ -25,7 +25,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.python" },
     -- { import = "lazyvim.plugins.extras.lang.clangd" },
     -- { import = "lazyvim.plugins.extras.lang.java" },
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
 
     { import = "lazyvim.plugins.extras.lang.docker" }, -- dockerls & docker_compose_language_service LSPs, hadolint linter
     { import = "lazyvim.plugins.extras.lang.markdown" }, -- marksman LSP, markdownlint linter, markdown-preview.nvim, and Headlines.nvim

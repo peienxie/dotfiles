@@ -1,22 +1,20 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      -- Update LSP keymaps
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- disable a keymap
-      keys[#keys + 1] = { "K", false }
-      keys[#keys + 1] = { "gK", false }
-      keys[#keys + 1] = { "<C-k>", false, mode = "i" }
-      -- disable a keymap
-      keys[#keys + 1] = { "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
-      keys[#keys + 1] = { "gl", "<Cmd>lua vim.diagnostic.open_float()<CR>" }
-      keys[#keys + 1] = { "gs", "<Cmd>lua vim.lsp.buf.signature_help()<CR>" }
-      keys[#keys + 1] = { "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>" }
-      keys[#keys + 1] = { "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>" }
-    end,
     opts = {
       servers = {
+        ["*"] = {
+          keys = {
+            { "K", false },
+            { "gK", false },
+            { "<C-k>", false, mode = "i" },
+            { "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>" },
+            { "gl", "<Cmd>lua vim.diagnostic.open_float()<CR>" },
+            { "gs", "<Cmd>lua vim.lsp.buf.signature_help()<CR>" },
+            { "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>" },
+            { "gR", "<Cmd>lua vim.lsp.buf.rename()<CR>" },
+          },
+        },
         lua_ls = {
           -- Use this to add any additional keymaps
           -- for specific lsp servers

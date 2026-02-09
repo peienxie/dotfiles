@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       {
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         enabled = false,
       },
     },

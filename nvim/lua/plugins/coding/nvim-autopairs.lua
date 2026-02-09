@@ -7,7 +7,7 @@ return {
     },
     dependencies = {
       {
-        "echasnovski/mini.pairs",
+        "nvim-mini/mini.pairs",
         enabled = false,
       },
     },

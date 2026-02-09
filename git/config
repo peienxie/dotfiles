@@ -14,7 +14,7 @@
 	email = peienxieit@gmail.com
 
 # Override the user config by sourcing config.work if inside any git repo of work
-[includeIf "gitdir:~/work/"]
+[includeIf "gitdir:D:/git/work/"]
 	path = config.work
 
 [rebase]
@@ -40,6 +40,18 @@
 [init]
 	defaultBranch = main
 
+[commit]
+	gpgsign = true
+
+[push]
+	autoSetupRemote = true
+
+[credential]
+	helper = manager
+
+[credential "helperselector"]
+	selected = manager
+
 [credential "https://github.com"]
 	helper = 
 	helper = !gh auth git-credential
@@ -47,3 +59,7 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !gh auth git-credential
+[http]
+	sslVerify = false
+[credential "https://192.168.3.87"]
+	provider = generic
