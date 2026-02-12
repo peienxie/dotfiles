@@ -1,0 +1,62 @@
+e.=explorer .
+l=ls --show-control-chars -CFGNhp --color --ignore={"NTUSER.DAT*","ntuser.dat*"} $* 
+ls=ls --show-control-chars -F --color $* 
+ll=ls -hl --show-control-chars -F --color $* 
+lla=ls -hla --show-control-chars -F --color $* 
+pwd=cd
+clear=cls
+unalias=alias /d $1
+vi=vim $*
+cmderr=cd /d "%CMDER_ROOT%"
+pwsh=%SystemRoot%/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression '. ''%CMDER_ROOT%/vendor/profile.ps1'''"
+
+g=git $*
+gd=git diff $*
+gl=git log $*
+glog=git log --oneline --decorate --graph
+gloga=git log --oneline --decorate --graph --all
+glod=git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"
+glods=git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short
+gaa=git add --all
+gcmsg=git commit --message $*
+gcn!=git commit --verbose --no-edit --amend
+gco=git checkout $*
+
+ggpull=git pull origin $*
+ggpush=git push origin $*
+
+glg=git log --stat
+glgg=git log --graph
+glgga=git log --graph --decorate --all
+glgm=git log --graph --max-count=10
+glgp=git log --stat --patch
+glo=git log --oneline --decorate
+globurl=noglob urlglobber 
+glol=git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"
+glola=git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all
+glols=git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat
+
+grb=git rebase
+grba=git rebase --abort
+grbc=git rebase --continue
+grbi=git rebase --interactive
+grbo=git rebase --onto
+grbs=git rebase --skip
+
+grh=git reset
+grhh=git reset --hard
+
+gst=git status -s
+
+path=echo %PATH% | tr ; \n
+pip=pip3 $*
+py=python3 $*
+python=python3 $*
+
+ehistory=nvim "%CMDER_ROOT%/config/clink_history"
+ealias=nvim "%CMDER_ROOT%/config/user_aliases.cmd" && "%CMDER_ROOT%/config/user_aliases.cmd"
+soalias="%CMDER_ROOT%/config/user_aliases.cmd"
+eprofile=nvim "%CMDER_ROOT%/config/user_profile.cmd" && "%CMDER_ROOT%/config/user_profile.cmd"
+soprofile="%CMDER_ROOT%/config/user_profile.cmd"
+
+notes=cd %HOME%\iCloudDrive\iCloud~md~obsidian\vimwiki

@@ -19,6 +19,12 @@
     ~/AppData/Roaming/alacritty/alacritty.yml: alacritty/alacritty-windows.yml
     ~/.config/wezterm: wezterm
 
+    # cmder config
+    ${CMDER_ROOT}:
+      path: cmder/config/*
+      glob: true
+      force: true
+
     ~/.config/npm: npm
     ~/.config/python: python
 
