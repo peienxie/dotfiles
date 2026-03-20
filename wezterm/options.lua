@@ -10,7 +10,7 @@ M.setup = function(config)
   config.skip_close_confirmation_for_processes_named = {}
 
   if wezterm.target_triple:find("windows") then
-    config.default_prog = { "cmd.exe", "/k", "%CMDER_ROOT%/vendor/init.bat" }
+    config.default_prog = { "cmd.exe", "/k", "%CMDER_ROOT%/vendor/init.bat", "/nix_tools", "2" }
     config.window_decorations = "RESIZE|TITLE"
     wezterm.on("gui-startup", function()
       local _, _, window = wezterm.mux.spawn_window({})

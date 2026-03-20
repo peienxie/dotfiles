@@ -1,4 +1,4 @@
 set MSYS=winsymlinks:nativestrict
 
-bash -c ./install
+sh -c ./install
 
