@@ -11,7 +11,7 @@ keymaps.setup(config)
 options.setup(config)
 tabbar.setup(config)
 
-smart_workspace_switcher.setup(config)
-resurrect.setup(config)
+-- smart_workspace_switcher.setup(config)
+-- resurrect.setup(config)
 
 return config
