@@ -2,7 +2,9 @@ echo off
 
 set LANG=en_US.utf8
 set EDITOR=nvim
+set CC=gcc
 
+set "HOME=%USERPROFILE%"
 set "SCOOP=D:\tools\scoop"
 set "K9S_CONFIG_DIR=%HOME%\.config\k9s"
 
