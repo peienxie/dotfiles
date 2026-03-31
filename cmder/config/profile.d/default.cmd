@@ -6,6 +6,7 @@ set CC=gcc
 
 set "HOME=%USERPROFILE%"
 set "SCOOP=D:\tools\scoop"
+set "XDG_CONFIG_HOME=%HOME%\.config"
 set "K9S_CONFIG_DIR=%HOME%\.config\k9s"
 
 set PATH=%SCOOP%\shims;%PATH%
