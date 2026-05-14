@@ -33,8 +33,8 @@ M.setup = function(config)
     { key = "-", mods = "SUPER", action = wezterm.action.DecreaseFontSize },
 
     -- Pane keybindings
-    { key = "%", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = '"', mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
     { key = "h", mods = "LEADER|CTRL", action = act.ActivatePaneDirection("Left") },
     { key = "j", mods = "LEADER|CTRL", action = act.ActivatePaneDirection("Down") },
     { key = "k", mods = "LEADER|CTRL", action = act.ActivatePaneDirection("Up") },
