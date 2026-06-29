@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# https://gist.github.com/jasonboukheir/3fdab92ece236744528447a4f7f5de00
+
+case "$(pwd -P)" in
+/mnt/?/*)
+  exec git.exe "$@" | sed 's/\([A-E]\):/\/mnt\/\L\1/g'
+  ;;
+*)
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    exec "$(brew --prefix git)/bin/git" "$@"
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    exec /usr/bin/git "$@"
+  fi
+  ;;
+esac

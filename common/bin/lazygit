@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case "$(pwd -P)" in
+/mnt/?/*)
+  exec lazygit.exe "$@"
+  ;;
+*)
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    exec "$(brew --prefix lazygit)/bin/lazygit" "$@"
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    exec /usr/bin/lazygit "$@"
+  fi
+  ;;
+esac

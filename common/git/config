@@ -1,0 +1,59 @@
+[core]
+	editor = nvim
+	autocrlf = false
+	filemode = false
+	pager = delta
+	excludesfile = ~/.config/git/gitignore_global
+	attributesfile = ~/.config/git/gitattributes_global
+
+[credential]
+	helper = manager
+
+[includeIf "gitdir:~/.dotfiles"]
+	path = config.personal
+[includeIf "gitdir:~/projects"]
+	path = config.personal
+
+# Override the user config by sourcing config.work if inside any git repo of work
+[includeIf "gitdir:~/work/"]
+	path = config.work
+[includeIf "gitdir:D:/git/work/"]
+	path = config.work
+
+[rebase]
+	autoStash = true
+
+[push]
+	# Automatically set origin as the remote for current branch
+	autoSetupRemote = true
+
+[pull]
+  rebase = false
+
+[format]
+	pretty = fuller
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	side-by-side = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[init]
+	defaultBranch = main
+
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential

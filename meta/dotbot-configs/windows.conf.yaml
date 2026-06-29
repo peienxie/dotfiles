@@ -1,0 +1,28 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ["~"]
+
+- link:
+    ~/Pictures/wallpapers: common/wallpapers
+    ~/.bin: common/bin
+    ~/.config/git: common/git
+    ~/.config/nvim: common/nvim
+
+    ~/.config/wezterm: common/wezterm
+    ~/.config/lazygit: common/lazygit
+    ~/.config/ripgrep: common/ripgrep
+    ~/.config/npm: common/npm
+
+    # cmder config
+    ${CMDER_ROOT}/config:
+      path: os/windows/cmder/config/*
+      glob: true
+      force: true
+
+    # IDE
+    ~/.config/vscode-neovim: common/vscode-neovim
+    ~/.config/vscodevim: common/vscodevim
+    ~/.config/ideavim: common/ideavim
