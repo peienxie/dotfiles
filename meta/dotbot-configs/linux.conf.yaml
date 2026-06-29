@@ -1,0 +1,30 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ["~"]
+
+- link:
+    ~/Pictures/wallpapers: common/wallpapers
+    ~/.bin: common/bin
+    ~/.config/git: common/git
+    ~/.config/nvim: common/nvim
+
+    ~/.config/wezterm: common/wezterm
+    ~/.config/lazygit: common/lazygit
+    ~/.config/ripgrep: common/ripgrep
+    ~/.config/npm: common/npm
+
+    ~/.zshenv: common/zsh/.zshenv
+    ~/.config/zsh: common/zsh
+    ~/.config/tmux: common/tmux
+
+    # WM
+    ~/.config/i3: os/linux/i3
+    ~/.config/picom: os/linux/picom
+
+    # IDE
+    ~/.config/vscode-neovim: common/vscode-neovim
+    ~/.config/vscodevim: common/vscodevim
+    ~/.config/ideavim: common/ideavim
