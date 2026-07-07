@@ -30,6 +30,9 @@ map("n", "<Leader>d", '"_d')
 map("v", "<Leader>d", '"_d')
 map("n", "x", '"_x')
 map("v", "x", '"_x')
+-- pasting over a selection no longer clobbers your clipboard
+-- https://www.youtube.com/watch?v=5N-okeDdIuI
+vim.cmd([[ xnoremap <expr> p 'pgv"' .v:register.'y' ]])
 
 -- Window movement keymaps
 unmap("n", "<C-h>")
