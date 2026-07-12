@@ -1,0 +1,31 @@
+- name: Install dependencies
+  become: true
+  package:
+    name:
+      - curl
+      - zip
+      - unzip
+    state: present
+
+- name: Install SDKMAN
+  shell: |
+    export SDKMAN_DIR="{{ sdkman_dir }}"
+    curl -s "https://get.sdkman.io" | bash
+  args:
+    creates: "{{ sdkman_dir }}"
+
+- name: Install SDKMAN candidates
+  shell: >
+    source {{ sdkman_dir }}/bin/sdkman-init.sh &&
+    sdk install {{ item.0.name }} {{ item.1 }} --non-interactive
+  loop: "{{ sdkman_candidates | subelements('versions') }}"
+  args:
+    executable: /bin/bash
+
+- name: Set default SDKMAN candidates
+  shell: >
+    source {{ sdkman_dir }}/bin/sdkman-init.sh &&
+    sdk default {{ item.name }} {{ item.default }}
+  loop: "{{ sdkman_candidates }}"
+  args:
+    executable: /bin/bash

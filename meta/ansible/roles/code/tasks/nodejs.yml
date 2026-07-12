@@ -1,0 +1,22 @@
+- name: Install dependencies
+  become: true
+  package:
+    name:
+      - curl
+    state: present
+
+- name: Install NVM
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    creates: "{{ nvm_dir }}"
+
+- name: Install desired Node.js versions
+  shell: source {{ nvm_dir }}/nvm.sh && nvm install {{ item }}
+  loop: "{{ node_versions }}"
+  args:
+    executable: /bin/bash
+
+- name: Set default Node.js version
+  shell: source {{ nvm_dir }}/nvm.sh && nvm alias default {{ default_node_version }}
+  args:
+    executable: /bin/bash

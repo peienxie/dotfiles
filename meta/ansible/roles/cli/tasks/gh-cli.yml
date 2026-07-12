@@ -1,0 +1,30 @@
+- name: Install dependencies
+  become: true
+  package:
+    name:
+      - wget
+    state: present
+
+- name: Add GitHub CLI keyring
+  become: true
+  shell: |
+    sudo mkdir -p -m 755 /etc/apt/keyrings
+    wget -nv -O - https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/githubcli-archive-keyring.gpg
+
+- name: Add GitHub CLI apt repository
+  become: true
+  copy:
+    dest: /etc/apt/sources.list.d/github-cli.list
+    content: |
+      deb [arch={{ ansible_facts['architecture'] }} signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
+
+- name: Install GitHub CLI
+  become: true
+  apt:
+    name: gh
+    state: present
+    update_cache: yes
+

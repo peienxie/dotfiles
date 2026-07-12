@@ -1,0 +1,30 @@
+- name: Install dependencies
+  become: true
+  package:
+    name:
+      - build-essential
+      - xclip
+    state: present
+
+- name: Add Neovim PPA on Debian/Ubuntu
+  become: true
+  apt_repository:
+    repo: "ppa:neovim-ppa/unstable"
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install Neovim package (Debian/Ubuntu)
+  become: true
+  apt:
+    name: neovim
+    state: latest
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install Neovim via Homebrew (macOS)
+  become: false
+  homebrew:
+    name: neovim
+    state: latest
+  when: ansible_facts['os_family'] == "Darwin"
+

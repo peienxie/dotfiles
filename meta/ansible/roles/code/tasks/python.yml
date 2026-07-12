@@ -1,0 +1,9 @@
+- name: Install python3
+  become: true
+  package:
+    name: python3
+    state: present
+
+- name: Install uv
+  shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+

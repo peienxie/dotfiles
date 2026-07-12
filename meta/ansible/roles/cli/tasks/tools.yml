@@ -1,0 +1,6 @@
+- name: Install basic CLI tools
+  become: true
+  package:
+    name: "{{ cli_tools }}"
+    state: present
+ 

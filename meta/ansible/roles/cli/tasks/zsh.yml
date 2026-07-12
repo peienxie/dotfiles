@@ -1,0 +1,62 @@
+- name: Install zsh
+  package:
+    name:
+      - zsh
+      - curl
+    state: present
+
+- name: Change default shell to zsh
+  become: true
+  user:
+    name: "{{ ansible_facts['user_id'] }}"
+    shell: /usr/bin/zsh
+
+- name: Check available locales
+  command: locale -a
+  register: locale_list
+  changed_when: false
+
+- name: Ensure the en_US.UTF-8 locale exists
+  become: true
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  when: "'en_US.utf8' not in locale_list.stdout_lines"
+
+- name: Check current system locale
+  command: localectl status
+  register: locale_status
+  changed_when: false
+
+- name: Set default system locale
+  become: true
+  command: localectl set-locale LANG=en_US.UTF-8
+  when: "'LANG=en_US.UTF-8' not in locale_status.stdout"
+
+- name: Install Oh My Zsh into ~/.config/oh-my-zsh
+  shell: |
+    export ZSH="{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh"
+
+- name: Install zsh-z plugin
+  git:
+    repo: https://github.com/agkozak/zsh-z
+    dest: "{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh/custom/plugins/zsh-z"
+    depth: 1
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh/custom/plugins/zsh-z"
+  when: false
+
+- name: Install zsh-autosuggestions plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    depth: 1
+
+- name: Install Powerline10k theme
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ansible_facts['user_dir'] }}/.config/oh-my-zsh/custom/themes/powerlevel10k"
+    depth: 1 

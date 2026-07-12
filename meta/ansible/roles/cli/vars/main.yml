@@ -1,0 +1,8 @@
+cli_tools:
+  - git
+  - zoxide
+  - ripgrep
+  - fd-find
+  - fzf
+  - jq
+  - httpie

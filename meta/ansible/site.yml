@@ -1,0 +1,7 @@
+- name: Personal dev environment setup
+  hosts: localhost
+  connection: local
+  roles:
+    - cli
+    - code
+

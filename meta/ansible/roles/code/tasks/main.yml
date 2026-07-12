@@ -1,0 +1,14 @@
+- import_tasks: java.yml
+  tags: [java]
+
+- import_tasks: python.yml
+  tags: [python]
+
+- import_tasks: nodejs.yml
+  tags: [nodejs]
+
+- import_tasks: golang.yml
+  tags: [golang]
+
+- import_tasks: rust.yml
+  tags: [rust]

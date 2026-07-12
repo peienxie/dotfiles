@@ -78,23 +78,6 @@ fi
 P10K_CONFIG_FILE="$ZDOTDIR/themes/p10k.zsh"
 [[ ! -f $P10K_CONFIG_FILE ]] || source $P10K_CONFIG_FILE
 
-# Automaticlly install oh-my-zsh custom plugins and themes
-[[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]] && {
-  echo -n "Clone the zsh-autosuggestions plugin..."
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions >/dev/null 2>&1
-  echo "Done"
-}
-# [[ ! -d "$ZSH_CUSTOM/plugins/zsh-z" ]] && {
-#   echo -n "Clone the zsh-z plugin..."
-#   git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z >/dev/null 2>&1
-#   echo "Done"
-# }
-[[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]] && {
-  echo -n "Clone the powerlevel10k theme..."
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k >/dev/null 2>&1
-  echo "Done"
-}
-
 # Which plugins would you like to load?
 plugins=(git kubectl minikube docker zsh-autosuggestions)
 
@@ -129,6 +112,7 @@ fi
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 # Initialize nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
 
 # My personal bin
 [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"

@@ -1,0 +1,31 @@
+sdkman_dir: "{{ ansible_facts['user_dir'] }}/.local/share/sdkman"
+sdkman_candidates:
+  - name: java
+    versions:
+      - "21.0.11-tem"
+      - "17.0.19-tem"
+      - "11.0.31-tem"
+      - "8.0.492-tem"
+    default: "21.0.11-tem"
+
+  - name: tomcat
+    versions:
+      - "10.1.55"
+      - "9.0.118"
+    default: "9.0.118"
+
+  - name: maven
+    versions:
+      - "3.9.16"
+    default: "3.9.16"
+
+#---
+
+nvm_dir: "{{ ansible_facts['user_dir'] }}/.config/nvm"
+nvm_version: "v0.40.5"
+node_versions:
+  - "22"
+
+# Default Node.js version to set
+default_node_version: "22"
+

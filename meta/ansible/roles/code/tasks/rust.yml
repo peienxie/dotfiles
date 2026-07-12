@@ -1,0 +1,9 @@
+- name: Install rustup
+  become: true
+  package:
+    name: rustup
+    state: present
+
+- name: Install stable version of rust
+  shell: rustup default stable
+
