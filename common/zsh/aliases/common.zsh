@@ -13,3 +13,4 @@ alias f='cd $(fd --type directory | fzf)'
 # create virtual serial ports connected each other
 alias vserial='socat -d -d pty,raw,echo=0 pty,raw,echo=0'
 
+alias lg=lazygit
