@@ -1,0 +1,58 @@
+{
+  "lastChangelogVersion": "0.84.2",
+  "theme": "dark",
+  "packages": [
+    "npm:pi-subagents",
+    "npm:pi-powerline-footer",
+    "npm:pi-context-view",
+    "npm:@houndmcp/hound-mcp-pi",
+    {
+      "source": "npm:pi-annotate",
+      "extensions": []
+    },
+    {
+      "source": "npm:graphify-pi",
+      "extensions": [],
+      "skills": [
+        "-skills/graphify/SKILL.md"
+      ]
+    }
+  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "high",
+  "enabledModels": [
+    "openai-codex/gpt-5.6-luna",
+    "openai-codex/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-sol"
+  ],
+  "hideThinkingBlock": true,
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-5.6-luna",
+    "defaultThinking": "medium",
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "low"
+      },
+      "worker": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "medium"
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "high"
+      }
+    }
+  },
+  "powerline": {
+    "separator": "ascii"
+  },
+  "workingVibe": "zen"
+}
