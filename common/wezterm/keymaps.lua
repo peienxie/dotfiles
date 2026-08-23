@@ -15,6 +15,7 @@ M.setup = function(config)
     { key = "r", mods = "LEADER|SHIFT", action = act.ReloadConfiguration },
     { key = "l", mods = "LEADER|SHIFT", action = act.ShowDebugOverlay },
     { key = "u", mods = "LEADER|SHIFT", action = act.CharSelect },
+    { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
 
     -- clipboard
     { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
