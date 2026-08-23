@@ -1,6 +1,24 @@
 return {
   {
     "snacks.nvim",
+    keys = {
+      { "<Leader>.", false },
+      { "<Leader>S", false },
+      {
+        "<leader>fs",
+        function()
+          Snacks.scratch()
+        end,
+        desc = "Toggle Scratch Buffer",
+      },
+      {
+        "<leader>fS",
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = "Select Scratch Buffer",
+      },
+    },
     opts = {
       dashboard = {
         sections = {
@@ -15,15 +33,6 @@ return {
       ident = {
         animate = {
           enabled = false,
-        },
-      },
-      input = {
-        win = {
-          actions = {
-            delete_word = function()
-              return "<cmd>normal! diw<cr><right>"
-            end,
-          },
         },
       },
     },

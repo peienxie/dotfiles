@@ -27,9 +27,9 @@ return {
       mappings = {
         i = {
           ["<M-p>"] = function(...) return require("telescope.actions.layout").toggle_preview(...) end,
-          ["<C-Down"] = nil,
+          ["<C-Down>"] = nil,
           ["<C-j>"] = function(...) return require("telescope.actions").cycle_history_next(...) end,
-          ["<C-Up"] = nil,
+          ["<C-Up>"] = nil,
           ["<C-k>"] = function(...) return require("telescope.actions").cycle_history_prev(...) end,
         },
         n = {
@@ -57,13 +57,27 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      local telescope = require("telescope")
-      telescope.setup(opts)
-      telescope.load_extension("fzf")
-    end,
     dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = function(plugin)
+          local result = vim
+            .system({ "make", "clean", "all" }, {
+              cwd = plugin.dir,
+              text = true,
+            })
+            :wait()
+
+          if result.code ~= 0 then
+            error(
+              ("Failed to build telescope-fzf-native.nvim\nstdout:\n%s\nstderr:\n%s"):format(
+                result.stdout or "",
+                result.stderr or ""
+              )
+            )
+          end
+        end,
+      },
     },
   },
 }
