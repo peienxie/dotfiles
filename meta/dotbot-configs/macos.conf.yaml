@@ -18,6 +18,7 @@
     ~/.config/ripgrep: ripgrep
     ~/.config/lazygit: lazygit
     ~/.pi/agent/settings.json: common/pi/agent/settings.json
+    ~/.pi/agent/keybindings.json: common/pi/agent/keybindings.json
     ~/.pi/agent/AGENTS.md: common/agents/AGENTS.md
     ~/.agents: common/agents
 
