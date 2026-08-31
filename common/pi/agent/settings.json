@@ -16,7 +16,8 @@
       "skills": [
         "-skills/graphify/SKILL.md"
       ]
-    }
+    },
+    "npm:@nqbao/pi-sandbox"
   ],
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-luna",
