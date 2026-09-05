@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+branch=""
+outdir="."
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -o | --output)
+    if [[ $# -lt 2 ]]; then
+      echo "Error: $1 requires a directory argument" >&2
+      exit 1
+    fi
+    outdir="$2"
+    shift 2
+    ;;
+  -h | --help)
+    cat <<'EOF'
+Usage:
+  git zip [branch] [-o directory]
+
+Examples:
+  git zip
+  git zip feature/foo
+  git zip -o /tmp/output
+  git zip feature/foo -o /tmp/output
+EOF
+    exit 0
+    ;;
+  -*)
+    echo "Error: unknown option: $1" >&2
+    exit 1
+    ;;
+  *)
+    if [[ -n "$branch" ]]; then
+      echo "Error: multiple branches specified" >&2
+      exit 1
+    fi
+    branch="$1"
+    shift
+    ;;
+  esac
+done
+
+# Verify that the branch/ref exists.
+if [[ -z "$branch" ]]; then
+  branch="$(git branch --show-current)"
+
+  if [[ -z "$branch" ]]; then
+    echo "Error: cannot determine current branch" >&2
+    exit 1
+  fi
+fi
+
+if ! git rev-parse --verify --quiet "$branch^{commit}" >/dev/null; then
+  echo "Error: invalid branch or ref: $branch" >&2
+  exit 1
+fi
+
+# Replace '/' in branch names so feature/foo becomes feature-foo.zip.
+name="${branch//\//-}"
+filename="${name}.zip"
+
+mkdir -p "$outdir"
+output_dir="$(cd "$outdir" && pwd -P)"
+output_path="$output_dir/$filename"
+
+git archive \
+  --format=zip \
+  --output="$output_path" \
+  "$branch"
+
+printf '%s\n' "$output_path"
